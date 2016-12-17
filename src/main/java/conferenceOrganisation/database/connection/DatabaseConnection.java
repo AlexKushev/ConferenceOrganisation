@@ -1,4 +1,4 @@
-package conferenceOrganisation.test;
+package conferenceOrganisation.database.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,11 +6,15 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
-public class DBConnectionTest {
+import javax.ejb.Singleton;
 
-	public static void main(String[] args) throws SQLException, IOException {
+@Singleton
+public class DatabaseConnection {
+
+	public static Statement getStatement() throws SQLException, IOException {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -43,6 +47,7 @@ public class DBConnectionTest {
 			System.out.println("Connection failed.");
 		}
 
+		return connection.createStatement();
 	}
 
 }
