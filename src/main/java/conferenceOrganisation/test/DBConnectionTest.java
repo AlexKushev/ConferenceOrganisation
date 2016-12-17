@@ -34,7 +34,7 @@ public class DBConnectionTest {
 			connection = DriverManager.getConnection(databaseUrl, prop.getProperty("databaseUserAccount"),
 					prop.getProperty("databasePassword"));
 		} catch (SQLException e) {
-			System.out.println("Connection failed");
+			System.out.println("Connection failed.");
 		}
 
 		if (connection != null) {
