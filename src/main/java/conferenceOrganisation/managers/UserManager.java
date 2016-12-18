@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Singleton;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.User;
 
 @Singleton
 public class UserManager {
+	
+	private Statement statement = DatabaseConnection.statement;
 
 	public void addUser(User user) throws SQLException {
 		String firstName = user.getFirstName();
@@ -31,7 +30,6 @@ public class UserManager {
 
 	public List<User> getAllUsers() throws SQLException, IOException {
 		String txtQuery = "select * from users u";
-		Statement statement = DatabaseConnection.statement;
 		ResultSet rs = statement.executeQuery(txtQuery);
 		List<User> users = new ArrayList<User>();
 		while (rs.next()) {
