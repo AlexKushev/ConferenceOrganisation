@@ -2,7 +2,6 @@ package conferenceOrganisation.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -26,11 +25,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getAllUsers() throws SQLException, IOException {
 		List<User> users = userManager.getAllUsers();
-		if (users == null) {
-			return new ArrayList<User>();
-		}
-		return users;
-		
+		return users;		
 	}
 
 }

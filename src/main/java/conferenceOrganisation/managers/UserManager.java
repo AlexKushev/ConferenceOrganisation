@@ -18,13 +18,6 @@ import conferenceOrganisation.models.User;
 @Singleton
 public class UserManager {
 
-	@PersistenceContext
-	private EntityManager em;
-	
-	@Inject
-	DatabaseConnection db;
-
-
 	public void addUser(User user) throws SQLException {
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
@@ -33,12 +26,12 @@ public class UserManager {
 		String txtQuery = String.format(
 				"insert into user(firstName, lastName, email, password) values ('%s', '%s', '%s', '%s')", firstName,
 				lastName, email, password);
-		//Statement statement.executeUpdate(txtQuery);
+		// Statement statement.executeUpdate(txtQuery);
 	}
-	
+
 	public List<User> getAllUsers() throws SQLException, IOException {
 		String txtQuery = "select * from users u";
-		Statement statement = db.getStatement();
+		Statement statement = DatabaseConnection.statement;
 		ResultSet rs = statement.executeQuery(txtQuery);
 		List<User> users = new ArrayList<User>();
 		while (rs.next()) {
@@ -46,6 +39,7 @@ public class UserManager {
 			user.setFirstName(rs.getString("firstName"));
 			user.setLastName(rs.getString("lastName"));
 			user.setEmail(rs.getString("email"));
+			user.setUserId(Integer.parseInt(rs.getString("userId")));
 			users.add(user);
 		}
 		return users;

@@ -1,7 +1,5 @@
 package conferenceOrganisation.database.connection;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -10,12 +8,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 
 @Singleton
+@Startup
 public class DatabaseConnection {
 
-	public Statement getStatement() throws SQLException, IOException {
+	public static Statement statement;
+
+	@PostConstruct
+	public void init() throws SQLException, IOException {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -28,10 +32,8 @@ public class DatabaseConnection {
 		try {
 			Properties prop = new Properties();
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			InputStream input = classLoader.getResourceAsStream("conferenceOrganisation/database/connection/config.properties");
-			
-
-			
+			InputStream input = classLoader
+					.getResourceAsStream("conferenceOrganisation/database/connection/config.properties");
 
 			prop.load(input);
 
@@ -50,7 +52,7 @@ public class DatabaseConnection {
 			System.out.println("Connection failed.");
 		}
 
-		return connection.createStatement();
+		statement = connection.createStatement();
 	}
 
 }
