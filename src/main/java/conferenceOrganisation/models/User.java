@@ -3,10 +3,14 @@ package conferenceOrganisation.models;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Table(name = "users")
+@Entity
+@XmlRootElement
 public class User implements Serializable {
 
 	/**

@@ -1,5 +1,6 @@
 package conferenceOrganisation.database.connection;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +15,7 @@ import javax.ejb.Singleton;
 @Singleton
 public class DatabaseConnection {
 
-	public static Statement getStatement() throws SQLException, IOException {
+	public Statement getStatement() throws SQLException, IOException {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -26,9 +27,11 @@ public class DatabaseConnection {
 
 		try {
 			Properties prop = new Properties();
-			InputStream input = null;
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			InputStream input = classLoader.getResourceAsStream("conferenceOrganisation/database/connection/config.properties");
+			
 
-			input = new FileInputStream("config.properties");
+			
 
 			prop.load(input);
 

@@ -21,18 +21,9 @@ public class DBConnectionTest {
 		Connection connection = null;
 
 		try {
-			Properties prop = new Properties();
-			InputStream input = null;
+			String databaseUrl = "jdbc:mysql://localhost:3306/conferenceOrganisation";
 
-			input = new FileInputStream("config.properties");
-
-			prop.load(input);
-
-			String databaseUrl = String.format("jdbc:mysql://%s:%s/%s", prop.getProperty("databaseNetworkAddress"),
-					prop.getProperty("databasePort"), prop.getProperty("databaseName"));
-
-			connection = DriverManager.getConnection(databaseUrl, prop.getProperty("databaseUserAccount"),
-					prop.getProperty("databasePassword"));
+			connection = DriverManager.getConnection(databaseUrl, "root", "1013");
 		} catch (SQLException e) {
 			System.out.println("Connection failed.");
 		}
