@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Singleton;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
+import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.utils.Utils;
 
@@ -39,6 +40,7 @@ public class UserManager {
 			user.setLastName(rs.getString("lastName"));
 			user.setEmail(rs.getString("email"));
 			user.setUserId(Integer.parseInt(rs.getString("userId")));
+			user.setEvents(initUserEventsByUserId(user.getUserId()));
 			users.add(user);
 		}
 		return users;
@@ -57,9 +59,33 @@ public class UserManager {
 				user.setFirstName(rs.getString("firstName"));
 				user.setLastName(rs.getString("lastName"));
 				user.setEmail(rs.getString("email"));
+				user.setEvents(initUserEventsByUserId(user.getUserId()));
 			}
 			return user;
 		}
+	}
+	
+	public List<Event> initUserEventsByUserId(int userId) throws SQLException {
+		List<Event> events = new ArrayList<Event>();
+		String txtQuery = String.format("select * events where events.creatorId='%s'", String.valueOf(userId));
+		ResultSet rs = statement.executeQuery(txtQuery);
+		if (!rs.next())	{
+			return null;
+		} else {
+			while (rs.next()) {
+				Event event = new Event();
+				event.setEventId(rs.getInt("eventId"));
+				event.setCreatorId(rs.getInt("creatorId"));
+				event.setHallId(rs.getInt("hallId"));
+				event.setTitle(rs.getString("title"));
+				event.setDescription(rs.getString("description"));
+				event.setDate(rs.getDate("date"));
+				event.setPrice(rs.getDouble("price"));
+				event.setAvailableSeats(rs.getInt("availableSeats"));
+				events.add(event);
+			}
+		}
+		return events;
 	}
 
 }

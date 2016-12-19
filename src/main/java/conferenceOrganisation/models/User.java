@@ -1,6 +1,8 @@
 package conferenceOrganisation.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,6 +25,8 @@ public class User implements Serializable {
 	private String email;
 
 	private String password;
+	
+	private List<Event> events = new ArrayList<Event>();
 
 	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
@@ -72,6 +76,18 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
+	public void addNewEvent(Event event) {
+		this.events.add(event);
 	}
 
 	@Override
