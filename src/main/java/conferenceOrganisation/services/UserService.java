@@ -1,6 +1,7 @@
 package conferenceOrganisation.services;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,6 +27,21 @@ public class UserService {
 	@Inject
 	private UserManager userManager;
 
+	@Inject
+	private CurrentUser currentUser;
+
+	@Path("login")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response loginUser(User user) throws SQLException {
+		User foundUser = userManager.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
+		if (foundUser == null) {
+			return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
+		}
+		currentUser.setCurrentUser(user);
+		return RESPONSE_OK;
+	}
+
 	@Path("register")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -37,6 +53,16 @@ public class UserService {
 			System.out.println("Problem occurs while trying to add new user.");
 		}
 		return Response.status(401).build();
+	}
+
+	@Path("current")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser() {
+		if (currentUser.getCurrentUser() == null) {
+			return null;
+		}
+		return currentUser.getCurrentUser();
 	}
 
 	@GET

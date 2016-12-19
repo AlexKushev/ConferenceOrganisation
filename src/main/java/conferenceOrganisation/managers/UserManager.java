@@ -14,7 +14,7 @@ import conferenceOrganisation.models.User;
 
 @Singleton
 public class UserManager {
-	
+
 	private Statement statement = DatabaseConnection.statement;
 
 	public void addUser(User user) throws SQLException {
@@ -41,6 +41,24 @@ public class UserManager {
 			users.add(user);
 		}
 		return users;
+	}
+
+	public User getUserByEmailAndPassword(String email, String password) throws SQLException {
+		User user = new User();
+		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,
+				password);
+		ResultSet rs = statement.executeQuery(txtQuery);
+		if (!rs.next()) {
+			return null;
+		} else {
+			while (rs.next()) {
+				user.setUserId(rs.getInt("userId"));
+				user.setFirstName(rs.getString("firstName"));
+				user.setLastName(rs.getString("lastName"));
+				user.setEmail(rs.getString("email"));
+			}
+			return user;
+		}
 	}
 
 }
