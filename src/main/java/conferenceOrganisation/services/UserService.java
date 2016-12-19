@@ -64,6 +64,12 @@ public class UserService {
 		}
 		return currentUser.getCurrentUser();
 	}
+	
+	@Path("logout")
+	@GET
+	public void logoutUser() {
+		currentUser.setCurrentUser(null);
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
