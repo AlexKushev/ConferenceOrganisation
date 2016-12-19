@@ -11,6 +11,7 @@ import javax.ejb.Singleton;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.User;
+import conferenceOrganisation.utils.Utils;
 
 @Singleton
 public class UserManager {
@@ -24,7 +25,7 @@ public class UserManager {
 		String password = user.getPassword();
 		String txtQuery = String.format(
 				"insert into users(firstName, lastName, email, password) values ('%s', '%s', '%s', '%s')", firstName,
-				lastName, email, password);
+				lastName, email, Utils.getHashedPassword(password));
 		statement.executeUpdate(txtQuery);
 	}
 
@@ -46,7 +47,7 @@ public class UserManager {
 	public User getUserByEmailAndPassword(String email, String password) throws SQLException {
 		User user = new User();
 		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,
-				password);
+				Utils.getHashedPassword(password));
 		ResultSet rs = statement.executeQuery(txtQuery);
 		if (!rs.next()) {
 			return null;
