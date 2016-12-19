@@ -23,9 +23,9 @@ public class UserManager {
 		String email = user.getEmail();
 		String password = user.getPassword();
 		String txtQuery = String.format(
-				"insert into user(firstName, lastName, email, password) values ('%s', '%s', '%s', '%s')", firstName,
+				"insert into users(firstName, lastName, email, password) values ('%s', '%s', '%s', '%s')", firstName,
 				lastName, email, password);
-		// Statement statement.executeUpdate(txtQuery);
+		statement.executeUpdate(txtQuery);
 	}
 
 	public List<User> getAllUsers() throws SQLException, IOException {
