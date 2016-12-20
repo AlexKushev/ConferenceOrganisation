@@ -18,6 +18,7 @@ import conferenceOrganisation.utils.Utils;
 public class UserManager {
 
 	private Statement statement = DatabaseConnection.statement;
+	private Statement secondStatement = DatabaseConnection.secondStatement;
 
 	public void addUser(User user) throws SQLException {
 		String firstName = user.getFirstName();
@@ -50,38 +51,40 @@ public class UserManager {
 		User user = new User();
 		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,
 				Utils.getHashedPassword(password));
-		ResultSet rs = statement.executeQuery(txtQuery);
-		if (!rs.next()) {
+		ResultSet rss = statement.executeQuery(txtQuery);
+		if (!rss.next()) {
 			return null;
 		} else {
-			while (rs.next()) {
-				user.setUserId(rs.getInt("userId"));
-				user.setFirstName(rs.getString("firstName"));
-				user.setLastName(rs.getString("lastName"));
-				user.setEmail(rs.getString("email"));
+			while (rss.next()) {
+				user.setUserId(rss.getInt("userId"));
+				user.setFirstName(rss.getString("firstName"));
+				user.setLastName(rss.getString("lastName"));
+				user.setEmail(rss.getString("email"));
 				user.setEvents(initUserEventsByUserId(user.getUserId()));
 			}
 			return user;
 		}
 	}
-	
+
 	public List<Event> initUserEventsByUserId(int userId) throws SQLException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * events where events.creatorId='%s'", String.valueOf(userId));
-		ResultSet rs = statement.executeQuery(txtQuery);
-		if (!rs.next())	{
-			return null;
-		} else {
-			while (rs.next()) {
+		Event eventt = new Event();
+		eventt.setCreatorId(1);
+		eventt.setTitle("ttet");
+		eventt.setDescription("fsafas");
+		String txtQuery = String.format("select * from events where events.creatorId=%s", String.valueOf(userId));
+		ResultSet rss = secondStatement.executeQuery(txtQuery);
+		if (rss.next()) {
+			while (rss.next()) {
 				Event event = new Event();
-				event.setEventId(rs.getInt("eventId"));
-				event.setCreatorId(rs.getInt("creatorId"));
-				event.setHallId(rs.getInt("hallId"));
-				event.setTitle(rs.getString("title"));
-				event.setDescription(rs.getString("description"));
-				event.setDate(rs.getDate("date"));
-				event.setPrice(rs.getDouble("price"));
-				event.setAvailableSeats(rs.getInt("availableSeats"));
+				event.setEventId(rss.getInt("eventId"));
+				event.setCreatorId(rss.getInt("creatorId"));
+				event.setHallId(rss.getInt("hallId"));
+				event.setTitle(rss.getString("title"));
+				event.setDescription(rss.getString("description"));
+				event.setDate(rss.getDate("date"));
+				event.setPrice(rss.getDouble("price"));
+				event.setAvailableSeats(rss.getInt("availableSeats"));
 				events.add(event);
 			}
 		}

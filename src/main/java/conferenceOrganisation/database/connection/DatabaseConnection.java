@@ -17,6 +17,7 @@ import javax.ejb.Startup;
 public class DatabaseConnection {
 
 	public static Statement statement;
+	public static Statement secondStatement;
 
 	@PostConstruct
 	public void init() throws SQLException, IOException {
@@ -53,6 +54,8 @@ public class DatabaseConnection {
 		}
 
 		statement = connection.createStatement();
+		secondStatement = connection.createStatement();
 	}
+	
 
 }
