@@ -68,10 +68,6 @@ public class UserManager {
 
 	public List<Event> initUserEventsByUserId(int userId) throws SQLException {
 		List<Event> events = new ArrayList<Event>();
-		Event eventt = new Event();
-		eventt.setCreatorId(1);
-		eventt.setTitle("ttet");
-		eventt.setDescription("fsafas");
 		String txtQuery = String.format("select * from events where events.creatorId=%s", String.valueOf(userId));
 		ResultSet rss = secondStatement.executeQuery(txtQuery);
 		if (rss.next()) {
@@ -82,7 +78,7 @@ public class UserManager {
 				event.setHallId(rss.getInt("hallId"));
 				event.setTitle(rss.getString("title"));
 				event.setDescription(rss.getString("description"));
-				event.setDate(rss.getDate("date"));
+				event.setDate(rss.getString("date"));
 				event.setPrice(rss.getDouble("price"));
 				event.setAvailableSeats(rss.getInt("availableSeats"));
 				events.add(event);

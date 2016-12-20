@@ -27,6 +27,8 @@ public class User implements Serializable {
 	private String password;
 	
 	private List<Event> events = new ArrayList<Event>();
+	
+	private List<Lecture> lectures = new ArrayList<Lecture>();
 
 	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
@@ -88,6 +90,18 @@ public class User implements Serializable {
 	
 	public void addNewEvent(Event event) {
 		this.events.add(event);
+	}
+	
+	public List<Lecture> getLectures() {
+		return lectures;
+	}
+
+	public void setLectures(List<Lecture> lectures) {
+		this.lectures = lectures;
+	}
+	
+	public void addNewLecture(Lecture lecture) {
+		this.lectures.add(lecture);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package conferenceOrganisation.models;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,7 +24,7 @@ public class Event implements Serializable {
 	
 	private String description;
 	
-	private Date date;
+	private String date;
 	
 	private double price;
 	
@@ -71,11 +70,11 @@ public class Event implements Serializable {
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
