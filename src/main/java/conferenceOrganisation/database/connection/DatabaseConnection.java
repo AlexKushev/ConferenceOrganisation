@@ -8,19 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 
 @Singleton
-@Startup
 public class DatabaseConnection {
 
-	public static Statement statement;
-	public static Statement secondStatement;
-
-	@PostConstruct
-	public void init() throws SQLException, IOException {
+	public Statement createStatement() throws SQLException, IOException {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -53,9 +46,7 @@ public class DatabaseConnection {
 			System.out.println("Connection failed.");
 		}
 
-		statement = connection.createStatement();
-		secondStatement = connection.createStatement();
+		return connection.createStatement();
 	}
-	
 
 }

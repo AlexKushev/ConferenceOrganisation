@@ -33,7 +33,7 @@ public class UserService {
 	@Path("login")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response loginUser(User user) throws SQLException {
+	public Response loginUser(User user) throws SQLException, IOException {
 		User foundUser = userManager.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
 		if (foundUser == null) {
 			return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
@@ -45,7 +45,7 @@ public class UserService {
 	@Path("register")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response registerUser(User user) {
+	public Response registerUser(User user) throws IOException {
 		try {
 			userManager.addUser(user);
 			return RESPONSE_OK;

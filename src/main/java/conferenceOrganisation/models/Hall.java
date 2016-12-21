@@ -13,6 +13,8 @@ public class Hall implements Serializable {
 	private static final long serialVersionUID = -3137686270741827052L;
 
 	private int hallId;
+	
+	private String name;
 
 	private int capacity;
 
@@ -22,9 +24,10 @@ public class Hall implements Serializable {
 
 	}
 
-	public Hall(int hallId, int capacity, String location) {
+	public Hall(int hallId, String name, int capacity, String location) {
 		super();
 		this.hallId = hallId;
+		this.name = name;
 		this.capacity = capacity;
 		this.location = location;
 	}
@@ -53,4 +56,12 @@ public class Hall implements Serializable {
 		this.location = location;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

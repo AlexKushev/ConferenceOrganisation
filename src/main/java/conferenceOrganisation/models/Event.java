@@ -29,6 +29,8 @@ public class Event implements Serializable {
 	private double price;
 	
 	private int availableSeats;
+	
+	private Hall hall;
 
 	public int getEventId() {
 		return eventId;
@@ -92,6 +94,14 @@ public class Event implements Serializable {
 
 	public void setAvailableSeats(int availableSeats) {
 		this.availableSeats = availableSeats;
+	}
+
+	public Hall getHall() {
+		return hall;
+	}
+
+	public void setHall(Hall hall) {
+		this.hall = hall;
 	}
 	
 }
