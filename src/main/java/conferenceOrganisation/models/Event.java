@@ -103,5 +103,5 @@ public class Event implements Serializable {
 	public void setHall(Hall hall) {
 		this.hall = hall;
 	}
-	
+
 }

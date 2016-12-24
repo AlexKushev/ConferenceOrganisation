@@ -11,8 +11,6 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
-import conferenceOrganisation.models.Event;
-import conferenceOrganisation.models.Lecture;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.utils.Utils;
 
@@ -21,6 +19,15 @@ public class UserManager {
 
 	@Inject
 	HallManager hallManager;
+
+	@Inject
+	TicketManager ticketManager;
+
+	@Inject
+	EventManager eventManager;
+
+	@Inject
+	LectureManager lectureManager;
 
 	@Inject
 	DatabaseConnection dbConnection;
@@ -49,8 +56,9 @@ public class UserManager {
 			user.setLastName(rs.getString("lastName"));
 			user.setEmail(rs.getString("email"));
 			user.setUserId(Integer.parseInt(rs.getString("userId")));
-			user.setEvents(initUserEventsByUserId(user.getUserId()));
-			user.setLectures(initUserLecturesByUserId(user.getUserId()));
+			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
+			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
+			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
 			users.add(user);
 		}
 		statement.close();
@@ -69,52 +77,12 @@ public class UserManager {
 			user.setFirstName(rss.getString("firstName"));
 			user.setLastName(rss.getString("lastName"));
 			user.setEmail(rss.getString("email"));
-			user.setEvents(initUserEventsByUserId(user.getUserId()));
-			user.setLectures(initUserLecturesByUserId(user.getUserId()));
+			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
+			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
+			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
 		}
 		statement.close();
 		return user;
 
 	}
-
-	public List<Event> initUserEventsByUserId(int userId) throws SQLException, IOException {
-		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.creatorId=%s", String.valueOf(userId));
-		Statement statement = dbConnection.createStatement();
-		ResultSet rss = statement.executeQuery(txtQuery);
-		while (rss.next()) {
-			Event event = new Event();
-			event.setEventId(rss.getInt("eventId"));
-			event.setHall(hallManager.getHallById(rss.getInt("hallId")));
-			event.setCreatorId(rss.getInt("creatorId"));
-			event.setHallId(rss.getInt("hallId"));
-			event.setTitle(rss.getString("title"));
-			event.setDescription(rss.getString("description"));
-			event.setDate(rss.getString("date"));
-			event.setPrice(rss.getDouble("price"));
-			event.setAvailableSeats(rss.getInt("availableSeats"));
-			events.add(event);
-		}
-
-		return events;
-	}
-
-	public List<Lecture> initUserLecturesByUserId(int userId) throws SQLException, IOException {
-		List<Lecture> lectures = new ArrayList<Lecture>();
-		String txtQuery = String.format("select * from lectures where lectures.lecturerId=%d", userId);
-		Statement statement = dbConnection.createStatement();
-		ResultSet rs = statement.executeQuery(txtQuery);
-		while (rs.next()) {
-			Lecture lecture = new Lecture();
-			lecture.setLectureId(rs.getInt("lectureId"));
-			lecture.setEventId(rs.getInt("eventId"));
-			lecture.setLecturerId(rs.getInt("lecturerId"));
-			lecture.setTitle(rs.getString("title"));
-			lecture.setDescription(rs.getString("description"));
-			lectures.add(lecture);
-		}
-		statement.close();
-		return lectures;
-	}
-
 }
