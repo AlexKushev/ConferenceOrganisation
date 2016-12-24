@@ -65,6 +65,25 @@ public class UserManager {
 		return users;
 	}
 
+	public User getUserById(int userId) throws SQLException, IOException {
+		User user = new User();
+		String txtQuery = String.format("select * from users where users.userId=%d", userId);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+
+		while (rs.next()) {
+			user.setUserId(rs.getInt("userId"));
+			user.setFirstName(rs.getString("firstName"));
+			user.setLastName(rs.getString("lastName"));
+			user.setEmail(rs.getString("email"));
+			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
+			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
+			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
+		}
+		statement.close();
+		return user;
+	}
+
 	public User getUserByEmailAndPassword(String email, String password) throws SQLException, IOException {
 		User user = new User();
 		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,

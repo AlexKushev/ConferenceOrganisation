@@ -12,9 +12,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import conferenceOrganisation.managers.TicketManager;
 import conferenceOrganisation.managers.UserManager;
 import conferenceOrganisation.models.User;
 
@@ -29,6 +31,9 @@ public class UserService {
 
 	@Inject
 	private CurrentUser currentUser;
+
+	@Inject
+	private TicketManager ticketManager;
 
 	@Path("login")
 	@POST
@@ -64,11 +69,22 @@ public class UserService {
 		}
 		return currentUser.getCurrentUser();
 	}
-	
+
 	@Path("logout")
 	@GET
 	public void logoutUser() {
 		currentUser.setCurrentUser(null);
+	}
+
+	@Path("bookTicket")
+	@POST
+	public Response bookTicket(@QueryParam("ownerId") int ownerId, @QueryParam("eventId") int eventId)
+			throws SQLException, IOException {
+		if(!ticketManager.addTicketToUser(ownerId, eventId)) {
+			return Response.status(401).build();
+		}
+		return RESPONSE_OK;
+
 	}
 
 	@GET
