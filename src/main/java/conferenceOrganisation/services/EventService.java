@@ -16,7 +16,7 @@ import conferenceOrganisation.models.Event;
 
 @Stateless
 @Path("events")
-public class EventUser {
+public class EventService {
 	
 	@Inject
 	EventManager eventManager;

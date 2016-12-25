@@ -3,7 +3,6 @@ package conferenceOrganisation.services;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -85,13 +84,6 @@ public class UserService {
 		}
 		return RESPONSE_OK;
 
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getAllUsers() throws SQLException, IOException {
-		List<User> users = userManager.getAllUsers();
-		return users;
 	}
 
 }

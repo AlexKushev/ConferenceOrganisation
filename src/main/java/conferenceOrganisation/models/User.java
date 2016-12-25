@@ -26,6 +26,8 @@ public class User implements Serializable {
 
 	private String password;
 	
+	private int isAdmin;
+	
 	private List<Event> events = new ArrayList<Event>();
 	
 	private List<Lecture> lectures = new ArrayList<Lecture>();
@@ -82,6 +84,14 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	public List<Event> getEvents() {
 		return events;
 	}

@@ -56,6 +56,7 @@ public class UserManager {
 			user.setLastName(rs.getString("lastName"));
 			user.setEmail(rs.getString("email"));
 			user.setUserId(Integer.parseInt(rs.getString("userId")));
+			user.setIsAdmin(rs.getInt("isAdmin"));
 			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
 			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
 			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
@@ -76,6 +77,7 @@ public class UserManager {
 			user.setFirstName(rs.getString("firstName"));
 			user.setLastName(rs.getString("lastName"));
 			user.setEmail(rs.getString("email"));
+			user.setIsAdmin(rs.getInt("isAdmin"));
 			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
 			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
 			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
@@ -96,6 +98,7 @@ public class UserManager {
 			user.setFirstName(rss.getString("firstName"));
 			user.setLastName(rss.getString("lastName"));
 			user.setEmail(rss.getString("email"));
+			user.setIsAdmin(rss.getInt("isAdmin"));
 			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
 			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
 			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
