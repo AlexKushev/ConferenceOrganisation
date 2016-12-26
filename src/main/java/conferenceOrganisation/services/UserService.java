@@ -15,8 +15,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import conferenceOrganisation.managers.EventManager;
 import conferenceOrganisation.managers.TicketManager;
 import conferenceOrganisation.managers.UserManager;
+import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.User;
 
 @Stateless
@@ -33,6 +35,9 @@ public class UserService {
 
 	@Inject
 	private TicketManager ticketManager;
+
+	@Inject
+	private EventManager eventManager;
 
 	@Path("login")
 	@POST
@@ -77,13 +82,20 @@ public class UserService {
 
 	@Path("bookTicket")
 	@POST
-	public Response bookTicket(@QueryParam("ownerId") int ownerId, @QueryParam("eventId") int eventId)
-			throws SQLException, IOException {
-		if(!ticketManager.addTicketToUser(ownerId, eventId)) {
+	public Response bookTicket(@QueryParam("eventId") int eventId) throws SQLException, IOException {
+		if (!ticketManager.addTicketToUser(eventId)) {
 			return Response.status(401).build();
 		}
 		return RESPONSE_OK;
+	}
 
+	@Path("createEvent")
+	@POST
+	public Response createEvent(Event event) throws SQLException, IOException {
+		if (!eventManager.addEvent(event)) {
+			return Response.status(401).build();
+		}
+		return RESPONSE_OK;
 	}
 
 }

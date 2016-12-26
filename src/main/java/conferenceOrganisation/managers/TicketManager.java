@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.Ticket;
 import conferenceOrganisation.models.User;
+import conferenceOrganisation.services.CurrentUser;
 
 @Stateless
 public class TicketManager {
@@ -22,6 +23,9 @@ public class TicketManager {
 
 	@Inject
 	UserManager userManager;
+	
+	@Inject
+	CurrentUser currentUser;
 
 	public List<Ticket> getAllTicketsByUserId(int userId) throws SQLException, IOException {
 		List<Ticket> tickets = new ArrayList<Ticket>();
@@ -39,14 +43,14 @@ public class TicketManager {
 		return tickets;
 	}
 
-	public boolean addTicketToUser(int userId, int eventId) throws SQLException {
+	public boolean addTicketToUser(int eventId) throws SQLException {
+		User user = currentUser.getCurrentUser();
+		int userId = user.getUserId();
 		String txtQuery = String.format("insert into tickets(ownerId, eventId) values (%d, %d)", userId, eventId);
-		User user = null;
 		Statement statement = null;
 		try {
 			statement = dbConnection.createStatement();
 			statement.executeUpdate(txtQuery);
-			user = userManager.getUserById(userId);
 			user.setTickets(getAllTicketsByUserId(userId));
 		} catch (SQLException | IOException e) {
 			statement.close();

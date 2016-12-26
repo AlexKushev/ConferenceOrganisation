@@ -12,18 +12,24 @@ import javax.inject.Inject;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.Event;
+import conferenceOrganisation.models.User;
+import conferenceOrganisation.services.CurrentUser;
 
 @Singleton
 public class EventManager {
-	
+
 	@Inject
 	private HallManager hallManager;
-	
-	@Inject 
+
+	@Inject
+	CurrentUser currentUser;
+
+	@Inject
 	DatabaseConnection dbConnection;
 
-	public void addEvent(Event event) throws SQLException, IOException {
-		int creatorId = event.getCreatorId();
+	public boolean addEvent(Event event) throws SQLException, IOException {
+		User user = currentUser.getCurrentUser();
+		int userId = user.getUserId();
 		int hallId = event.getHallId();
 		String title = event.getTitle();
 		String description = event.getDescription();
@@ -32,18 +38,25 @@ public class EventManager {
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
 		String txtQuery = String.format(
 				"insert into events(creatorId, hallId, title, description, date, price, availableSeats) values (%d, %d, '%s', '%s', '%s', %s, %d)",
-				creatorId, hallId, title, description, date, price, availableSeats);
-		Statement statement = dbConnection.createStatement();
-		statement.executeQuery(txtQuery);
+				userId, hallId, title, description, date, price, availableSeats);
+		Statement statement = null;
+		try {
+			statement = dbConnection.createStatement();
+			statement.executeQuery(txtQuery);
+			currentUser.getCurrentUser().setEvents(getAllEventsByUserId(userId));
+		} catch (SQLException | IOException e) {
+			return false;
+		}
 		statement.close();
+		return true;
 	}
-	
+
 	public List<Event> getAllEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
 		String txtQuery = "select * from events e";
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
-		while(rs.next()) {
+		while (rs.next()) {
 			Event event = new Event();
 			event.setEventId(rs.getInt("eventId"));
 			event.setCreatorId(rs.getInt("creatorId"));
@@ -59,7 +72,7 @@ public class EventManager {
 		statement.close();
 		return events;
 	}
-	
+
 	public List<Event> getAllEventsByUserId(int userId) throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
 		String txtQuery = String.format("select * from events where events.creatorId=%s", String.valueOf(userId));
