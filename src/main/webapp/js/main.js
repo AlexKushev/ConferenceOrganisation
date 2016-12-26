@@ -46,9 +46,9 @@ $(function() {
     $("form").submit(function() {
         switch (this.id) {
             case "login-form":
-                var $lg_username = $('#login_username').val();
+                var $lg_email = $('#login_email').val();
                 var $lg_password = $('#login_password').val();
-                if ($lg_username == "ERROR") {
+                if ($lg_email == "ERROR") {
                     msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
                 } else {
                     msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
@@ -63,10 +63,9 @@ $(function() {
                 }
                 return false;
             case "register-form":
-                var $rg_username = $('#register_username').val();
                 var $rg_email = $('#register_email').val();
                 var $rg_password = $('#register_password').val();
-                if ($rg_username == "ERROR") {
+                if ($rg_email == "ERROR") {
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
                 } else {
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
