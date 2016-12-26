@@ -164,6 +164,16 @@ a, span {
 		border-bottom: 1px solid #0e0e0e;
 	}
 
+    .mobileMenu__items a:last-of-type {
+        border-bottom: none;
+        border-bottom-left-radius: 5px;
+        -moz-border-bottom-left-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        -moz-border-bottom-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+    }
+
 	.mobileMenu__items a:hover {
 		background: #2c2c2c;
 	}
