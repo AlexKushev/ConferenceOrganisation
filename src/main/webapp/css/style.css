@@ -292,7 +292,7 @@ header {
     text-transform: uppercase;
 }
 
-#content__filters a.active {
+#content__filters a.active, #content__filters a:hover {
     background-color: rgba(255, 255, 255, 1);
 }
 
