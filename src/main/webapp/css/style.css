@@ -293,6 +293,15 @@ header {
 
 #content__filters {
     right: 0;
+    font-size: .9em;
+}
+
+#content__filters span {
+    color: #eee;
+}
+
+#content__filters select {
+    border-radius: 5px;
 }
 
 #content__tabs a {
