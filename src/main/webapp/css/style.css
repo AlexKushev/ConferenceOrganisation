@@ -281,13 +281,21 @@ header {
     -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
 
+#content__tabs,
 #content__filters {
     position: absolute;
     top: -31px;
+}
+
+#content__tabs {
     left: 0;
 }
 
-#content__filters a {
+#content__filters {
+    right: 0;
+}
+
+#content__tabs a {
     float: left;
     margin-right: 4px;
     padding: 5px 10px;
@@ -302,7 +310,7 @@ header {
     text-transform: uppercase;
 }
 
-#content__filters a.active, #content__filters a:hover {
+#content__tabs a.active, #content__tabs a:hover {
     background-color: rgba(255, 255, 255, 1);
 }
 
