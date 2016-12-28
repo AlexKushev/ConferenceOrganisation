@@ -1,6 +1,8 @@
 package conferenceOrganisation.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,24 +15,26 @@ public class Event implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int eventId;
-	
+
 	private int creatorId;
-	
+
 	private int hallId;
-	
+
 	private String title;
-	
+
 	private String description;
-	
+
 	private String date;
-	
+
 	private double price;
-	
+
 	private int availableSeats;
-	
+
 	private Hall hall;
+
+	private List<Lecture> lectures = new ArrayList<Lecture>();
 
 	public int getEventId() {
 		return eventId;
@@ -102,6 +106,18 @@ public class Event implements Serializable {
 
 	public void setHall(Hall hall) {
 		this.hall = hall;
+	}
+
+	public List<Lecture> getLectures() {
+		return lectures;
+	}
+
+	public void setLectures(List<Lecture> lectures) {
+		this.lectures = lectures;
+	}
+
+	public void addLecture(Lecture lecture) {
+		this.lectures.add(lecture);
 	}
 
 }

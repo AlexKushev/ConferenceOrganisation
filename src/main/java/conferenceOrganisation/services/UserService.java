@@ -22,7 +22,7 @@ import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.User;
 
 @Stateless
-@Path("users")
+@Path("user")
 public class UserService {
 
 	private static final Response RESPONSE_OK = Response.ok().build();

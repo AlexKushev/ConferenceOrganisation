@@ -23,6 +23,9 @@ public class EventManager {
 
 	@Inject
 	CurrentUser currentUser;
+	
+	@Inject
+	LectureManager lectureManager;
 
 	@Inject
 	DatabaseConnection dbConnection;
@@ -67,6 +70,7 @@ public class EventManager {
 			event.setPrice(rs.getDouble("price"));
 			event.setDate(rs.getString("date"));
 			event.setAvailableSeats(rs.getInt("availableSeats"));
+			event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
 			events.add(event);
 		}
 		statement.close();
@@ -89,6 +93,7 @@ public class EventManager {
 			event.setDate(rss.getString("date"));
 			event.setPrice(rss.getDouble("price"));
 			event.setAvailableSeats(rss.getInt("availableSeats"));
+			event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
 			events.add(event);
 		}
 
