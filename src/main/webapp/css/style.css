@@ -1,5 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto);
-
+    @import url(http://fonts.googleapis.com/css?family=Roboto);
 html,
 body {
     margin: 0;
@@ -47,10 +46,11 @@ a {
 
 a:hover,
 a:focus {
-	text-decoration: none;
+    text-decoration: none;
 }
 
-a, span {
+a,
+span {
     transition-property: all;
     transition-duration: .4s;
 }
@@ -64,7 +64,7 @@ a, span {
 }
 
 .scrollTop {
-	z-index: 999;
+    z-index: 999;
     width: 40px;
     height: 40px;
     position: fixed;
@@ -85,7 +85,7 @@ a, span {
 }
 
 .scrollTop:hover {
-	background-color: #ddd
+    background-color: #ddd
 }
 
 .topline {
@@ -96,7 +96,7 @@ a, span {
 }
 
 .topline__section {
-	position: relative;
+    position: relative;
     max-width: 960px;
     margin: 0 auto;
     padding: 0 4%;
@@ -108,7 +108,7 @@ a, span {
 }
 
 .topline__section a {
-	color: #ddd;
+    color: #ddd;
 }
 
 .topline__section a:hover {
@@ -121,62 +121,62 @@ a, span {
     line-height: 2.8em;
 }
 
-	.desktopMenu {
-		display: none;
-	}
+.desktopMenu {
+    display: none;
+}
 
-	.desktopMenu a {
-	    display: block;
-	    float: left;
-	    background: #1c1c1c;
-	    margin-right: 1px;
-	    padding: 0px 15px;
-	}
+.desktopMenu a {
+    display: block;
+    float: left;
+    background: #1c1c1c;
+    margin-right: 1px;
+    padding: 0px 15px;
+}
 
-	.desktopMenu a:hover {
-	    background: #2c2c2c;
-	}
+.desktopMenu a:hover {
+    background: #2c2c2c;
+}
 
-	.mobileMenu > a {
-		display: block;
-	    background: #1c1c1c url(../img/icon-nav.png) no-repeat center center;
-	    height: 36px;
-	    width: 46px;
-	    position: absolute
-	}
+.mobileMenu > a {
+    display: block;
+    background: #1c1c1c url(../img/icon-nav.png) no-repeat center center;
+    height: 36px;
+    width: 46px;
+    position: absolute
+}
 
-	.mobileMenu__items {
-		position: absolute;
-	    top: 36px;
-	    display: none;
-	    width: 92%; // MUST FIX THIS SOMEDAY
-	}
+.mobileMenu__items {
+    position: absolute;
+    top: 36px;
+    display: none;
+    width: 92%; // MUST FIX THIS SOMEDAY
+}
 
-	.mobileMenu__items.active {
-		display: block;
-	}
+.mobileMenu__items.active {
+    display: block;
+}
 
-	.mobileMenu__items a {
-		display: block;
-		background: #1c1c1c;
-		min-width: 200px;
-		padding: 2px 14px;
-		border-bottom: 1px solid #0e0e0e;
-	}
+.mobileMenu__items a {
+    display: block;
+    background: #1c1c1c;
+    min-width: 200px;
+    padding: 2px 14px;
+    border-bottom: 1px solid #0e0e0e;
+}
 
-    .mobileMenu__items a:last-of-type {
-        border-bottom: none;
-        border-bottom-left-radius: 5px;
-        -moz-border-bottom-left-radius: 5px;
-        -webkit-border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        -moz-border-bottom-right-radius: 5px;
-        -webkit-border-bottom-right-radius: 5px;
-    }
+.mobileMenu__items a:last-of-type {
+    border-bottom: none;
+    border-bottom-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
 
-	.mobileMenu__items a:hover {
-		background: #2c2c2c;
-	}
+.mobileMenu__items a:hover {
+    background: #2c2c2c;
+}
 
 .topline__section__right {
     float: right;
@@ -319,8 +319,13 @@ header {
     text-transform: uppercase;
 }
 
-#content__tabs a.active, #content__tabs a:hover {
+#content__tabs a.active,
+#content__tabs a:hover {
     background-color: rgba(255, 255, 255, 1);
+}
+
+#content__tabs a.active {
+    cursor: default;
 }
 
 .event {
@@ -332,36 +337,29 @@ header {
 
 
 /*.event__effect {
-	display: block;
-	padding: 1%;
+    display: block;
+    padding: 1%;
     border-radius: 5px;
 }*/
 
 
 /*.event__effect:hover {
-	box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
 }*/
 
 .event:first-of-type {
     margin-top: 0px;
     padding-top: 0px;
-}
-
-#content .event:first-of-type {
     border-top: none;
 }
 
-#content .event:last-of-type {
-	margin-bottom: 5px;
+.event:last-of-type {
+    margin-bottom: 5px;
 }
 
 .event a {
     display: block;
     color: initial;
-}
-
-.event h1.past {
-    color: #6f2323;
 }
 
 .event__date {
@@ -378,20 +376,12 @@ header {
     padding: 3px 12px 1px;
 }
 
-.event__date__day--past {
-    background-color: #a91e1e;
-}
-
 .event__date__month {
     background: #23506f;
     font-size: .9em;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 2px 0;
-}
-
-.event__date__month--past {
-    background-color: #791111;
 }
 
 .event__main {
@@ -413,7 +403,7 @@ header {
 }
 
 .event__main__details:last-of-type {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .event__main__details--location {
@@ -430,7 +420,7 @@ header {
 }
 
 .event__time {
-	display: none;
+    display: none;
     float: left;
     width: 14%;
     color: #777;
@@ -458,26 +448,38 @@ header {
     background: #d3911f;
 }
 
+.event--past h1 {
+    color: #222;
+}
+
+.event--past .event__date__day {
+    background-color: #999;
+}
+
+.event--past .event__date__month {
+    background-color: #666;
+}
+
 footer {
-	width: 100%;
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
-	line-height: 3em;
-	font-size: .8em;
-	color: rgba(255, 255, 255, 0.5);
-	text-align: center;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 3em;
+    font-size: .8em;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
 }
 
 span.event__CTA__arrow {
-	display: block;
-	float: right;
-	position: absolute;
-	top: calc(50% - 10px);
-	top: -moz-calc(50% - 10px);
-	top: -webkit-calc(50% - 10px);
-	right: 10px;
-	width: 15px;
-	height: 24px;
-	background: url(../img/icon-arrow.png) no-repeat;
+    display: block;
+    float: right;
+    position: absolute;
+    top: calc(50% - 10px);
+    top: -moz-calc(50% - 10px);
+    top: -webkit-calc(50% - 10px);
+    right: 10px;
+    width: 15px;
+    height: 24px;
+    background: url(../img/icon-arrow.png) no-repeat;
 }
 
 p.backTop {
@@ -514,10 +516,10 @@ a#loader:hover {
 
 @media only screen and (min-width: 560px) {
     .topline__section__left .desktopMenu {
-    	display: block;
+        display: block;
     }
     .topline__section__left .mobileMenu {
-    	display: none;
+        display: none;
     }
     #headerLogo {
         float: left;
@@ -529,12 +531,13 @@ a#loader:hover {
 }
 
 @media only screen and (min-width: 640px) {
-	.event__time, span.event__CTA__btn {
-		display: block !important;
-	}
-	span.event__CTA__arrow {
-		display: none;
-	}
+    .event__time,
+    span.event__CTA__btn {
+        display: block !important;
+    }
+    span.event__CTA__arrow {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 875px) {
@@ -552,6 +555,7 @@ a#loader:hover {
     }
 }
 
+
 /* #####################################################################
    #
    #   Project       : Modal Login with jQuery Effects
@@ -561,15 +565,14 @@ a#loader:hover {
    #   Last Change   : 08/02/2015
    #
    ##################################################################### */
-   
-
 
 #login-modal .modal-dialog {
     max-width: 350px;
 }
 
-#login-modal input[type=text], input[type=password] {
-	margin-top: 10px;
+#login-modal input[type=text],
+input[type=password] {
+    margin-top: 10px;
 }
 
 #div-login-msg,
@@ -625,6 +628,7 @@ a#loader:hover {
     max-width: 100px;
 }
 
+
 /* #########################################
    #    override the bootstrap configs     #
    ######################################### */
@@ -635,8 +639,8 @@ a#loader:hover {
 }
 
 .modal-open .modal {
-	padding-left: 10px;
-	padding-right: 10px!important;
+    padding-left: 10px;
+    padding-right: 10px!important;
 }
 
 .modal-dialog {
@@ -683,7 +687,8 @@ a#loader:hover {
     outline: none;
 }
 
-.btn-lg, .btn-group-lg>.btn {
+.btn-lg,
+.btn-group-lg>.btn {
     border-radius: 0px;
 }
 
@@ -692,14 +697,15 @@ a#loader:hover {
     color: #95a5a6;
 }
 
-.btn-link:hover, .btn-link:focus {
+.btn-link:hover,
+.btn-link:focus {
     color: #2c3e50;
     text-decoration: none;
 }
 
 .btn-primary {
-	background-color: #306ba4;
-	border-color: #275a8c;
+    background-color: #306ba4;
+    border-color: #275a8c;
 }
 
 .glyphicon {
@@ -707,10 +713,10 @@ a#loader:hover {
 }
 
 .form-control {
-  border-radius: 0px;
+    border-radius: 0px;
 }
 
 @media (min-width: 768px) {
-  .modal-dialog {
-    margin: 30px auto;
-  }
+    .modal-dialog {
+        margin: 30px auto;
+    }
