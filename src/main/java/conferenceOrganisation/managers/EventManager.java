@@ -24,7 +24,7 @@ public class EventManager {
 
 	@Inject
 	CurrentUser currentUser;
-	
+
 	@Inject
 	LectureManager lectureManager;
 
@@ -100,7 +100,7 @@ public class EventManager {
 
 		return events;
 	}
-	
+
 	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
 		CitiesContainer cyties = new CitiesContainer();
 		String txtQuery = "select distinct(city) from halls";
@@ -110,6 +110,30 @@ public class EventManager {
 			cyties.addCity(rs.getString("city"));
 		}
 		return cyties;
+	}
+
+	public List<Event> getAllEventsByCity(String city) throws SQLException, IOException {
+		List<Event> events = new ArrayList<Event>();
+		String txtQuery = String
+				.format("select * from events where events.hallId IN (select hallId from halls where city='%s'", city);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			Event event = new Event();
+			event.setEventId(rs.getInt("eventId"));
+			event.setHall(hallManager.getHallById(rs.getInt("hallId")));
+			event.setCreatorId(rs.getInt("creatorId"));
+			event.setHallId(rs.getInt("hallId"));
+			event.setTitle(rs.getString("title"));
+			event.setDescription(rs.getString("description"));
+			event.setDate(rs.getString("date"));
+			event.setPrice(rs.getDouble("price"));
+			event.setAvailableSeats(rs.getInt("availableSeats"));
+			event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
+			events.add(event);
+		}
+		statement.close();
+		return events;
 	}
 
 }

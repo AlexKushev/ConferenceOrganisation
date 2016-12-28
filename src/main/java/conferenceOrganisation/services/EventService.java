@@ -51,5 +51,13 @@ public class EventService {
 		return cyties;
 	}
 	
+	@Path("eventsByCity")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Event> getAllEventsByCity(@QueryParam("city") String city) throws SQLException, IOException {
+		List<Event> events = eventManager.getAllEventsByCity(city);
+		return events;
+	}
+	
 
 }
