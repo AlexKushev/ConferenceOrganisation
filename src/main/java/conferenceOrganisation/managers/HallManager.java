@@ -27,6 +27,7 @@ public class HallManager {
 			hall.setName(rs.getString("name"));
 			hall.setCapacity(rs.getInt("capacity"));
 			hall.setLocation(rs.getString("location"));
+			hall.setCity(rs.getString("city"));
 		}
 		statement.close();
 		return hall;

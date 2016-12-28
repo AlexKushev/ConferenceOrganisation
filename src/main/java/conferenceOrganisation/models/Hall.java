@@ -19,6 +19,8 @@ public class Hall implements Serializable {
 	private int capacity;
 
 	private String location;
+	
+	private String city;
 
 	public Hall() {
 
@@ -62,6 +64,14 @@ public class Hall implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 }

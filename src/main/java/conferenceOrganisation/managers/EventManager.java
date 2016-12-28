@@ -11,6 +11,7 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
+import conferenceOrganisation.models.CitiesContainer;
 import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
@@ -98,6 +99,17 @@ public class EventManager {
 		}
 
 		return events;
+	}
+	
+	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
+		CitiesContainer cyties = new CitiesContainer();
+		String txtQuery = "select distinct(city) from halls";
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			cyties.addCity(rs.getString("city"));
+		}
+		return cyties;
 	}
 
 }

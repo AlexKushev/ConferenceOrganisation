@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import conferenceOrganisation.managers.EventManager;
 import conferenceOrganisation.managers.LectureManager;
+import conferenceOrganisation.models.CitiesContainer;
 import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.Lecture;
 
@@ -41,5 +42,14 @@ public class EventService {
 		List<Lecture> lectures = lectureManager.getAllLectuersByEventId(eventId);
 		return lectures;
 	}
+	
+	@Path("cities")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
+		CitiesContainer cyties = eventManager.getAllCytiesWithEvent();
+		return cyties;
+	}
+	
 
 }
