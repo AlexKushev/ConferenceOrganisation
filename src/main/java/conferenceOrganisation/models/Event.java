@@ -33,6 +33,8 @@ public class Event implements Serializable {
 	private int availableSeats;
 
 	private Hall hall;
+	
+	private int isPublished;
 
 	private List<Lecture> lectures = new ArrayList<Lecture>();
 
@@ -106,6 +108,14 @@ public class Event implements Serializable {
 
 	public void setHall(Hall hall) {
 		this.hall = hall;
+	}
+	
+	public int getIsPublished() {
+		return isPublished;
+	}
+
+	public void setIsPublished(int isPublished) {
+		this.isPublished = isPublished;
 	}
 
 	public List<Lecture> getLectures() {

@@ -41,8 +41,8 @@ public class EventManager {
 		double price = event.getPrice();
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
 		String txtQuery = String.format(
-				"insert into events(creatorId, hallId, title, description, date, price, availableSeats) values (%d, %d, '%s', '%s', '%s', %s, %d)",
-				userId, hallId, title, description, date, price, availableSeats);
+				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, isPublished) values (%d, %d, '%s', '%s', '%s', %s, %d)",
+				userId, hallId, title, description, date, price, availableSeats, 0);
 		Statement statement = null;
 		try {
 			statement = dbConnection.createStatement();
@@ -61,40 +61,53 @@ public class EventManager {
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
-			Event event = new Event();
-			event.setEventId(rs.getInt("eventId"));
-			event.setCreatorId(rs.getInt("creatorId"));
-			event.setHallId(rs.getInt("hallId"));
-			event.setHall(hallManager.getHallById(event.getHallId()));
-			event.setTitle(rs.getString("title"));
-			event.setDescription(rs.getString("description"));
-			event.setPrice(rs.getDouble("price"));
-			event.setDate(rs.getString("date"));
-			event.setAvailableSeats(rs.getInt("availableSeats"));
-			event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
+			Event event = loadEventProperties(rs);
 			events.add(event);
 		}
 		statement.close();
 		return events;
 	}
 
+	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
+		List<Event> events = new ArrayList<Event>();
+		String txtQuery = "select * from events where events.isPublished=1";
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			Event event = loadEventProperties(rs);
+			events.add(event);
+		}
+		statement.close();
+		return events;
+	}
+
+	public List<Event> getAllUnpublishedEvents() throws SQLException, IOException {
+		List<Event> events = new ArrayList<Event>();
+		String txtQuery = "select * from events where events.isPublished=0";
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			Event event = loadEventProperties(rs);
+			events.add(event);
+		}
+		statement.close();
+		return events;
+	}
+
+	public void makeEventPublish(int eventId) throws SQLException, IOException {
+		String txtQuery = String.format("update events set isPublished = 1 where events.eventId=%d", eventId);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
 	public List<Event> getAllEventsByUserId(int userId) throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
 		String txtQuery = String.format("select * from events where events.creatorId=%s", String.valueOf(userId));
 		Statement statement = dbConnection.createStatement();
-		ResultSet rss = statement.executeQuery(txtQuery);
-		while (rss.next()) {
-			Event event = new Event();
-			event.setEventId(rss.getInt("eventId"));
-			event.setHall(hallManager.getHallById(rss.getInt("hallId")));
-			event.setCreatorId(rss.getInt("creatorId"));
-			event.setHallId(rss.getInt("hallId"));
-			event.setTitle(rss.getString("title"));
-			event.setDescription(rss.getString("description"));
-			event.setDate(rss.getString("date"));
-			event.setPrice(rss.getDouble("price"));
-			event.setAvailableSeats(rss.getInt("availableSeats"));
-			event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			Event event = loadEventProperties(rs);
 			events.add(event);
 		}
 
@@ -103,7 +116,7 @@ public class EventManager {
 
 	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
 		CitiesContainer cyties = new CitiesContainer();
-		String txtQuery = "select distinct(city) from halls";
+		String txtQuery = "select distinct(city) from halls where hallId IN (select hallId from events where events.isPublished=1)";
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -114,26 +127,33 @@ public class EventManager {
 
 	public List<Event> getAllEventsByCity(String city) throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String
-				.format("select * from events where events.hallId IN (select hallId from halls where city='%s'", city);
+		String txtQuery = String.format(
+				"select * from events where events.hallId IN (select hallId from halls where city='%s') AND events.isPublished=1",
+				city);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
-			Event event = new Event();
-			event.setEventId(rs.getInt("eventId"));
-			event.setHall(hallManager.getHallById(rs.getInt("hallId")));
-			event.setCreatorId(rs.getInt("creatorId"));
-			event.setHallId(rs.getInt("hallId"));
-			event.setTitle(rs.getString("title"));
-			event.setDescription(rs.getString("description"));
-			event.setDate(rs.getString("date"));
-			event.setPrice(rs.getDouble("price"));
-			event.setAvailableSeats(rs.getInt("availableSeats"));
-			event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
+			Event event = loadEventProperties(rs);
 			events.add(event);
 		}
 		statement.close();
 		return events;
+	}
+
+	private Event loadEventProperties(ResultSet rs) throws SQLException, IOException {
+		Event event = new Event();
+		event.setEventId(rs.getInt("eventId"));
+		event.setHall(hallManager.getHallById(rs.getInt("hallId")));
+		event.setCreatorId(rs.getInt("creatorId"));
+		event.setHallId(rs.getInt("hallId"));
+		event.setTitle(rs.getString("title"));
+		event.setDescription(rs.getString("description"));
+		event.setDate(rs.getString("date"));
+		event.setPrice(rs.getDouble("price"));
+		event.setAvailableSeats(rs.getInt("availableSeats"));
+		event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
+		event.setIsPublished(rs.getInt("isPublished"));
+		return event;
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -21,20 +22,43 @@ import conferenceOrganisation.models.Lecture;
 @Stateless
 @Path("events")
 public class EventService {
-	
+
 	@Inject
 	EventManager eventManager;
-	
-	@Inject 
+
+	@Inject
 	LectureManager lectureManager;
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Event> getAllEvents() throws SQLException, IOException {
 		List<Event> events = eventManager.getAllEvents();
 		return events;
 	}
-	
+
+	@Path("published")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
+		List<Event> events = eventManager.getAllPublishedEvents();
+		return events;
+	}
+
+	@Path("unpublished")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Event> getAllUnpublishedEvents() throws SQLException, IOException {
+		List<Event> events = eventManager.getAllUnpublishedEvents();
+		return events;
+	}
+
+	@Path("publish")
+	@POST
+	public void publishEvent(@QueryParam("eventId") int eventId) throws SQLException, IOException {
+		eventManager.makeEventPublish(eventId);
+		// TODO detect exceptions
+	}
+
 	@Path("lectures")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -42,7 +66,7 @@ public class EventService {
 		List<Lecture> lectures = lectureManager.getAllLectuersByEventId(eventId);
 		return lectures;
 	}
-	
+
 	@Path("cities")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +74,7 @@ public class EventService {
 		CitiesContainer cyties = eventManager.getAllCytiesWithEvent();
 		return cyties;
 	}
-	
+
 	@Path("eventsByCity")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,6 +82,5 @@ public class EventService {
 		List<Event> events = eventManager.getAllEventsByCity(city);
 		return events;
 	}
-	
 
 }
