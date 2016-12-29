@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Conference Organisator</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <div class="topline">
+        <div class="topline__section clear">
+            <div class="topline__section__left">
+                <nav class="desktopMenu clear">
+                    <a href="index.html">Home</a>
+                    <a href="#">Item 1</a>
+                    <a href="#">Item 2</a>
+                    <a href="#">Item 3</a>
+                </nav>
+                <nav class="mobileMenu">
+                    <a href="#" class="mobileMenu__btn"></a>
+                    <div class="mobileMenu__items">
+                        <a href="#">Item 1</a>
+                        <a href="#">Item 2</a>
+                        <a href="#">Item 3</a>
+                        <a href="#">Item 4</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="topline__section__right">
+                <a href="#" class="profile" role="button" data-toggle="modal" data-target="#login-modal">Account</a>
+            </div>
+        </div>
+        <div class="topstripe"></div>
+    </div>
+    <div id="wrap">
+        <header class="clear">
+            <div id="headerLogo">
+                <a href="index.html"></a>
+            </div>
+            <div id="headerIntro" class="clear">
+                <strong>SIGN UP</strong> today and get your place for the most interesting conferences in the IT industry.
+                <a href="#" class="btnRegister" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
+            </div>
+        </header>
+        <div id="content">
+            <div id="content__tabs" class="clear">
+                <a href="index.html">Upcoming</a>
+                <a href="pastevents.html">Past</a>
+                <a href="addevent.html" class="active">Add New</a>
+            </div>
+            <form method="post" role="form" accept-charset="utf-8">
+                <div class="form-group">
+                    <label for="eventTopic">Conference Topic</label>
+                    <input type="text" class="form-control" id="eventTopic" placeholder="Topic" name="eventTopic">
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Date</label>
+                    <br />
+                    <input type="date" class="form-control" id="eventDate" name="eventDate">
+                </div>
+                <div class="form-group">
+                    <label for="eventTime">Time</label>
+                    <br />
+                    <input type="time" class="form-control" id="eventTime" placeholder="Starting Hour" name="eventTime">
+                </div>
+                <div class="form-group float clear">
+                    <label for="eventDate">Address</label>
+                    <br />
+                    <input type="text" class="form-control" id="eventAddress" placeholder="Street Address" name="eventAddress">
+                    <input type="text" class="form-control" placeholder="City" name="eventCity">
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Description</label>
+                    <textarea class="form-control" rows="4" id="eventDescription" name="eventDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="eventSeats">Number of Seats</label>
+                    <br />
+                    <input type="number" class="form-control" id="eventSeas" placeholder="Seats" name="eventSeats">
+                </div>
+                <div class="form-group">
+                <label for="eventPrice">Ticket Price <span>/leave 0 for 'FREE' tickets/</span></label>
+                    <br />
+                    <input type="number" min="0" step="any" class="form-control" id="eventPrice" placeholder="Price" name="eventPrice" />
+                </div>
+                <button type="submit" class="btn btn-primary">Publish</button>
+            </form>
+        </div>
+        <a href="#" class="scrollTop">Scroll</a>
+    </div>
+    <footer>
+        © 2016 Conference Organisator
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>

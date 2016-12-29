@@ -284,14 +284,15 @@ header {
 #content__tabs,
 #content__filters {
     position: absolute;
-    top: -31px;
 }
 
 #content__tabs {
+    top: -31px;
     left: 0;
 }
 
 #content__filters {
+    top: -26px;
     right: 0;
     font-size: .9em;
 }
@@ -571,7 +572,7 @@ a#loader:hover {
 }
 
 #login-modal input[type=text],
-input[type=password] {
+#login-modal input[type=password] {
     margin-top: 10px;
 }
 
@@ -674,9 +675,9 @@ input[type=password] {
     margin-bottom: 0px;
 }
 
-.btn {
+/*.btn {
     border-radius: 0px;
-}
+}*/
 
 .btn:focus,
 .btn:active:focus,
@@ -689,7 +690,7 @@ input[type=password] {
 
 .btn-lg,
 .btn-group-lg>.btn {
-    border-radius: 0px;
+    border-radius: 5px;
 }
 
 .btn-link {
@@ -712,11 +713,36 @@ input[type=password] {
     top: 0px;
 }
 
-.form-control {
+/*.form-control {
     border-radius: 0px;
-}
+}*/
 
 @media (min-width: 768px) {
     .modal-dialog {
         margin: 30px auto;
     }
+}
+/* BOOTSTRAP OVERRIDE FOR ADDEVENT PAGE */
+
+label {
+    font-size: .9em;
+}
+
+label span {
+    color: #777;
+    font-weight: normal;
+    font-size: .8em;
+}
+
+.form-group.float input {
+    float: left;
+}
+
+.form-group.float input:first-of-type {
+    width: 69%;
+    margin-right: 1%;
+}
+
+.form-group.float input:last-of-type {
+    width: 30%;
+}
