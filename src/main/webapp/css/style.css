@@ -717,6 +717,15 @@ a#loader:hover {
     border-radius: 0px;
 }*/
 
+h1 {
+    font-size: 1.4em;
+}
+
+hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 @media (min-width: 768px) {
     .modal-dialog {
         margin: 30px auto;
