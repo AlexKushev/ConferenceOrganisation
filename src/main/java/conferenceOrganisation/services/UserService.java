@@ -59,7 +59,7 @@ public class UserService {
 			userManager.addUser(user);
 			return RESPONSE_OK;
 		} catch (SQLException e) {
-			System.out.println("Problem occurs while trying to add new user.");
+			System.out.println("Problem occurs while trying to add new user (User with same email already exist");
 		}
 		return Response.status(401).build();
 	}
