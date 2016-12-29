@@ -36,23 +36,57 @@
         </div>
         <div class="topstripe"></div>
     </div>
-    <div id="wrap">
+    <div class="wrap">
         <header class="clear">
-            <div id="headerLogo">
+            <div class="headerLogo">
                 <a href="index.html"></a>
             </div>
-            <div id="headerIntro" class="clear">
+            <div class="headerBox" class="clear">
                 <strong>SIGN UP</strong> today and get your place for the most interesting conferences in the IT industry.
-                <a href="#" class="btnRegister" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
             </div>
         </header>
-        <div id="content">
-            <h1>Event Title</h1>
-            <p>Date</p>
-            <p>Place</p>
-            <p>Description</p>
-            <p>Available Seats</p>
-            <p>Price</p>
+        <div class="content">
+            <div class="content__tabs" class="clear">
+                <a href="index.html">Upcoming</a>
+                <a href="pastevents.html">Past</a>
+                <a href="addevent.html">Add New</a>
+            </div>
+            <article class="singleEvent"><!-- IF EVENT IS PAST ADD CLASS "pastEvent" -->
+                <div class="singleEvent__header clear">
+                    <div class="eventDate">
+                        <div class="eventDate__day">
+                            18
+                        </div>
+                        <div class="eventDate__month">
+                            DEC
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h1>Smart Cities – Exhibition and Conference for South - East Europe</h1>
+                        <div style="background: url(img/icon-time.png) no-repeat 0 2px; margin-top: 6px; padding-left: 20px; display: inline-block;"> 10:00</div>
+                        <div style="background: url(img/icon-location.png) no-repeat 0 2px; margin-top: 6px; padding-left: 20px; display: inline-block;"><a href="http://maps.google.com/?q=Inter Expo Center, Sofia" target="_blank">Inter Expo Center, Sofia</a></div>
+                    </div>
+                </div>
+                <hr />
+                <div class="singleEvent__main clear">
+                    <div class="singleEvent__main__eventInfo">
+                        <h2>Description</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, id minima totam quo, vel nisi quasi quam dolorem molestiae perspiciatis, quibusdam obcaecati. Pariatur laboriosam vel ullam, obcaecati iusto cum atque. Excepturi repellendus, ad dolor tempore eaque porro, soluta, harum quaerat saepe nisi sint fugiat sequi repellat at optio distinctio. Magnam.</p>
+                    </div>
+                    <div class="singleEvent__main__eventLectures">
+                        <h2>Lecture Topic</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod totam a distinctio molestiae adipisci.</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="clear">
+                <p style="float: left;"><strong>Seats</strong>: 100/150</p>
+                <div style="float: right;">
+                <span style="padding-right: 5px; font-style: italic;">25 BGN</span> <a href="#" class="btn btn-yellow">Get Ticket</a>
+            </div>
+            </div>
+            </article>
         </div>
         <a href="#" class="scrollTop">Scroll</a>
     </div>

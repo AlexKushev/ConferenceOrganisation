@@ -1,4 +1,4 @@
-    @import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 html,
 body {
     margin: 0;
@@ -30,13 +30,25 @@ h3,
 h4,
 h5,
 h6 {
-    color: #23506f;
     font-weight: initial;
+    font-size: initial;
 }
 
 h1 {
     margin: 0;
+    color: #23506f;
+    font-size: 1.3em;
     font-weight: bold;
+}
+
+h2 {
+    margin: 0 0 10px;
+    font-weight: bold;
+}
+
+hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 a {
@@ -207,7 +219,7 @@ span {
     background-image: linear-gradient(to right, #c69 0%, #c69 8.33333%, #b37399 8.33333%, #b37399 16.66667%, #d58e10 16.66667%, #d58e10 25%, #f6c352 25%, #f6c352 33.33333%, #d2e1dd 33.33333%, #d2e1dd 41.66667%, #fff 41.66667%, #fff 50%, #f2ece4 50%, #f2ece4 58.33333%, #e1d7d2 58.33333%, #e1d7d2 66.66667%, #dadbdf 66.66667%, #dadbdf 75%, #6e94b9 75%, #6e94b9 83.33333%, #306ba4 83.33333%, #306ba4 91.66667%, #23506f 91.66667%, #23506f 100%);
 }
 
-#wrap {
+.wrap {
     position: relative;
     max-width: 960px;
     margin: 0 auto;
@@ -218,7 +230,7 @@ header {
     min-height: 90px;
 }
 
-#headerLogo {
+.headerLogo {
     margin: 0 auto;
     width: 181px;
     height: 60px;
@@ -227,14 +239,13 @@ header {
     -moz-background-size: 100%;
     -webkit-background-size: 100%;
 }
+    .headerLogo a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
 
-#headerLogo a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-#headerIntro {
+.headerBox {
     display: none;
     float: right;
     width: 294px;
@@ -247,7 +258,7 @@ header {
     -webkit-border-radius: 5px;
 }
 
-#headerIntro a.btnRegister {
+a.headerBox__btn {
     display: block;
     float: right;
     margin-top: 8px;
@@ -263,11 +274,11 @@ header {
     -webkit-border-radius: 3px;
 }
 
-#headerIntro a.btnRegister:hover {
+a.headerBox__btn:hover {
     background: #a51c60;
 }
 
-#content {
+.content {
     z-index: 1;
     position: relative;
     max-width: 1000px;
@@ -281,31 +292,31 @@ header {
     -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
 
-#content__tabs,
-#content__filters {
+.content__tabs,
+.content__filters {
     position: absolute;
 }
 
-#content__tabs {
+.content__tabs {
     top: -31px;
     left: 0;
 }
 
-#content__filters {
+.content__filters {
     top: -26px;
     right: 0;
     font-size: .9em;
 }
 
-#content__filters span {
+.content__filters span {
     color: #eee;
 }
 
-#content__filters select {
+.content__filters select {
     border-radius: 5px;
 }
 
-#content__tabs a {
+.content__tabs a {
     float: left;
     margin-right: 4px;
     padding: 5px 10px;
@@ -320,12 +331,12 @@ header {
     text-transform: uppercase;
 }
 
-#content__tabs a.active,
-#content__tabs a:hover {
+.content__tabs a.active,
+.content__tabs a:hover {
     background-color: rgba(255, 255, 255, 1);
 }
 
-#content__tabs a.active {
+.content__tabs a.active {
     cursor: default;
 }
 
@@ -335,17 +346,13 @@ header {
     padding-top: 10px;
     border-top: 1px solid #ccc;
 }
-
-
 /*.event__effect {
-    display: block;
-    padding: 1%;
-    border-radius: 5px;
+display: block;
+padding: 1%;
+border-radius: 5px;
 }*/
-
-
 /*.event__effect:hover {
-    box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
+box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
 }*/
 
 .event:first-of-type {
@@ -363,13 +370,13 @@ header {
     color: initial;
 }
 
-.event__date {
+.eventDate {
     float: left;
     color: #fff;
     text-align: center;
 }
 
-.event__date__day {
+.eventDate__day {
     background-color: #306ba4;
     font-size: 1.4em;
     border-top-left-radius: 5px;
@@ -377,7 +384,7 @@ header {
     padding: 3px 12px 1px;
 }
 
-.event__date__month {
+.eventDate__month {
     background: #23506f;
     font-size: .9em;
     border-bottom-left-radius: 5px;
@@ -393,7 +400,7 @@ header {
 }
 
 .event__main h1 {
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .event__main__details {
@@ -428,37 +435,74 @@ header {
     font-size: .8em;
 }
 
-.event__CTA {
+.eventCTA {
     float: right;
     min-width: 10%;
 }
 
-.event__CTA span.event__CTA__btn {
-    display: none;
-    float: right;
-    margin: 20px 0;
-    padding: 5px 10px;
-    background: #eab132;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: .8em;
-    color: #1c1c1c;
-}
+    span.eventCTA__btn {
+        display: none;
+        float: right;
+        margin: 20px 0;
+        padding: 5px 10px;
+        background: #eab132;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: .8em;
+        color: #1c1c1c;
+    }
 
-.event__CTA span.event__CTA__btn:hover {
-    background: #d3911f;
-}
+    span.eventCTA__btn:hover {
+        background: #d3911f;
+    }
 
-.event--past h1 {
+    span.eventCTA__arrow {
+        display: block;
+        float: right;
+        position: absolute;
+        top: calc(50% - 10px);
+        top: -moz-calc(50% - 10px);
+        top: -webkit-calc(50% - 10px);
+        right: 10px;
+        width: 15px;
+        height: 24px;
+        background: url(../img/icon-arrow.png) no-repeat;
+    }
+
+/* STYLE OVERRIDE FOR PAST EVENT */
+
+.pastEvent h1 {
     color: #222;
 }
 
-.event--past .event__date__day {
+.pastEvent .eventDate__day {
     background-color: #999;
 }
 
-.event--past .event__date__month {
+.pastEvent .eventDate__month {
     background-color: #666;
+}
+
+.singleEvent__header .info {
+    float: left;
+    width: 70%;
+    margin-left: 15px;
+}
+
+.singleEvent__main > div {
+    float: left;
+    font-size: .9em;
+}
+
+.singleEvent__main__eventInfo {
+    width: 54%;
+    padding-right: 2%;
+}
+
+.singleEvent__main__eventLectures {
+    width: 42%;
+    padding-left: 2%;
+    border-left: 1px dotted #ccc;
 }
 
 footer {
@@ -470,34 +514,7 @@ footer {
     text-align: center;
 }
 
-span.event__CTA__arrow {
-    display: block;
-    float: right;
-    position: absolute;
-    top: calc(50% - 10px);
-    top: -moz-calc(50% - 10px);
-    top: -webkit-calc(50% - 10px);
-    right: 10px;
-    width: 15px;
-    height: 24px;
-    background: url(../img/icon-arrow.png) no-repeat;
-}
-
-p.backTop {
-    margin-bottom: 0;
-    text-align: center;
-}
-
-.backTop a {
-    display: inline-block;
-    width: 100%;
-    padding: 10px 15px;
-    background: #ccc;
-    color: #222;
-    border-top: 1px solid #ccc;
-}
-
-a#loader {
+a.loader {
     display: block;
     width: 80px;
     line-height: 80px;
@@ -510,7 +527,7 @@ a#loader {
     cursor: pointer;
 }
 
-a#loader:hover {
+a.loader:hover {
     background: #23506f;
     color: #fff;
 }
@@ -522,27 +539,27 @@ a#loader:hover {
     .topline__section__left .mobileMenu {
         display: none;
     }
-    #headerLogo {
+    .headerLogo {
         float: left;
         margin: 0;
     }
-    #headerIntro {
+    .headerBox {
         display: block;
     }
 }
 
 @media only screen and (min-width: 640px) {
     .event__time,
-    span.event__CTA__btn {
+    span.eventCTA__btn {
         display: block !important;
     }
-    span.event__CTA__arrow {
+    span.eventCTA__arrow {
         display: none;
     }
 }
 
 @media only screen and (min-width: 875px) {
-    #wrap,
+    .wrap,
     .topline__section {
         padding-left: 25px;
         padding-right: 25px;
@@ -555,17 +572,15 @@ a#loader:hover {
         width: auto;
     }
 }
-
-
 /* #####################################################################
-   #
-   #   Project       : Modal Login with jQuery Effects
-   #   Author        : Rodrigo Amarante (rodrigockamarante)
-   #   Version       : 1.0
-   #   Created       : 07/28/2015
-   #   Last Change   : 08/02/2015
-   #
-   ##################################################################### */
+#
+#   Project       : Modal Login with jQuery Effects
+#   Author        : Rodrigo Amarante (rodrigockamarante)
+#   Version       : 1.0
+#   Created       : 07/28/2015
+#   Last Change   : 08/02/2015
+#
+##################################################################### */
 
 #login-modal .modal-dialog {
     max-width: 350px;
@@ -628,11 +643,9 @@ a#loader:hover {
     max-height: 100px;
     max-width: 100px;
 }
-
-
 /* #########################################
-   #    override the bootstrap configs     #
-   ######################################### */
+#    override the bootstrap configs     #
+######################################### */
 
 .modal-backdrop.in {
     filter: alpha(opacity=50);
@@ -675,10 +688,6 @@ a#loader:hover {
     margin-bottom: 0px;
 }
 
-/*.btn {
-    border-radius: 0px;
-}*/
-
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
@@ -713,17 +722,16 @@ a#loader:hover {
     top: 0px;
 }
 
-/*.form-control {
-    border-radius: 0px;
-}*/
-
-h1 {
-    font-size: 1.4em;
+.btn-yellow {
+    background-color: #eab132;
+    border-color: #b98c28;
+    color: #1c1c1c;
+    font-weight: bold;
 }
 
-hr {
-    margin-top: 15px;
-    margin-bottom: 15px;
+.btn-yellow:hover {
+    background-color: #d3911f;
+    color: #000;
 }
 
 @media (min-width: 768px) {
@@ -731,7 +739,8 @@ hr {
         margin: 30px auto;
     }
 }
-/* BOOTSTRAP OVERRIDE FOR ADDEVENT PAGE */
+
+/* BOOTSTRAP OVERRIDE FOR ADD EVENT PAGE */
 
 label {
     font-size: .9em;
@@ -754,4 +763,8 @@ label span {
 
 .form-group.float input:last-of-type {
     width: 30%;
+}
+
+.regularForm button {
+    float: right;
 }

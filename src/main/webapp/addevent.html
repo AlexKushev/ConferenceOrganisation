@@ -36,25 +36,25 @@
         </div>
         <div class="topstripe"></div>
     </div>
-    <div id="wrap">
+    <div class="wrap">
         <header class="clear">
-            <div id="headerLogo">
+            <div class="headerLogo">
                 <a href="index.html"></a>
             </div>
-            <div id="headerIntro" class="clear">
+            <div class="headerBox" class="clear">
                 <strong>SIGN UP</strong> today and get your place for the most interesting conferences in the IT industry.
-                <a href="#" class="btnRegister" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
             </div>
         </header>
-        <div id="content">
-            <div id="content__tabs" class="clear">
+        <div class="content">
+            <div class="content__tabs" class="clear">
                 <a href="index.html">Upcoming</a>
                 <a href="pastevents.html">Past</a>
                 <a href="addevent.html" class="active">Add New</a>
             </div>
-            <h1>Add New Conference</h1>
+            <h1>Add New Conference | Add Lectures</h1>
             <hr />
-            <form method="post" role="form" accept-charset="utf-8">
+            <form method="post" role="form" accept-charset="utf-8" class="regularForm">
                 <div class="form-group">
                     <label for="eventTopic">Conference Topic</label>
                     <input type="text" class="form-control" id="eventTopic" placeholder="Topic" name="eventTopic">
@@ -65,7 +65,7 @@
                     <input type="date" class="form-control" id="eventDate" name="eventDate">
                 </div>
                 <div class="form-group">
-                    <label for="eventTime">Time</label>
+                    <label for="eventTime">Starting Time</label>
                     <br />
                     <input type="time" class="form-control" id="eventTime" placeholder="Starting Hour" name="eventTime">
                 </div>
@@ -85,11 +85,32 @@
                     <input type="number" class="form-control" id="eventSeas" placeholder="Seats" name="eventSeats">
                 </div>
                 <div class="form-group">
-                <label for="eventPrice">Ticket Price <span>/leave 0 for 'FREE' tickets/</span></label>
+                    <label for="eventPrice">Ticket Price <span>(leave 0 for 'FREE' tickets)</span></label>
                     <br />
-                    <input type="number" min="0" step="any" class="form-control" id="eventPrice" placeholder="Price" name="eventPrice" />
+                    <input type="number" min="0" step="any" class="form-control" id="eventPrice" placeholder="Price BGN" name="eventPrice" />
                 </div>
-                <button type="submit" class="btn btn-primary">Publish</button>
+                <div class="clear">
+                    <button type="button" class="btn btn-primary">Next</button>
+                </div>
+                <div class="form-group">
+                    <label for="lectureTopic">Lecture Topic</label>
+                    <input type="text" class="form-control" id="lectureTopic" placeholder="Topic" name="lectureTopic">
+                </div>
+                <div class="form-group">
+                    <label for="lectureDescription">Description</label>
+                    <input type="text" class="form-control" id="lectureDescription" placeholder="What the lecture is about" name="lectureDescription">
+                </div>
+                <div class="form-group">
+                    <label for="lecturerName">Lecturer</label>
+                    <input type="text" class="form-control" id="lecturerName" placeholder="Lecturer" name="lecturerName">
+                </div>
+                <div class="form-group">
+                    <label for="lecturerInfo">Lecturer's Experience</label>
+                    <input type="text" class="form-control" id="lecturerInfo" placeholder="Topic related professional background" name="lecturerInfo">
+                </div>
+                <div class="clear">
+                    <button type="submit" class="btn btn-success">Publish</button>
+                </div>
             </form>
         </div>
         <a href="#" class="scrollTop">Scroll</a>
