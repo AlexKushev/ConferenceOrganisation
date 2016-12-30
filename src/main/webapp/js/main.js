@@ -37,7 +37,7 @@
         }).fail(function() {
             alert('Invalid data or user with this e-mail already exists!');
         }).always(function() {
-            
+            // submit
         });
     });
 
