@@ -51,15 +51,7 @@ public class UserManager {
 		ResultSet rs = statement.executeQuery(txtQuery);
 		List<User> users = new ArrayList<User>();
 		while (rs.next()) {
-			User user = new User();
-			user.setFirstName(rs.getString("firstName"));
-			user.setLastName(rs.getString("lastName"));
-			user.setEmail(rs.getString("email"));
-			user.setUserId(Integer.parseInt(rs.getString("userId")));
-			user.setIsAdmin(rs.getInt("isAdmin"));
-			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
-			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
-			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
+			User user = loadUserProperties(rs);
 			users.add(user);
 		}
 		statement.close();
@@ -67,20 +59,13 @@ public class UserManager {
 	}
 
 	public User getUserById(int userId) throws SQLException, IOException {
-		User user = new User();
+		User user = null;
 		String txtQuery = String.format("select * from users where users.userId=%d", userId);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 
 		while (rs.next()) {
-			user.setUserId(rs.getInt("userId"));
-			user.setFirstName(rs.getString("firstName"));
-			user.setLastName(rs.getString("lastName"));
-			user.setEmail(rs.getString("email"));
-			user.setIsAdmin(rs.getInt("isAdmin"));
-			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
-			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
-			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
+			user = loadUserProperties(rs);
 		}
 		statement.close();
 		return user;
@@ -94,18 +79,23 @@ public class UserManager {
 		ResultSet rss = statement.executeQuery(txtQuery);
 
 		while (rss.next()) {
-			user = new User();
-			user.setUserId(rss.getInt("userId"));
-			user.setFirstName(rss.getString("firstName"));
-			user.setLastName(rss.getString("lastName"));
-			user.setEmail(rss.getString("email"));
-			user.setIsAdmin(rss.getInt("isAdmin"));
-			user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
-			user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
-			user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
+			user = loadUserProperties(rss);
 		}
 		statement.close();
 		return user;
 
+	}
+
+	private User loadUserProperties(ResultSet rs) throws SQLException, IOException {
+		User user = new User();
+		user.setUserId(rs.getInt("userId"));
+		user.setFirstName(rs.getString("firstName"));
+		user.setLastName(rs.getString("lastName"));
+		user.setEmail(rs.getString("email"));
+		user.setIsAdmin(rs.getInt("isAdmin"));
+		user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
+		user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
+		user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
+		return user;
 	}
 }
