@@ -58,6 +58,21 @@
             contentType: 'application/json',
             data: JSON.stringify(userData)
         }).done(function() {
+            // destroy modal login 
+            $('#login-modal').modal('toggle');
+
+            // set current user
+            // $.ajax({
+            //     type: 'GET',
+            //     url: 'rest/user/current',
+            //     contentType: 'application/json',
+            //     dataType: 'application/json',
+            //     success: function(response) {
+            //         var currentUserData = response.user;
+                    
+            //     }
+            // })
+
             alert("Successfully logged in!")
         }).fail(function() {
             alert("Wrong e-mail or password!")
