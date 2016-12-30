@@ -87,13 +87,14 @@ public class UserManager {
 	}
 
 	public User getUserByEmailAndPassword(String email, String password) throws SQLException, IOException {
-		User user = new User();
+		User user = null;
 		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,
 				Utils.getHashedPassword(password));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rss = statement.executeQuery(txtQuery);
 
 		while (rss.next()) {
+			user = new User();
 			user.setUserId(rss.getInt("userId"));
 			user.setFirstName(rss.getString("firstName"));
 			user.setLastName(rss.getString("lastName"));
