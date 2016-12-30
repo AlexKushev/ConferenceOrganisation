@@ -4,6 +4,68 @@
 
  $(document).ready(function() {
 
+    var registerButton = $('#register-button'),
+        loginButton = $('#login-button');
+
+    registerButton.on('click', function() {
+        var userEmail = $('#register_email').val(),
+            userPassword = $('#register_password').val(),
+            userFirstName = $('#register_firstName').val(),
+            userLastName = $('#register_lastName').val();
+
+        var userData = {
+            user: {
+                email: userEmail,
+                password: userPassword,
+                firstName: userFirstName,
+                lastName: userLastName
+            }
+        };
+
+        if (!validateUserData(userEmail, userPassword, userFirstName, userLastName)) {
+            alert('Invalid data!');
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: 'rest/user/register',
+            contentType: 'application/json',
+            data: JSON.stringify(userData)
+        }).done(function() {
+            alert('Successfully registered!');
+        }).fail(function() {
+            alert('Invalid data or user with this e-mail already exists!');
+        }).always(function() {
+            
+        });
+    });
+
+    loginButton.on('click', function() {
+        var userEmail = $('login_email'),
+            userPassword = $('login_password');
+
+        var userData = {
+            user: {
+                email: userEmail,
+                password: userPassword
+            }
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'rest/user/login',
+            contentType: 'application/json',
+            data: JSON.stringify(userData)
+        }).done(function() {
+            alert("Successfully logged in!")
+        }).fail(function() {
+            alert("Wrong e-mail or password!")
+        }).always(function() {
+            
+        });
+    });
+
      $(window).scroll(function() {
          if ($(this).scrollTop() > 350) {
              $('.scrollTop').show();
@@ -20,6 +82,31 @@
      });
 
  });
+
+ function validateUserData(userEmail, userPassword, userFirstName, userLastName) {
+    function validateLength(str, min, max) {
+        return str.length >= min && str.length <= max;
+    }
+
+    function validateIfEmpty(str) {
+        if (str.trim() === null || str.trim() === '' || str.trim() === ' ') {
+            return true;
+        }
+
+        return false;
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    if (!validateEmail(userEmail) || validateIfEmpty(userPassword) || !validateLength(userPassword, 5, 20) || validateIfEmpty(userFirstName) || !validateLength(userFirstName, 2, 20) || validateIfEmpty(userLastName) || !validateLength(userLastName, 2, 20)) {
+        return false;
+    }
+
+    return true;
+ }
 
  // Mobile Menu Toggle
  $(document).on('click', '.mobileMenu__btn', function() {
