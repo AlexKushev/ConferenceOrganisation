@@ -230,10 +230,6 @@ span {
     padding: 35px 4%;
 }
 
-header {
-    min-height: 90px;
-}
-
 .headerLogo {
     margin: 0 auto;
     width: 181px;
@@ -261,6 +257,10 @@ header {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+
+.headerBox strong {
+    text-transform: uppercase;
 }
 
 a.headerBox__btn {
@@ -297,33 +297,38 @@ a.headerBox__btn:hover {
     -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
 
-.content__tabs,
-.content__filters {
-    position: absolute;
+.filterLine {
+    position: relative;
+    bottom: -35px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
-.content__tabs {
-    top: -31px;
-    left: 0;
+.filterLine__tabs {
+    float: left;
 }
 
-.content__filters {
-    top: -26px;
-    right: 0;
+.filterLine__filters {
+    float: right;
+    margin: 5px 0;
     font-size: .9em;
 }
 
-.content__filters span {
+.filterLine__filters span {
     color: #eee;
+    text-shadow: #000 0 0 6px;
+    -moz-text-shadow: #000 0 0 6px;
+    -webkit-text-shadow: #000 0 0 6px;
 }
 
-.content__filters select {
+.filterLine__filters select {
     border-radius: 5px;
 }
 
-.content__tabs a {
+.filterLine__tabs a {
     float: left;
     margin-right: 4px;
+    margin-bottom: 4px;
     padding: 5px 10px;
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 5px;
@@ -336,12 +341,12 @@ a.headerBox__btn:hover {
     text-transform: uppercase;
 }
 
-.content__tabs a.active,
-.content__tabs a:hover {
+.filterLine__tabs a.active,
+.filterLine__tabs a:hover {
     background-color: rgba(255, 255, 255, 1);
 }
 
-.content__tabs a.active {
+.filterLine__tabs a.active {
     cursor: default;
 }
 
@@ -641,6 +646,10 @@ a.loader:hover {
     }
     .headerBox {
         display: block;
+    }
+    .filterLine {
+        bottom: 0;
+        margin-bottom: -35px;
     }
     .lecture {
         flex-direction: row;

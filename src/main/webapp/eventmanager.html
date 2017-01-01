@@ -132,20 +132,32 @@
             <div class="headerLogo">
                 <a href="index.html"></a>
             </div>
+            <!-- LOGGED IN 
             <div class="headerBox" class="clear">
-                <strong>SIGN UP</strong> today and get your place for the most interesting conferences in the IT industry.
+                Be bold and ready to take on new challenges! Create Your first conference and make a difference!
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Add New</a>
+            </div>
+            -->
+
+            <!-- NOT LOGGED IN -->
+            <div class="headerBox" class="clear">
+                <strong>Sign up</strong> today and get your place for the most interesting conferences in the IT industry.
                 <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
             </div>
         </header>
-        <div class="content">
-            <!-- NO FILTERS FOR USERS -->
-            <div class="content__filters" class="clear">
+
+        <!-- NO FILTERS FOR USERS -->
+        <div class="filterLine clear">
+            <div class="filterLine__filters">
                 <span>Filter:</span> 
                 <select>
                     <option>All</option>
                     <option>Pending</option>
                 </select>
             </div>
+        </div>
+
+        <div class="content">
             <!--
             <table cellpadding="0" cellspacing="0" class="managerTable">
                 <tr>

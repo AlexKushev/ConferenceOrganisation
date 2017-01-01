@@ -138,18 +138,28 @@
             <div class="headerLogo">
                 <a href="index.html"></a>
             </div>
+            <!-- LOGGED IN 
             <div class="headerBox" class="clear">
-                <strong>SIGN UP</strong> today and get your place for the most interesting conferences in the IT industry.
+                Be bold and ready to take on new challenges! Create Your first conference and make a difference!
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Add New</a>
+            </div>
+            -->
+            
+            <!-- NOT LOGGED IN -->
+            <div class="headerBox" class="clear">
+                <strong>Sign up</strong> today and get your place for the most interesting conferences in the IT industry.
                 <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
             </div>
         </header>
-        <div class="content pastEvent">
-            <div class="content__tabs" class="clear">
+
+        <div class="filterLine clear">
+            <div class="filterLine__tabs clear">
                 <a href="index.html">Upcoming</a>
                 <a href="pastevents.html" class="active">Past</a>
                 <a href="addevent.html">Add New</a>
             </div>
-            <div class="content__filters" class="clear">
+                
+            <div class="filterLine__filters">
                 <span>Events in:</span> 
                 <select>
                     <option>All</option>
@@ -158,6 +168,9 @@
                     <option>Varna</option>
                 </select>
             </div>
+        </div>
+
+        <div class="content pastEvent">
             <article class="event">
                 <a href="event.html" class="clear">
                     <div class="event__date eventDate">
