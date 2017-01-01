@@ -530,6 +530,20 @@ span.eventCTA__arrow {
     background: #f5f2ed;
 }
 
+.singleEvent__footer > span {
+    float: left;
+    margin-top: 6px;
+}
+
+.singleEvent__footer > div {
+    float: right;
+}
+
+.singleEvent__footer > div > span {
+    padding-right: 5px;
+    font-style: italic;
+}
+
 footer {
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -572,7 +586,8 @@ a.loader:hover {
         display: block;
     }
     .lecture {
-    flex-direction: row;
+        flex-direction: row;
+    }
 }
 
 @media only screen and (min-width: 640px) {
