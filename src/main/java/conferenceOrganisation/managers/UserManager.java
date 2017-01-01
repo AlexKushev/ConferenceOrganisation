@@ -108,7 +108,6 @@ public class UserManager {
 		user.setEmail(rs.getString("email"));
 		user.setIsAdmin(rs.getInt("isAdmin"));
 		user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
-		user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
 		user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
 		return user;
 	}
