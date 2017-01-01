@@ -19,6 +19,7 @@ import conferenceOrganisation.managers.EventManager;
 import conferenceOrganisation.managers.TicketManager;
 import conferenceOrganisation.managers.UserManager;
 import conferenceOrganisation.models.Event;
+import conferenceOrganisation.models.Hall;
 import conferenceOrganisation.models.User;
 
 @Stateless
@@ -92,8 +93,8 @@ public class UserService {
 	@Path("createEvent")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createEvent(Event event) throws SQLException, IOException {
-		if (!eventManager.addEvent(event)) {
+	public Response createEvent(Event event, Hall hall) throws SQLException, IOException {
+		if (!eventManager.addEvent(event, hall)) {
 			return Response.status(401).build();
 		}
 		return RESPONSE_OK;
