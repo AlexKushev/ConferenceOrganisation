@@ -105,11 +105,15 @@ span {
     background-color: #ddd
 }
 
+.toplineWrap {
+    width: 100%;
+    background: #0e0e0e;
+}
+
 .topline {
     position: relative;
     z-index: 999;
-    max-width: 960px;
-    background: #0e0e0e;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 4%;
     color: #9aabbc;
@@ -601,8 +605,7 @@ a.loader:hover {
 }
 
 @media only screen and (min-width: 875px) {
-    .wrap,
-    .topline__section {
+    .wrap {
         padding-left: 25px;
         padding-right: 25px;
     }
