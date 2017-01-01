@@ -16,6 +16,7 @@ import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.Hall;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
+import conferenceOrganisation.utils.EventStatus;
 
 @Singleton
 public class EventManager {
@@ -43,8 +44,8 @@ public class EventManager {
 		double price = event.getPrice();
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
 		String txtQuery = String.format(
-				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, isPublished) values (%d, %d, '%s', '%s', '%s', %s, %d)",
-				userId, hallId, title, description, date, price, availableSeats, 0);
+				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status) values (%d, %d, '%s', '%s', '%s', %s, %d)",
+				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW));
 		Statement statement = null;
 		try {
 			statement = dbConnection.createStatement();
@@ -83,37 +84,12 @@ public class EventManager {
 		return events;
 	}
 
-	public List<Event> getAllUnpublishedEvents() throws SQLException, IOException {
-		List<Event> events = new ArrayList<Event>();
-		String txtQuery = "select * from events where events.isPublished=0";
-		Statement statement = dbConnection.createStatement();
-		ResultSet rs = statement.executeQuery(txtQuery);
-		while (rs.next()) {
-			Event event = loadEventProperties(rs);
-			events.add(event);
-		}
-		statement.close();
-		return events;
-	}
-
-	public void makeEventPublish(int eventId) throws SQLException, IOException {
-		String txtQuery = String.format("update events set isPublished = 1 where events.eventId=%d", eventId);
+	public void sendEventForReview(int eventId) throws SQLException, IOException {
+		String txtQuery = String.format("update events set status='%s' where events.eventId=%d", EventStatus.PENDING,
+				eventId);
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
-	}
-
-	public List<Event> getAllEventsByUserId(int userId) throws SQLException, IOException {
-		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.creatorId=%s", String.valueOf(userId));
-		Statement statement = dbConnection.createStatement();
-		ResultSet rs = statement.executeQuery(txtQuery);
-		while (rs.next()) {
-			Event event = loadEventProperties(rs);
-			events.add(event);
-		}
-
-		return events;
 	}
 
 	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
@@ -153,6 +129,48 @@ public class EventManager {
 		return event;
 	}
 
+	public List<Event> getAllPendingEvents() throws SQLException, IOException {
+		List<Event> events = new ArrayList<Event>();
+		String txtQuery = String.format("select * from events where events.status='%s'", EventStatus.PENDING);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			Event event = loadEventProperties(rs);
+			events.add(event);
+		}
+		statement.close();
+		return events;
+	}
+
+	public void acceptEvent(int eventId) throws SQLException, IOException {
+		String txtQuery = String.format("update events set events.status='%s' where events.eventId=%d",
+				EventStatus.PUBLISHED, eventId);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
+	public void declineEvent(int eventId) throws SQLException, IOException {
+		String txtQuery = String.format("update events set events.status='%s' where events.eventId=%d",
+				EventStatus.NOT_APPROVED, eventId);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
+	public List<Event> getAllEventsByUserId(int userId) throws SQLException, IOException {
+		List<Event> events = new ArrayList<Event>();
+		String txtQuery = String.format("select * from events where events.creatorId=%d", userId);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			Event event = loadEventProperties(rs);
+			events.add(event);
+		}
+		statement.close();
+		return events;
+	}
+
 	private Event loadEventProperties(ResultSet rs) throws SQLException, IOException {
 		Event event = new Event();
 		event.setEventId(rs.getInt("eventId"));
@@ -164,8 +182,8 @@ public class EventManager {
 		event.setDate(rs.getString("date"));
 		event.setPrice(rs.getDouble("price"));
 		event.setAvailableSeats(rs.getInt("availableSeats"));
+		event.setStatus(EventStatus.valueOf(rs.getString("status")));
 		event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
-		event.setIsPublished(rs.getInt("isPublished"));
 		return event;
 	}
 
