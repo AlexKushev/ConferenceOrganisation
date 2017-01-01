@@ -41,9 +41,14 @@ h1 {
     font-weight: bold;
 }
 
-h2 {
-    margin: 0 0 10px;
+h2,
+h3 {
+    margin: 0 0 8px;
     font-weight: bold;
+}
+
+h3 {
+    font-size: 1em;
 }
 
 hr {
@@ -358,8 +363,11 @@ a.headerBox__btn:hover {
     color: initial;
 }
 
-.eventDate {
+.event__date {
     float: left;
+}
+
+.eventDate {
     color: #fff;
     text-align: center;
 }
@@ -481,26 +489,45 @@ span.eventCTA__arrow {
     background-color: #666;
 }
 
-.singleEvent__title {
-    float: left;
-    width: 70%;
-    margin-left: 15px;
+.singleEvent__header {
+    display: flex;
 }
 
-.singleEvent__main > div {
+.singleEvent__title {
+    padding-left: 15px;
+}
+
+.singleEvent__main {
     font-size: .9em;
 }
 
-.singleEvent__main__eventInfo {/*
-    width: 54%;
-    padding-right: 2%;*/
+.lecture {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #d2d0cd;
 }
 
-.singleEvent__main__eventLectures {
-    width: 48%;
-    padding-left: 2%;
-    margin-right: 2%;
-    border-left: 1px dotted #ccc;
+.lecture:last-of-type {
+    margin-bottom: none;
+    border-bottom: none;
+}
+
+.lecture__item {
+    flex-basis: 50%;
+    padding: 10px 12px;
+}
+
+.lecture__item p {
+    margin: 0;
+}
+
+.lecture__item--lecture {
+    background: #ece9e4;
+}
+
+.lecture__item--lecturer {
+    background: #f5f2ed;
 }
 
 footer {
@@ -544,6 +571,8 @@ a.loader:hover {
     .headerBox {
         display: block;
     }
+    .lecture {
+    flex-direction: row;
 }
 
 @media only screen and (min-width: 640px) {
