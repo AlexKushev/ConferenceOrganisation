@@ -142,6 +142,17 @@ public class EventManager {
 		return events;
 	}
 
+	public Event getEventByEventId(int eventId) throws SQLException, IOException {
+		Event event = null;
+		String txtQuery = String.format("select * from events where events.eventId=%d", eventId);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			event = loadEventProperties(rs);
+		}
+		return event;
+	}
+
 	private Event loadEventProperties(ResultSet rs) throws SQLException, IOException {
 		Event event = new Event();
 		event.setEventId(rs.getInt("eventId"));
