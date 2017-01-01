@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Conference Organisator</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <!-- BEGIN # MODAL LOGIN -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <img id="img_logo" src="img/logo-modal.png">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                    <!-- Begin # Login Form -->
+                    <form id="login-form">
+                        <div class="modal-body">
+                            <div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">Type your username and password.</span>
+                            </div>
+                            <input id="login_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
+                            <input id="login_password" class="form-control" type="password" placeholder="Password" required>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button id="login-button" type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                            </div>
+                            <div>
+                                <!-- <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button> -->
+                                <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End # Login Form -->
+                    <!-- Begin | Lost Password Form -->
+                    <!-- <form id="lost-form" style="display:none;">
+                        <div class="modal-body">
+                            <div id="div-lost-msg">
+                                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-lost-msg">Type your e-mail.</span>
+                            </div>
+                            <input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                            </div>
+                            <div>
+                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
+                            </div>
+                        </div>
+                    </form> -->
+                    <!-- End | Lost Password Form -->
+                    <!-- Begin | Register Form -->
+                    <form id="register-form" style="display:none;">
+                        <div class="modal-body">
+                            <div id="div-register-msg">
+                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-register-msg">Register an account.</span>
+                            </div>
+                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
+                            <input id="register_firstName" class="form-control" type="text" placeholder="First Name" required>
+                            <input id="register_lastName" class="form-control" type="text" placeholder="Last Name" required>
+                            <input id="register_password" class="form-control" type="password" placeholder="Password" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button id="register-button" type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                            </div>
+                            <div>
+                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <!-- <button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button> -->
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Register Form -->
+                </div>
+                <!-- End # DIV Form -->
+            </div>
+        </div>
+    </div>
+    <!-- END # MODAL LOGIN -->
+    <div class="toplineWrap">
+        <div class="topline clear">
+            <div class="topline__left">
+                <nav class="desktopMenu clear">
+                    <a href="index.html">Home</a>
+                    <a href="#">Item 1</a>
+                    <a href="#">Item 2</a>
+                    <a href="#">Item 3</a>
+                    <a href="#">Item 4</a>
+                </nav>
+                <nav class="mobileMenu">
+                    <a href="#" class="mobileMenu__btn"></a>
+                    <div class="mobileMenu__items">
+                        <a href="#">Item 1</a>
+                        <a href="#">Item 2</a>
+                        <a href="#">Item 3</a>
+                        <a href="#">Item 4</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="topline__right">
+                <a id="account" href="#" class="profile" role="button" data-toggle="modal" data-target="#login-modal">Account</a>
+            </div>
+        </div>
+    </div>
+    <div class="topstripe"></div>
+    <div class="wrap">
+        <header class="clear">
+            <div class="headerLogo">
+                <a href="index.html"></a>
+            </div>
+            <div class="headerBox" class="clear">
+                <strong>SIGN UP</strong> today and get your place for the most interesting conferences in the IT industry.
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
+            </div>
+        </header>
+        <div class="content">
+            <!-- NO FILTERS FOR USERS -->
+            <div class="content__filters" class="clear">
+                <span>Filter:</span> 
+                <select>
+                    <option>All</option>
+                    <option>Pending</option>
+                </select>
+            </div>
+            <!--
+            <table cellpadding="0" cellspacing="0" class="managerTable">
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Building a Future Proof Artificial Intelligence</a>
+                        <span class="label label-warning">New</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs">Publish</a>
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                        <span class="label label-default">Pending</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Introduction to UX Design</a>
+                        <span class="label label-default">Pending</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Building a Future Proof Artificial Intelligence</a>
+                        <span class="label label-danger">Not Approved</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Achieving Sustainable Growth in Business in Information Technology</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Introduction to UX Design</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+            </table>-->
+
+            <table cellpadding="0" cellspacing="0" class="managerTable">
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Building a Future Proof Artificial Intelligence</a>
+                        <span class="label label-default">Pending</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs">Decline</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                        <span class="label label-default">Pending</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs">Decline</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Introduction to UX Design</a>
+                        <span class="label label-default">Pending</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs">Decline</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Building a Future Proof Artificial Intelligence</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs disabled">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs disabled">Decline</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs disabled">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs disabled">Decline</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Introduction to UX Design</a>
+                        <span class="label label-default">Pending</span>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-success btn-xs">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs">Decline</a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        <a href="#" class="scrollTop">Scroll</a>
+        <a class="loader">Load More</a>
+    </div>
+    <footer>
+        © 2016 Conference Organisator
+    </footer>
+</body>
+
+</html>

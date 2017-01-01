@@ -113,7 +113,7 @@ span {
 .topline {
     position: relative;
     z-index: 999;
-    max-width: 1000px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 4%;
     color: #9aabbc;
@@ -548,6 +548,59 @@ span.eventCTA__arrow {
     font-style: italic;
 }
 
+.eventManager {
+    display: table;
+    width: 100%;
+}
+
+.eventManager__item {
+    display: table-row;
+}
+
+.eventManager__item div {
+    display: table-cell;
+    border: 1px solid #ccc;
+}
+
+.managerTable {
+    width: 100%;
+}
+
+.managerTable td {
+    padding: 12px 6px;
+    font-size: .9em;
+    border-bottom: 1px solid #ccc;
+}
+
+.managerTable__title {
+    font-weight: bold;
+}
+
+.managerTable__title .label {
+    margin: -1px 0 0 8px;
+}
+
+.managerTable__date {
+    width: 120px;
+    text-align: center;
+}
+
+.managerTable td:last-child {
+    text-align: right;
+}
+
+.managerTable tr:last-child td {
+    border: none;
+}
+
+.managerTable__CTA .btn-xs {
+    margin: 3px 0;
+}
+
+.managerTable tr:nth-child(2n) td {
+    background: #eee;
+}
+
 footer {
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -605,7 +658,8 @@ a.loader:hover {
 }
 
 @media only screen and (min-width: 875px) {
-    .wrap {
+    .wrap,
+    .topline {
         padding-left: 25px;
         padding-right: 25px;
     }
