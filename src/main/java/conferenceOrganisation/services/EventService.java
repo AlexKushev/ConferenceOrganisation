@@ -32,32 +32,16 @@ public class EventService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Event> getAllEvents() throws SQLException, IOException {
-		List<Event> events = eventManager.getAllEvents();
-		return events;
-	}
-
-	@Path("published")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
 		List<Event> events = eventManager.getAllPublishedEvents();
 		return events;
 	}
 
-	@Path("unpublished")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Event> getAllUnpublishedEvents() throws SQLException, IOException {
-		List<Event> events = eventManager.getAllUnpublishedEvents();
-		return events;
-	}
-
-	@Path("publish")
+	@Path("review")
 	@POST
-	public Response publishEvent(@QueryParam("eventId") int eventId) {
+	public Response sendEventForReview(@QueryParam("eventId") int eventId) {
 		try {
-			eventManager.makeEventPublish(eventId);
+			eventManager.sendEventForReview(eventId);
 		} catch (SQLException | IOException e) {
 			System.out.println("Exception while trying to publish event with id : " + eventId);
 			return Utils.RESPONSE_ERROR;
@@ -87,6 +71,15 @@ public class EventService {
 	public Event getEventByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
 		Event event = eventManager.getEventByEventId(eventId);
 		return event;
+	}
+	
+	@Path("eventsByCreatorId")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Event> getAllEventsByCreatorId(@QueryParam("creatorId") int creatorId)
+			throws SQLException, IOException {
+		List<Event> events = eventManager.getAllEventsByUserId(creatorId);
+		return events;
 	}
 
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import conferenceOrganisation.utils.EventStatus;
+
 @Table(name = "events")
 @XmlRootElement
 public class Event implements Serializable {
@@ -34,7 +36,7 @@ public class Event implements Serializable {
 
 	private Hall hall;
 	
-	private int isPublished;
+	private EventStatus status;
 
 	private List<Lecture> lectures = new ArrayList<Lecture>();
 
@@ -101,6 +103,14 @@ public class Event implements Serializable {
 	public void setAvailableSeats(int availableSeats) {
 		this.availableSeats = availableSeats;
 	}
+	
+	public EventStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(EventStatus status) {
+		this.status = status;
+	}
 
 	public Hall getHall() {
 		return hall;
@@ -110,14 +120,6 @@ public class Event implements Serializable {
 		this.hall = hall;
 	}
 	
-	public int getIsPublished() {
-		return isPublished;
-	}
-
-	public void setIsPublished(int isPublished) {
-		this.isPublished = isPublished;
-	}
-
 	public List<Lecture> getLectures() {
 		return lectures;
 	}
