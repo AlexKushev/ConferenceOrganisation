@@ -37,7 +37,7 @@ h6 {
 h1 {
     margin: 0;
     color: #23506f;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
@@ -239,11 +239,12 @@ header {
     -moz-background-size: 100%;
     -webkit-background-size: 100%;
 }
-    .headerLogo a {
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
+
+.headerLogo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 
 .headerBox {
     display: none;
@@ -346,14 +347,6 @@ a.headerBox__btn:hover {
     padding-top: 10px;
     border-top: 1px solid #ccc;
 }
-/*.event__effect {
-display: block;
-padding: 1%;
-border-radius: 5px;
-}*/
-/*.event__effect:hover {
-box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
-}*/
 
 .event:first-of-type {
     margin-top: 0px;
@@ -392,42 +385,56 @@ box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
     padding: 2px 0;
 }
 
-.event__main {
+.event__title {
     float: left;
     width: 65%;
     padding: 0 15px;
     font-size: .8em;
 }
 
-.event__main h1 {
-    font-size: 1.2em;
+.eventTitle {
+
 }
 
-.event__main__details {
+.eventTitle__details {
+    background-repeat: no-repeat;
+    margin-top: 6px;
     padding-left: 22px;
-    margin: 6px 0;
-    line-height: 16px;
-    color: #777;
 }
 
-.event__main__details:last-of-type {
+.eventTitle__details--inline {
+    display: inline-block;
+    background-position: 0 2px;
+}
+
+.eventTitle__details--block {
+    margin-bottom: 6px;
+    line-height: 16px;
+    color: #555;
+}
+
+.eventTitle__details--eventList:last-of-type {
     margin-bottom: 0;
 }
 
-.event__main__details--location {
-    background: url('../img/icon-location.png') no-repeat;
+.eventTitle__details--location {
+    background-image: url('../img/icon-location.png');
 }
 
-.event__main__details--price {
-    background: url('../img/icon-price.png') no-repeat;
+.eventTitle__details--price {
+    background-image: url('../img/icon-price.png');
     font-weight: bold;
 }
 
-.event__main__details--price.free {
+.eventTitle__details--time {
+    background-image: url('../img/icon-time.png');
+}
+
+.eventTitle__details--freeprice {
     color: #139616;
 }
 
-.event__time {
+.event__dateTime {
     display: none;
     float: left;
     width: 14%;
@@ -440,34 +447,35 @@ box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
     min-width: 10%;
 }
 
-    span.eventCTA__btn {
-        display: none;
-        float: right;
-        margin: 20px 0;
-        padding: 5px 10px;
-        background: #eab132;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: .8em;
-        color: #1c1c1c;
-    }
+span.eventCTA__btn {
+    display: none;
+    float: right;
+    margin: 20px 0;
+    padding: 5px 10px;
+    background: #eab132;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: .8em;
+    color: #1c1c1c;
+}
 
-    span.eventCTA__btn:hover {
-        background: #d3911f;
-    }
+span.eventCTA__btn:hover {
+    background: #d3911f;
+}
 
-    span.eventCTA__arrow {
-        display: block;
-        float: right;
-        position: absolute;
-        top: calc(50% - 10px);
-        top: -moz-calc(50% - 10px);
-        top: -webkit-calc(50% - 10px);
-        right: 10px;
-        width: 15px;
-        height: 24px;
-        background: url(../img/icon-arrow.png) no-repeat;
-    }
+span.eventCTA__arrow {
+    display: block;
+    float: right;
+    position: absolute;
+    top: calc(50% - 10px);
+    top: -moz-calc(50% - 10px);
+    top: -webkit-calc(50% - 10px);
+    right: 10px;
+    width: 15px;
+    height: 24px;
+    background: url(../img/icon-arrow.png) no-repeat;
+}
+
 
 /* STYLE OVERRIDE FOR PAST EVENT */
 
@@ -483,25 +491,25 @@ box-shadow: rgba(0, 0, 0, 0.4) 0 0 8px;
     background-color: #666;
 }
 
-.singleEvent__header .info {
+.singleEvent__title {
     float: left;
     width: 70%;
     margin-left: 15px;
 }
 
 .singleEvent__main > div {
-    float: left;
     font-size: .9em;
 }
 
-.singleEvent__main__eventInfo {
+.singleEvent__main__eventInfo {/*
     width: 54%;
-    padding-right: 2%;
+    padding-right: 2%;*/
 }
 
 .singleEvent__main__eventLectures {
-    width: 42%;
+    width: 48%;
     padding-left: 2%;
+    margin-right: 2%;
     border-left: 1px dotted #ccc;
 }
 
@@ -549,7 +557,7 @@ a.loader:hover {
 }
 
 @media only screen and (min-width: 640px) {
-    .event__time,
+    .event__dateTime,
     span.eventCTA__btn {
         display: block !important;
     }
@@ -572,6 +580,8 @@ a.loader:hover {
         width: auto;
     }
 }
+
+
 /* #####################################################################
 #
 #   Project       : Modal Login with jQuery Effects
@@ -643,6 +653,8 @@ a.loader:hover {
     max-height: 100px;
     max-width: 100px;
 }
+
+
 /* #########################################
 #    override the bootstrap configs     #
 ######################################### */
@@ -740,6 +752,7 @@ a.loader:hover {
     }
 }
 
+
 /* BOOTSTRAP OVERRIDE FOR ADD EVENT PAGE */
 
 label {
@@ -765,6 +778,6 @@ label span {
     width: 30%;
 }
 
-.regularForm button {
+.btn--floatRight {
     float: right;
 }

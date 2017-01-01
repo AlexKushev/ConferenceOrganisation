@@ -58,45 +58,31 @@
                 <a href="pastevents.html">Past</a>
                 <a href="addevent.html" class="active">Add New</a>
             </div>
-            <h1>Add Conference</h1>
+            <h1>Add Lecture</h1>
             <hr />
             <form method="post" role="form" accept-charset="utf-8" class="regularForm">
                 <div class="form-group">
-                    <label for="eventTopic">Conference Topic</label>
-                    <input type="text" class="form-control" id="eventTopic" placeholder="Topic" name="eventTopic">
+                    <label for="lectureTopic">Lecture Topic</label>
+                    <input type="text" class="form-control" id="lectureTopic" placeholder="Topic" name="lectureTopic">
                 </div>
                 <div class="form-group">
-                    <label for="eventDate">Date</label>
-                    <br />
-                    <input type="date" class="form-control" id="eventDate" name="eventDate">
+                    <label for="lectureDescription">Description</label>
+                    <input type="text" class="form-control" id="lectureDescription" placeholder="What the lecture is about" name="lectureDescription">
                 </div>
                 <div class="form-group">
-                    <label for="eventTime">Starting Time</label>
-                    <br />
-                    <input type="time" class="form-control" id="eventTime" placeholder="Starting Hour" name="eventTime">
-                </div>
-                <div class="form-group float clear">
-                    <label for="eventDate">Address</label>
-                    <br />
-                    <input type="text" class="form-control" id="eventAddress" placeholder="Street Address" name="eventAddress">
-                    <input type="text" class="form-control" placeholder="City" name="eventCity">
+                    <label for="lecturerName">Lecturer</label>
+                    <input type="text" class="form-control" id="lecturerName" placeholder="Lecturer" name="lecturerName">
                 </div>
                 <div class="form-group">
-                    <label for="eventDescription">Description</label>
-                    <textarea class="form-control" rows="4" id="eventDescription" name="eventDescription"></textarea>
+                    <label for="lecturerInfo">Lecturer's Experience</label>
+                    <input type="text" class="form-control" id="lecturerInfo" placeholder="Topic related professional background" name="lecturerInfo">
                 </div>
                 <div class="form-group">
-                    <label for="eventSeats">Number of Seats</label>
-                    <br />
-                    <input type="number" class="form-control" id="eventSeas" placeholder="Seats" name="eventSeats">
-                </div>
-                <div class="form-group">
-                    <label for="eventPrice">Ticket Price <span>(leave 0 for 'FREE' tickets)</span></label>
-                    <br />
-                    <input type="number" min="0" step="any" class="form-control" id="eventPrice" placeholder="Price BGN" name="eventPrice" />
+                    <label for="lecturerInfo">Lecturer's E-Mail</label>
+                    <input type="text" class="form-control" id="lecturerEmail" placeholder="E-Mail" name="lecturerEmail">
                 </div>
                 <div class="clear">
-                    <button type="submit" class="btn btn-primary btn--floatRight">Add Conference</button>
+                    <button type="submit" class="btn btn-primary btn--floatRight">Add Lecture</button>
                 </div>
             </form>
         </div>
