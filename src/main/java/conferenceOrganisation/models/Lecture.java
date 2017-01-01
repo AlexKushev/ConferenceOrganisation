@@ -14,24 +14,32 @@ public class Lecture implements Serializable {
 
 	private int lectureId;
 
-	private int lecturerId;
-
 	private int eventId;
 
 	private String title;
 
 	private String description;
 
-	public Lecture(int lectureId, int lecturerId, int eventId, String title, String description) {
+	private String lecturerName;
+	
+	private String lecturerEmail;
+	
+	private String lecturerDescription;
+
+	public Lecture(int lectureId, int eventId, String title, String description, String lecturerName,
+			String lecturerEmail, String lecturerDescription) {
+		super();
 		this.lectureId = lectureId;
-		this.lecturerId = lecturerId;
 		this.eventId = eventId;
 		this.title = title;
 		this.description = description;
+		this.lecturerName = lecturerName;
+		this.lecturerEmail = lecturerEmail;
+		this.lecturerDescription = lecturerDescription;
 	}
-
+	
 	public Lecture() {
-
+		
 	}
 
 	public int getLectureId() {
@@ -40,14 +48,6 @@ public class Lecture implements Serializable {
 
 	public void setLectureId(int lectureId) {
 		this.lectureId = lectureId;
-	}
-
-	public int getLecturerId() {
-		return lecturerId;
-	}
-
-	public void setLecturerId(int lecturerId) {
-		this.lecturerId = lecturerId;
 	}
 
 	public int getEventId() {
@@ -74,4 +74,27 @@ public class Lecture implements Serializable {
 		this.description = description;
 	}
 
+	public String getLecturerName() {
+		return lecturerName;
+	}
+
+	public void setLecturerName(String lecturerName) {
+		this.lecturerName = lecturerName;
+	}
+
+	public String getLecturerEmail() {
+		return lecturerEmail;
+	}
+
+	public void setLecturerEmail(String lecturerEmail) {
+		this.lecturerEmail = lecturerEmail;
+	}
+
+	public String getLecturerDescription() {
+		return lecturerDescription;
+	}
+
+	public void setLecturerDescription(String lecturerDescription) {
+		this.lecturerDescription = lecturerDescription;
+	}
 }

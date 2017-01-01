@@ -45,6 +45,20 @@ public class UserManager {
 		statement.close();
 	}
 
+	public void editUser(User user) throws SQLException, IOException {
+		String newFirstName = user.getFirstName();
+		String newLastName = user.getLastName();
+		String newEmail = user.getEmail();
+		String newPassword = user.getPassword();
+		String txtQuery = String.format(
+				"update users set users.firstName = '%s', users.lastName='%s', users.email='%s'"
+						+ ", users.password = '%s' where users.userId=%d",
+				newFirstName, newLastName, newEmail, Utils.getHashedPassword(newPassword), user.getUserId());
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
 	public List<User> getAllUsers() throws SQLException, IOException {
 		String txtQuery = "select * from users u";
 		Statement statement = dbConnection.createStatement();
@@ -94,7 +108,6 @@ public class UserManager {
 		user.setEmail(rs.getString("email"));
 		user.setIsAdmin(rs.getInt("isAdmin"));
 		user.setEvents(eventManager.getAllEventsByUserId(user.getUserId()));
-		user.setLectures(lectureManager.getAllLecturesByUserId(user.getUserId()));
 		user.setTickets(ticketManager.getAllTicketsByUserId(user.getUserId()));
 		return user;
 	}

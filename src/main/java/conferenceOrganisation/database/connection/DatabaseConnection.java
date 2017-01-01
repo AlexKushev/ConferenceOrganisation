@@ -48,5 +48,4 @@ public class DatabaseConnection {
 
 		return connection.createStatement();
 	}
-
 }

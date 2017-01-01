@@ -12,12 +12,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import conferenceOrganisation.managers.EventManager;
 import conferenceOrganisation.managers.LectureManager;
 import conferenceOrganisation.models.CitiesContainer;
 import conferenceOrganisation.models.Event;
-import conferenceOrganisation.models.Lecture;
+import conferenceOrganisation.utils.Utils;
 
 @Stateless
 @Path("events")
@@ -54,17 +55,14 @@ public class EventService {
 
 	@Path("publish")
 	@POST
-	public void publishEvent(@QueryParam("eventId") int eventId) throws SQLException, IOException {
-		eventManager.makeEventPublish(eventId);
-		// TODO detect exceptions
-	}
-
-	@Path("lectures")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Lecture> getAllLecturesByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
-		List<Lecture> lectures = lectureManager.getAllLectuersByEventId(eventId);
-		return lectures;
+	public Response publishEvent(@QueryParam("eventId") int eventId) {
+		try {
+			eventManager.makeEventPublish(eventId);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to publish event with id : " + eventId);
+			return Utils.RESPONSE_ERROR;
+		}
+		return Utils.RESPONSE_OK;
 	}
 
 	@Path("cities")
@@ -81,6 +79,14 @@ public class EventService {
 	public List<Event> getAllEventsByCity(@QueryParam("city") String city) throws SQLException, IOException {
 		List<Event> events = eventManager.getAllEventsByCity(city);
 		return events;
+	}
+
+	@Path("eventByEventId")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Event getEventByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
+		Event event = eventManager.getEventByEventId(eventId);
+		return event;
 	}
 
 }

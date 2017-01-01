@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
+import conferenceOrganisation.managers.HallManager;
 import conferenceOrganisation.managers.UserManager;
 import conferenceOrganisation.models.User;
 
@@ -24,6 +25,9 @@ public class AdminService {
 	
 	@Inject
 	UserManager userManager;
+	
+	@Inject
+	HallManager hallManager;
 	
 	@Path("users")
 	@GET

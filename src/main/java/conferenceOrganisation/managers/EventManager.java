@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.CitiesContainer;
 import conferenceOrganisation.models.Event;
+import conferenceOrganisation.models.Hall;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
 
@@ -31,10 +32,11 @@ public class EventManager {
 	@Inject
 	DatabaseConnection dbConnection;
 
-	public boolean addEvent(Event event) throws SQLException, IOException {
+	public boolean addEvent(Event event, Hall hall) throws SQLException, IOException {
+		int hallId = hallManager.createHall(hall);
+		hall.setHallId(hallId);
 		User user = currentUser.getCurrentUser();
 		int userId = user.getUserId();
-		int hallId = event.getHallId();
 		String title = event.getTitle();
 		String description = event.getDescription();
 		String date = event.getDate();
@@ -138,6 +140,17 @@ public class EventManager {
 		}
 		statement.close();
 		return events;
+	}
+
+	public Event getEventByEventId(int eventId) throws SQLException, IOException {
+		Event event = null;
+		String txtQuery = String.format("select * from events where events.eventId=%d", eventId);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			event = loadEventProperties(rs);
+		}
+		return event;
 	}
 
 	private Event loadEventProperties(ResultSet rs) throws SQLException, IOException {
