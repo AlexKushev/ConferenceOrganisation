@@ -73,7 +73,8 @@ public class EventManager {
 
 	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = "select * from events where events.isPublished=1";
+		String txtQuery = String.format("select * from events where events.status='%s'",
+				EventStatus.PUBLISHED.toString());
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -94,7 +95,9 @@ public class EventManager {
 
 	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
 		CitiesContainer cyties = new CitiesContainer();
-		String txtQuery = "select distinct(city) from halls where hallId IN (select hallId from events where events.isPublished=1)";
+		String txtQuery = String.format(
+				"select distinct(city) from halls where hallId IN (select hallId from events where events.status='%s')",
+				EventStatus.PUBLISHED.toString());
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
