@@ -74,7 +74,7 @@ public class EventManager {
 	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
 		String txtQuery = String.format("select * from events where events.status='%s'",
-				EventStatus.PUBLISHED.toString());
+				String.valueOf(EventStatus.PUBLISHED));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -86,8 +86,8 @@ public class EventManager {
 	}
 
 	public void sendEventForReview(int eventId) throws SQLException, IOException {
-		String txtQuery = String.format("update events set status='%s' where events.eventId=%d", EventStatus.PENDING,
-				eventId);
+		String txtQuery = String.format("update events set status='%s' where events.eventId=%d",
+				String.valueOf(EventStatus.PENDING), eventId);
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
@@ -97,7 +97,7 @@ public class EventManager {
 		CitiesContainer cyties = new CitiesContainer();
 		String txtQuery = String.format(
 				"select distinct(city) from halls where hallId IN (select hallId from events where events.status='%s')",
-				EventStatus.PUBLISHED.toString());
+				String.valueOf(EventStatus.PUBLISHED));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -109,8 +109,8 @@ public class EventManager {
 	public List<Event> getAllEventsByCity(String city) throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
 		String txtQuery = String.format(
-				"select * from events where events.hallId IN (select hallId from halls where city='%s') AND events.isPublished=1",
-				city);
+				"select * from events where events.hallId IN (select hallId from halls where city='%s') AND events.status='%s'",
+				city, String.valueOf(EventStatus.PUBLISHED));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -134,7 +134,8 @@ public class EventManager {
 
 	public List<Event> getAllPendingEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.status='%s'", EventStatus.PENDING);
+		String txtQuery = String.format("select * from events where events.status='%s'",
+				String.valueOf(EventStatus.PENDING));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -147,7 +148,7 @@ public class EventManager {
 
 	public void acceptEvent(int eventId) throws SQLException, IOException {
 		String txtQuery = String.format("update events set events.status='%s' where events.eventId=%d",
-				EventStatus.PUBLISHED, eventId);
+				String.valueOf(EventStatus.PUBLISHED), eventId);
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
@@ -155,7 +156,7 @@ public class EventManager {
 
 	public void declineEvent(int eventId) throws SQLException, IOException {
 		String txtQuery = String.format("update events set events.status='%s' where events.eventId=%d",
-				EventStatus.NOT_APPROVED, eventId);
+				String.valueOf(EventStatus.NOT_APPROVED), eventId);
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
