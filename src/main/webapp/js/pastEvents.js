@@ -31,10 +31,13 @@ function createEventsHtml(eventsData) {
     var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     var i, len = eventsData.length;
+
     if (len === 0) {
         $('#past-events-container').text('No events yet :(');
     }
     else {
+        var pastEvents = [];
+
         for (i = 0; i < len; i++) {
             var id = eventsData[i].eventId;
             var title = eventsData[i].title;
@@ -51,6 +54,7 @@ function createEventsHtml(eventsData) {
             var currentDate = new Date();
 
             if (date.getTime() < currentDate.getTime()) {
+                pastEvents.push(eventsData[i])
                 var monthName = monthNames[date.getMonth()];
                 var dayName = days[date.getDay()];
 
@@ -79,6 +83,10 @@ function createEventsHtml(eventsData) {
                 $('#past-events-container').append(eventHtml);
             }
         }
+
+        if (pastEvents.length === 0) {
+            $('#past-events-container').text('No events yet :(');
+        }
     }
 }
 
@@ -106,6 +114,7 @@ function filterPastEventsByCity(city) {
 
 function loadMore() {
     var loadMoreButton = $('#past-load-more-button');
+    loadMoreButton.show();
 
     var articlesSize = $("#past-events-container article").size();
     var itemsToShow = 10;
