@@ -114,6 +114,7 @@ function filterPastEventsByCity(city) {
 
 function loadMore() {
     var loadMoreButton = $('#past-load-more-button');
+    loadMoreButton.show();
 
     var articlesSize = $("#past-events-container article").size();
     var itemsToShow = 10;
