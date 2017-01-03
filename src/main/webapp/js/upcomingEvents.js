@@ -36,6 +36,7 @@ function createEventsHtml(eventsData) {
 		$('#events-container').text('No events :(');
 	}
 	else {
+		var upcomingEvents = [];
 		for (i = 0; i < len; i++) {
 			var id = eventsData[i].eventId;
 			var title = eventsData[i].title;
@@ -52,6 +53,7 @@ function createEventsHtml(eventsData) {
 			var currentDate = new Date();
 
 			if (date.getTime() >= currentDate.getTime()) {
+				upcomingEvents.push(eventsData[i]);
 				var monthName = monthNames[date.getMonth()];
 				var dayName = days[date.getDay()];
 
@@ -79,6 +81,10 @@ function createEventsHtml(eventsData) {
 
             	$('#events-container').append(eventHtml);
 			}	
+		}
+
+		if (upcomingEvents.length === 0) {
+			$('#events-container').text('No events :(');
 		}
 	}	
 }
