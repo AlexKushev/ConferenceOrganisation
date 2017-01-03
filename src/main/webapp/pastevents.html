@@ -14,6 +14,7 @@
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/pastEvents.js"></script>
 </head>
 
 <body>
@@ -170,8 +171,8 @@
             </div>
         </div>
 
-        <div class="content pastEvent">
-            <article class="event">
+        <div id="past-events-container" class="content pastEvent">
+            <!-- <article class="event">
                 <a href="event.html" class="clear">
                     <div class="event__date eventDate">
                         <div class="eventDate__day">
@@ -374,11 +375,11 @@
                         <span class="eventCTA__arrow"></span>
                     </div>
                 </a>
-            </article>
+            </article> -->
             
         </div>
         <a href="#" class="scrollTop">Scroll</a>
-        <a class="loader">Load More</a>
+        <a id="past-load-more-button" class="loader">Load More</a>
     </div>
     <footer>
         © 2016 Conference Organisator

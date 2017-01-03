@@ -283,6 +283,14 @@ a.headerBox__btn:hover {
     background: #a51c60;
 }
 
+#events-container article { 
+    display:none;
+}
+
+#past-events-container article {
+    display: none;
+}
+
 .content {
     z-index: 1;
     position: relative;
