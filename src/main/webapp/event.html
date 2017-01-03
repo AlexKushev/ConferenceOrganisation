@@ -14,6 +14,7 @@
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/eventDetails.js"></script>
 </head>
 
 <body>
@@ -74,8 +75,8 @@
 
         <div class="content">
 
-            <article class="singleEvent"><!-- IF EVENT IS PAST ADD CLASS "pastEvent" -->
-                <div class="singleEvent__header">
+            <article id="single-event" class="singleEvent"><!-- IF EVENT IS PAST ADD CLASS "pastEvent" -->
+                <!-- <div class="singleEvent__header">
                     <div class="eventDate">
                         <div class="eventDate__day">
                             18
@@ -98,26 +99,28 @@
                 <div class="singleEvent__main">
                     <h2>Description</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, id minima totam quo, vel nisi quasi quam dolorem molestiae perspiciatis, quibusdam obcaecati. Pariatur laboriosam vel ullam, obcaecati iusto cum atque. Excepturi repellendus, ad dolor tempore eaque porro, soluta, harum quaerat saepe nisi sint fugiat sequi repellat at optio distinctio. Magnam.</p>
-
-                    <div class="lecture">
-                        <div class="lecture__item lecture__item--lecture">
-                            <h3>Lecture Topic</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod totam a distinctio molestiae adipisci. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, quam?</p>
-                        </div>
-                        <div class="lecture__item lecture__item--lecturer">
-                            <h3>Lecturer Name</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod fugit veniam ex soluta at quasi? Ratione, ipsum corrupti vel culpa?</p>
-                        </div>
-                    </div>
                     
-                    <div class="lecture">
-                        <div class="lecture__item lecture__item--lecture">
-                            <h3>Lecture Topic</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod totam a distinctio molestiae adipisci. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, quam?</p>
+                    <div id="lectures-container">
+                        <div class="lecture">
+                            <div class="lecture__item lecture__item--lecture">
+                                <h3>Lecture Topic</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod totam a distinctio molestiae adipisci. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, quam?</p>
+                            </div>
+                            <div class="lecture__item lecture__item--lecturer">
+                                <h3>Lecturer Name</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod fugit veniam ex soluta at quasi? Ratione, ipsum corrupti vel culpa?</p>
+                            </div>
                         </div>
-                        <div class="lecture__item lecture__item--lecturer">
-                            <h3>Lecturer Name</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod fugit veniam ex soluta at quasi? Ratione, ipsum corrupti vel culpa?</p>
+                    
+                        <div class="lecture">
+                            <div class="lecture__item lecture__item--lecture">
+                                <h3>Lecture Topic</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod totam a distinctio molestiae adipisci. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, quam?</p>
+                            </div>
+                            <div class="lecture__item lecture__item--lecturer">
+                                <h3>Lecturer Name</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod fugit veniam ex soluta at quasi? Ratione, ipsum corrupti vel culpa?</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,7 +132,7 @@
                         <span>25 BGN</span>
                         <a href="#" class="btn btn-yellow">Get Ticket</a>
                     </div>
-                </div>
+                </div> -->
             </article>
         </div>
         <a href="#" class="scrollTop">Scroll</a>

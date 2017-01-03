@@ -30,8 +30,8 @@ $(document).ready(function() {
 				var monthName = monthNames[date.getMonth()];
 				var dayName = days[date.getDay()];
 
-				var eventHtml = '<article id=' + id + ' class="event">' +
-					'<a href="event.html" class="clear">' +
+				var eventHtml = '<article class="event">' +
+					'<a href="event.html?id=' + id +'" class="clear">' +
                     	'<div class="event__date eventDate">' +
                         	'<div class="eventDate__day">' + day + '</div>' +
                         	'<div class="eventDate__month">' + monthName.toUpperCase() + '</div>' +
