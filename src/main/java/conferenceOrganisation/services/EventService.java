@@ -72,7 +72,7 @@ public class EventService {
 		Event event = eventManager.getEventByEventId(eventId);
 		return event;
 	}
-	
+
 	@Path("eventsByCreatorId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -80,6 +80,21 @@ public class EventService {
 			throws SQLException, IOException {
 		List<Event> events = eventManager.getAllEventsByUserId(creatorId);
 		return events;
+	}
+
+	@Path("addRating")
+	@POST
+	public Response giveRatingToEvent(@QueryParam("eventId") int eventId, @QueryParam("score") int score) {
+		try {
+			if (!eventManager.checkIfUserIsAbleToGiveRatingToSpecificEvent(eventId)) {
+				return Utils.RESPONSE_ERROR;
+			}
+			eventManager.giveRatingToEvent(eventId, score);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to add new rating to event with id : " + eventId);
+			return Utils.RESPONSE_ERROR;
+		}
+		return Utils.RESPONSE_OK;
 	}
 
 }
