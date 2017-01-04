@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Conference Organisator</title>
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+<script>
+    $(document).ready(function() {
+        $(".toplineWrap").load("navigation.html");
+    });
+</script>
+    <div class="toplineWrap"></div>
+
+    <div class="topstripe"></div>
+    
+    <div class="wrap">
+        <header class="clear">
+            <div class="headerLogo">
+                <a href="index.html"></a>
+            </div>
+            <!-- LOGGED IN 
+            <div class="headerBox" class="clear">
+                Be bold and ready to take on new challenges! Create Your first conference and make a difference!
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Add New</a>
+            </div>
+            -->
+            
+            <!-- NOT LOGGED IN -->
+            <div class="headerBox" class="clear">
+                <strong>Sign up</strong> today and get your place for the most interesting conferences in the IT industry.
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
+            </div>
+        </header>
+
+		<div class="filterLine clear">
+            <div class="filterLine__tabs clear">
+                <a href="index.html">Upcoming</a>
+                <a href="pastevents.html">Past</a>
+                <a href="addevent.html">Add New</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>Edit Lecture</h1>
+            <hr />
+            <form method="post" role="form" accept-charset="utf-8" class="regularForm">
+                <div class="form-group">
+                    <label for="lectureTopic">Lecture Topic</label>
+                    <input type="text" class="form-control" id="lectureTopic" placeholder="Topic" name="lectureTopic">
+                </div>
+                <div class="form-group">
+                    <label for="lectureDescription">Description</label>
+                    <input type="text" class="form-control" id="lectureDescription" placeholder="What the lecture is about" name="lectureDescription">
+                </div>
+                <div class="form-group">
+                    <label for="lecturerName">Lecturer</label>
+                    <input type="text" class="form-control" id="lecturerName" placeholder="Lecturer" name="lecturerName">
+                </div>
+                <div class="form-group">
+                    <label for="lecturerInfo">Lecturer's Experience</label>
+                    <input type="text" class="form-control" id="lecturerInfo" placeholder="Topic related professional background" name="lecturerInfo">
+                </div>
+                <div class="form-group">
+                    <label for="lecturerInfo">Lecturer's E-Mail</label>
+                    <input type="text" class="form-control" id="lecturerEmail" placeholder="E-Mail" name="lecturerEmail">
+                </div>
+                <div class="clear">
+                    <button type="submit" class="btn btn-primary btn--floatRight">Edit Lecture</button>
+                </div>
+            </form>
+        </div>
+        <a href="#" class="scrollTop">Scroll</a>
+    </div>
+    <footer>
+        © 2016 Conference Organisator
+    </footer>
+</body>
+
+</html>
