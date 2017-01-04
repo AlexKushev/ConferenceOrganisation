@@ -107,6 +107,7 @@ span {
 
 .toplineWrap {
     width: 100%;
+    min-height: 35px;
     background: #0e0e0e;
 }
 
