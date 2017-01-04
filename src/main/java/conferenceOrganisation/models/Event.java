@@ -37,6 +37,10 @@ public class Event implements Serializable {
 	private Hall hall;
 	
 	private EventStatus status;
+	
+	private double rating;
+	
+	private int evaluatersCount;
 
 	private List<Lecture> lectures = new ArrayList<Lecture>();
 
@@ -120,6 +124,22 @@ public class Event implements Serializable {
 		this.hall = hall;
 	}
 	
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	public int getEvaluatersCount() {
+		return evaluatersCount;
+	}
+
+	public void setEvaluatersCount(int evaluatersCount) {
+		this.evaluatersCount = evaluatersCount;
+	}
+
 	public List<Lecture> getLectures() {
 		return lectures;
 	}

@@ -14,6 +14,7 @@ import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.CitiesContainer;
 import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.Hall;
+import conferenceOrganisation.models.Ticket;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
 import conferenceOrganisation.utils.EventStatus;
@@ -175,6 +176,47 @@ public class EventManager {
 		return events;
 	}
 
+	public boolean checkIfUserIsAbleToGiveRatingToSpecificEvent(int eventId) throws SQLException, IOException {
+		String txtQuery = String.format("select * from tickets where tickets.eventId=%d and tickets.ownerId=%d",
+				eventId, currentUser.getCurrentUser().getUserId());
+		Ticket ticket = null;
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		while (rs.next()) {
+			ticket = new Ticket();
+			ticket.setTicketId(rs.getInt("ticketId"));
+			ticket.setOwnerId(rs.getInt("ownerId"));
+			ticket.setEventId(rs.getInt("eventId"));
+		}
+
+		if (ticket == null) {
+			return false;
+		}
+		return true;
+	}
+
+	public void giveRatingToEvent(int eventId, int score) throws SQLException, IOException {
+		Event event = getEventByEventId(eventId);
+		double currentRating = event.getRating();
+		int currentEvaluatresCount = event.getEvaluatersCount();
+		double newRating = ((currentRating * currentEvaluatresCount) + score) / (currentEvaluatresCount + 1);
+		String txtQuery = String.format("update events set events.rating=%.2f, events.evaluatersCount=%d", newRating,
+				currentEvaluatresCount + 1);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
+	public void reduceEventAvailabeSeatsByOneByEventId(int eventId) throws SQLException, IOException {
+		Event event = getEventByEventId(eventId);
+		event.setAvailableSeats(event.getAvailableSeats() - 1);
+		String txtQuery = String.format("update events set events.availableSeats=%d where events.eventId=%d",
+				event.getAvailableSeats(), eventId);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
 	private Event loadEventProperties(ResultSet rs) throws SQLException, IOException {
 		Event event = new Event();
 		event.setEventId(rs.getInt("eventId"));
@@ -187,6 +229,8 @@ public class EventManager {
 		event.setPrice(rs.getDouble("price"));
 		event.setAvailableSeats(rs.getInt("availableSeats"));
 		event.setStatus(EventStatus.valueOf(rs.getString("status")));
+		event.setRating(rs.getDouble("rating"));
+		event.setEvaluatersCount(rs.getInt("evaluatersCount"));
 		event.setLectures(lectureManager.getAllLectuersByEventId(event.getEventId()));
 		return event;
 	}
