@@ -5,6 +5,7 @@
  $(document).ready(function() {
 
     $('#logged-in-header').hide();
+    $('.profileMenu__btn--logout').hide();
 
     authUser();
 
@@ -131,16 +132,19 @@
  function authUser() {
     $.getJSON('rest/user/current', function(response) {
         if (!response) {
+            $('.profileMenu__btn--logout').hide();
             return;
         }
+        else {
+            var currentUser = response.user;
 
-        var currentUser = response.user;
+            console.log(currentUser);
 
-        console.log(currentUser);
-
-        $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
-        $('#not-logged-in-header').hide();
-        $('#logged-in-header').show();
+            $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
+            $('#not-logged-in-header').hide();
+            $('#logged-in-header').show();
+            $('.profileMenu__btn--logout').show();
+        }       
     }).done(function() {
         console.log("done");
     }).fail(function() {
