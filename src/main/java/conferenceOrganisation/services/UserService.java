@@ -47,7 +47,6 @@ public class UserService {
 		if (foundUser == null) {
 			return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
 		}
-		currentUser.setCurrentUser(user);
 		return RESPONSE_OK;
 	}
 
@@ -68,6 +67,7 @@ public class UserService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUser() {
+		System.out.println(currentUser.getCurrentUser());
 		if (currentUser.getCurrentUser() == null) {
 			return null;
 		}
