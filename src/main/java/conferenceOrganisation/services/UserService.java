@@ -101,13 +101,16 @@ public class UserService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createEvent(Event event) {
+		if (event.getTitle() == null || event.getTitle().trim().equals("") || event.getHall().getCapacity() <= 0) {
+			return Utils.RESPONSE_ERROR;
+		}
 		try {
 			eventManager.addEvent(event);
-				return RESPONSE_OK;
-			
+			return RESPONSE_OK;
+
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-			return Response.status(401).build();
+			return Utils.RESPONSE_ERROR;
 		}
 	}
 
