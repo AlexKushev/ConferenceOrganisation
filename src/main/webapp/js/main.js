@@ -6,6 +6,8 @@
 
     $('#logged-in-header').hide();
     $('.profileMenu__btn--logout').hide();
+    $('#account').attr("data-toggle", "modal");
+    $('#account').attr("data-target", "#login-modal");
 
     authUser();
 
@@ -144,6 +146,8 @@
             $('#not-logged-in-header').hide();
             $('#logged-in-header').show();
             $('.profileMenu__btn--logout').show();
+            $('#account').removeAttr("data-toggle");
+            $('#account').removeAttr("data-target");
         }       
     }).done(function() {
         console.log("done");
