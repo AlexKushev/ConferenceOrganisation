@@ -8,6 +8,7 @@
     $('.profileMenu__btn--logout').hide();
     $('#account').attr("data-toggle", "modal");
     $('#account').attr("data-target", "#login-modal");
+    $('#account').text('Account');
 
     authUser();
 
@@ -148,6 +149,7 @@
             $('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
+            $('#account').text(currentUser.firstName + ' ' + currentUser.lastName);
         }       
     }).done(function() {
         console.log("done");

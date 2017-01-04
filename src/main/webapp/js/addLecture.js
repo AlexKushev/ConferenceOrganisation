@@ -15,6 +15,14 @@ function isAuthUser() {
 		if (!response) {
 			window.location.replace('index.html');
 		}
+		else {
+			var currentUser = response.user;
+			
+			$('.profileMenu__btn--logout').show();
+            $('#account').removeAttr("data-toggle");
+            $('#account').removeAttr("data-target");
+            $('#account').text(currentUser.firstName + ' ' + currentUser.lastName);
+		}
 	});
 }
 
