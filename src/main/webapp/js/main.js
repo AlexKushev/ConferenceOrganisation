@@ -4,6 +4,12 @@
 
  $(document).ready(function() {
 
+    $('#logged-in-header').hide();
+
+    console.log("inside main");
+
+    authUser();
+
     var registerButton = $('#register-button'),
         loginButton = $('#login-button');
 
@@ -52,6 +58,9 @@
     }).done(function() {
         // destroy modal login 
         $('#login-modal').modal('toggle');
+
+        // set current user
+        authUser();
 
         alert("Successfully logged in!");
 
@@ -119,6 +128,27 @@
     }
 
     return true;
+ }
+
+ function authUser() {
+    console.log("is authenticated?");
+    $.getJSON('rest/user/current', function(response) {
+        if (!response) {
+            return;
+        }
+
+        var currentUser = response.user;
+
+        console.log(currentUser);
+
+        $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
+        $('#not-logged-in-header').hide();
+        $('#logged-in-header').show();
+    }).done(function() {
+        console.log("done");
+    }).fail(function() {
+        console.log("failed");
+    });
  }
 
  // Mobile Menu Toggle
