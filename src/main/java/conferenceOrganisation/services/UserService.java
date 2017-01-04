@@ -100,11 +100,15 @@ public class UserService {
 	@Path("createEvent")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createEvent(Event event) throws SQLException, IOException {
-		if (!eventManager.addEvent(event)) {
+	public Response createEvent(Event event) {
+		try {
+			eventManager.addEvent(event);
+				return RESPONSE_OK;
+			
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
 			return Response.status(401).build();
 		}
-		return RESPONSE_OK;
 	}
 
 }

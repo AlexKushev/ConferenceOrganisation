@@ -33,7 +33,7 @@ public class EventManager {
 	@Inject
 	DatabaseConnection dbConnection;
 
-	public boolean addEvent(Event event) throws SQLException, IOException {
+	public void addEvent(Event event) throws SQLException, IOException {
 		int hallId = hallManager.createHall(event.getHall());
 		User user = currentUser.getCurrentUser();
 		int userId = user.getUserId();
@@ -43,18 +43,16 @@ public class EventManager {
 		double price = event.getPrice();
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
 		String txtQuery = String.format(
-				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status) values (%d, %d, '%s', '%s', '%s', %.2f, %d, %s)",
+				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status) values (%d, %d, '%s', '%s', '%s', %.2f, %d, '%s')",
 				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW));
+		System.out.println(txtQuery);
 		Statement statement = null;
-		try {
-			statement = dbConnection.createStatement();
-			statement.executeQuery(txtQuery);
-			currentUser.getCurrentUser().setEvents(getAllEventsByUserId(userId));
-		} catch (SQLException | IOException e) {
-			return false;
-		}
+
+		statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		currentUser.getCurrentUser().setEvents(getAllEventsByUserId(userId));
+
 		statement.close();
-		return true;
 	}
 
 	public void editEvent(Event event) throws SQLException, IOException {
