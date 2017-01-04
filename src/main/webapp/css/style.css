@@ -125,7 +125,7 @@ span {
 }
 
 .topline a {
-    color: #ddd;
+    color: #ccc;
 }
 
 .topline a:hover {
@@ -153,12 +153,16 @@ span {
     background: #2c2c2c;
 }
 
-.mobileMenu > a {
+a.mobileMenu__btn {
     display: block;
     background: #1c1c1c url(../img/icon-nav.png) no-repeat center center;
     height: 35px;
     width: 46px;
     position: absolute
+}
+
+a.mobileMenu__btn.active {
+    background-color: #2c2c2c;
 }
 
 .mobileMenu__items {
@@ -195,21 +199,20 @@ span {
 }
 
 .topline__right {
-    float: right;
-    padding-right: 3px;
+    float: right;/*
+    padding-right: 3px;*/
 }
 
 .topline__right a.profile {
     display: inline-block;
-    background: url(../img/icon-profile.png) no-repeat right top;
+    background: #1c1c1c url(../img/icon-profile.png) no-repeat right 12px center;
     background-size: 24px 24px;
-    opacity: 0.8;
-    line-height: 24px;
-    margin-top: 6px;
-    padding-right: 32px;
+    line-height: 35px;
+    padding: 0 42px 0 12px;
 }
 
 .topline__right a.profile:hover {
+    background-color: #2c2c2c;
     opacity: 1;
 }
 

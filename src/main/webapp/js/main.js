@@ -155,6 +155,7 @@
  $(document).on('click', '.mobileMenu__btn', function() {
      var menu = $('.mobileMenu__items');
      menu.toggleClass('active');
+     $(this).toggleClass('active');
  });
 
  /* #####################################################################
