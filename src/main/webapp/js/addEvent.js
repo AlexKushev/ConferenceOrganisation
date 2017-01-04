@@ -6,8 +6,6 @@ $(document).ready(function() {
 	addConferenceButton.on('click', function() {
 		addNewConference();
 	});
-
-
 });
 
 function isAuthUser() {
@@ -57,8 +55,10 @@ function addNewConference() {
 		url: 'rest/user/createEvent',
 		contentType: 'application/json',
 		data: JSON.stringify(conferenceData)
-	}).done(function() {
-		console.log(JSON.stringify(conferenceData));
+	}).done(function(res) {
+		console.log(res);
+		var conferenceId = res;
+		sessionStorage.setItem("conferenceId", conferenceId);
 		alert('Successfully added new conference!')
 		window.location.replace('addlecture.html');
 	}).fail(function() {
