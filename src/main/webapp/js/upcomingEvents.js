@@ -84,7 +84,7 @@ function createEventsHtml(eventsData) {
 		}
 
 		if (upcomingEvents.length === 0) {
-			$('#events-container').text('No events :(');
+			$('#events-container').text('No upcoming events!');
 		}
 	}	
 }

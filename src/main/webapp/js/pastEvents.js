@@ -33,7 +33,7 @@ function createEventsHtml(eventsData) {
     var i, len = eventsData.length;
 
     if (len === 0) {
-        $('#past-events-container').text('No events yet :(');
+        $('#past-events-container').text('No past events!');
     }
     else {
         var pastEvents = [];
