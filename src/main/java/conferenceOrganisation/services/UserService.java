@@ -20,6 +20,7 @@ import conferenceOrganisation.managers.TicketManager;
 import conferenceOrganisation.managers.UserManager;
 import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.User;
+import conferenceOrganisation.utils.Utils;
 
 @Stateless
 @Path("user")
@@ -53,13 +54,21 @@ public class UserService {
 	@Path("register")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response registerUser(User user) throws IOException {
+	public Response registerUser(final User user) throws IOException {
 		try {
 			userManager.addUser(user);
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					Utils.sendWelcomeEmail(user);
+				}
+			});
+			thread.start();
 			return RESPONSE_OK;
 		} catch (SQLException e) {
 			System.out.println("Problem occurs while trying to add new user (User with same email already exist");
 		}
+
 		return Response.status(401).build();
 	}
 
