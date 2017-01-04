@@ -29,11 +29,6 @@ function addNewConference() {
 		city = $('#eventCity').val(),
 		seats = $('#eventSeats').val();
 
-	console.log(date);
-	console.log(time);
-	console.log(hallName);
-	console.log(city);
-
 	var conferenceData = {
 		event: {
 			title: title,
@@ -45,7 +40,8 @@ function addNewConference() {
 				location: location,
 				city: city,
 				capacity: seats
-			}
+			},
+			status: 'NEW'
 		}
 	};
 
@@ -64,6 +60,7 @@ function addNewConference() {
 	}).done(function() {
 		console.log(JSON.stringify(conferenceData));
 		alert('Successfully added new conference!')
+		window.location.replace('addlecture.html');
 	}).fail(function() {
 		alert('Invalid data!');
 	});
@@ -71,9 +68,6 @@ function addNewConference() {
 
 function validateConferenceData(conferenceData) {
 	var event = conferenceData.event;
-
-	var date = $('#eventDate').val(),
-		time = $('#eventTime').val();
 
     function validateLength(str, min, max) {
         return str.length >= min && str.length <= max;
@@ -87,7 +81,7 @@ function validateConferenceData(conferenceData) {
         return false;
     }
 
-    if (validateIfEmpty(event.title) || !validateLength(event.title, 4, 40) || validateIfEmpty(event.description) || !validateLength(event.description, 5, 10000) || validateIfEmpty(date) || validateIfEmpty(time) || event.price <= 0 || validateIfEmpty(event.hall.name) || !validateLength(event.hall.name, 2, 30) || validateIfEmpty(event.hall.location) || !validateLength(event.hall.location, 5, 50) || validateIfEmpty(event.hall.city) || !validateLength(event.hall.city, 2, 20) || event.hall.capacity <= 0) {
+    if (validateIfEmpty(event.title) || !validateLength(event.title, 4, 40) || event.price <= 0 || event.hall.capacity <= 0) {
         return false;
     }
 
