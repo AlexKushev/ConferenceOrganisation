@@ -134,8 +134,7 @@ span {
 
 .topline__left {
     float: left;
-    height: 2.8em;
-    line-height: 2.8em;
+    line-height: 35px;
 }
 
 .desktopMenu {
@@ -157,14 +156,14 @@ span {
 .mobileMenu > a {
     display: block;
     background: #1c1c1c url(../img/icon-nav.png) no-repeat center center;
-    height: 36px;
+    height: 35px;
     width: 46px;
     position: absolute
 }
 
 .mobileMenu__items {
     position: absolute;
-    top: 36px;
+    top: 35px;
     display: none;
     width: 92%; // MUST FIX THIS SOMEDAY
 }
