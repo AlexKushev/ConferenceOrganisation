@@ -2,8 +2,6 @@ $(document).ready(function() {
 
 	var eventId = qs('id');
 
-	console.log(eventId);
-
 	var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   						"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -41,7 +39,7 @@ $(document).ready(function() {
                     '</div>' +
                     '<div class="singleEvent__title eventTitle">' +
                         '<h1>' + title +'</h1>' +
-                        '<div class="eventTitle__details eventTitle__details--inline eventTitle__details--time">' + hours + ':' + minutes + '</div>' +
+                        '<div class="eventTitle__details eventTitle__details--inline eventTitle__details--time">' + hours + ':' + minutes + ' </div>' +
                         '<div class="eventTitle__details eventTitle__details--inline eventTitle__details--location">' +
                             '<a href="http://maps.google.com/?q=' + location + '" target="_blank">' + location + '</a>' +
                         '</div>' +
