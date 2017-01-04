@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
+import conferenceOrganisation.utils.Utils;
 
 @Singleton
 public class UserManager {
@@ -28,7 +29,7 @@ public class UserManager {
 
 	@Inject
 	LectureManager lectureManager;
-	
+
 	@Inject
 	CurrentUser currentUser;
 
@@ -43,7 +44,7 @@ public class UserManager {
 		// TODO add password encryption
 		String txtQuery = String.format(
 				"insert into users(firstName, lastName, email, password, isAdmin) values ('%s', '%s', '%s', '%s', %d)",
-				firstName, lastName, email, password, 0);
+				firstName, lastName, email, Utils.getHashedPassword(password), 0);
 		Statement statement;
 
 		statement = dbConnection.createStatement();
@@ -60,7 +61,7 @@ public class UserManager {
 		String txtQuery = String.format(
 				"update users set users.firstName = '%s', users.lastName='%s', users.email='%s'"
 						+ ", users.password = '%s' where users.userId=%d",
-				newFirstName, newLastName, newEmail, newPassword, user.getUserId());
+				newFirstName, newLastName, newEmail, Utils.getHashedPassword(newPassword), user.getUserId());
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
@@ -95,7 +96,7 @@ public class UserManager {
 	public User getUserByEmailAndPassword(String email, String password) throws SQLException, IOException {
 		User user = null;
 		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,
-				password);
+				Utils.getHashedPassword(password));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rss = statement.executeQuery(txtQuery);
 
