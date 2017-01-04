@@ -114,4 +114,31 @@ public class UserService {
 		}
 	}
 
+	@Path("newPassword")
+	@POST
+	public Response resetUserPassword(@QueryParam("email") String email) {
+		final String toEmail = email;
+		try {
+			final String newPassword = userManager.changeUserPassword(email);
+			if (newPassword != null) {
+				Thread thread = new Thread(new Runnable() {
+					@Override
+					public void run() {
+
+						Utils.sendNewPasswordEmail(toEmail, newPassword);
+					}
+				});
+				thread.start();
+				return Utils.RESPONSE_OK;
+			} else {
+				return Utils.RESPONSE_ERROR;
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Utils.RESPONSE_ERROR;
+		}
+
+	}
+
 }

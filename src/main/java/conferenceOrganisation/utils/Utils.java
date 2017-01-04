@@ -2,8 +2,10 @@ package conferenceOrganisation.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -13,12 +15,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.ws.rs.core.Response;
 
+import conferenceOrganisation.managers.UserManager;
 import conferenceOrganisation.models.User;
 
 public class Utils {
 
 	public static final Response RESPONSE_OK = Response.ok().build();
 	public static final Response RESPONSE_ERROR = Response.status(401).build();
+	private static final String USER_NAME = "conferenceorganisationhelp@gmail.com";
+	private static final String PASSWORD = "conference1234";
+
+	@Inject
+	UserManager userManager;
 
 	public static String getHashedPassword(String password) {
 
@@ -40,10 +48,18 @@ public class Utils {
 
 	}
 
+	public static String generateRandomPassword() {
+		final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		SecureRandom rnd = new SecureRandom();
+
+		StringBuilder sb = new StringBuilder(10);
+		for (int i = 0; i < 10; i++) {
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		}
+		return sb.toString();
+	}
+
 	public static void sendWelcomeEmail(User user) {
-		System.out.println("Start sending email to " + user.getEmail() + " ...");
-		String USER_NAME = "conferenceorganisationhelp@gmail.com";
-		String PASSWORD = "conference1234";
 		String RECIPIENT = user.getEmail();
 
 		String from = USER_NAME;
@@ -56,6 +72,25 @@ public class Utils {
 						+ "If you have any questions you can contact us : %s",
 				user.getFirstName(), user.getEmail(), user.getPassword(), USER_NAME);
 
+		sendFromGMail(from, pass, to, subject, body);
+	}
+
+	public static void sendNewPasswordEmail(String email, String newPassword) {
+		String RECIPIENT = email;
+
+		String from = USER_NAME;
+		String pass = PASSWORD;
+		String[] to = { RECIPIENT };
+
+		String subject = "Conference Organisation Reset Password";
+		String body = String.format("Your new password is : '%s' \r\n\r\nYou can change it from your account settings!",
+				newPassword);
+
+		sendFromGMail(from, pass, to, subject, body);
+	}
+
+	private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
+		System.out.println("Start sending email to " + to[0] + " ...");
 		Properties props = System.getProperties();
 		String host = "smtp.gmail.com";
 		props.put("mail.smtp.starttls.enable", "true");
@@ -72,6 +107,7 @@ public class Utils {
 			message.setFrom(new InternetAddress(from));
 			InternetAddress[] toAddress = new InternetAddress[to.length];
 
+			// To get the array of addresses
 			for (int i = 0; i < to.length; i++) {
 				toAddress[i] = new InternetAddress(to[i]);
 			}
@@ -86,7 +122,7 @@ public class Utils {
 			transport.connect(host, from, pass);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
-			System.out.println("Email to " + user.getEmail() + " sent.");
+			System.out.println("Email to " + to[0] + " sent.");
 		} catch (AddressException ae) {
 			ae.printStackTrace();
 		} catch (MessagingException me) {

@@ -109,6 +109,34 @@ public class UserManager {
 
 	}
 
+	public User getUserByEmail(String email) throws SQLException, IOException {
+		User user = null;
+		String txtQuery = String.format("select * from users where users.email='%s'", email);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+
+		while (rs.next()) {
+			user = loadUserProperties(rs);
+		}
+		statement.close();
+		return user;
+	}
+
+	public String changeUserPassword(String email) throws SQLException, IOException {
+		User user = getUserByEmail(email);
+		if (user == null) {
+			return null;
+		} else {
+			String newPassword = Utils.generateRandomPassword();
+			String txtQuery = String.format("update users set users.password='%s' where users.email='%s'",
+					Utils.getHashedPassword(newPassword), email);
+			Statement statement = dbConnection.createStatement();
+			statement.executeUpdate(txtQuery);
+			statement.close();
+			return newPassword;
+		}
+	}
+
 	private User loadUserProperties(ResultSet rs) throws SQLException, IOException {
 		User user = new User();
 		user.setUserId(rs.getInt("userId"));
