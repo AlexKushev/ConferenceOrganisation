@@ -207,6 +207,8 @@ a.profileMenu__btn {
     display: inline-block;
     background-color: #1c1c1c;
     background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: right 12px center;
     line-height: 35px;
     padding: 0 38px 0 12px;
 }
@@ -218,14 +220,10 @@ a.profileMenu__btn:hover {
 
 .profileMenu__btn--account {
     background-image: url(../img/icon-profile.png);
-    background-repeat: no-repeat;
-    background-position: right 12px center;
 }
 
 .profileMenu__btn--logout {
     background-image: url(../img/icon-logout.png);
-    background-repeat: no-repeat;
-    background-position: right 12px center;
 }
 
 .topstripe {
