@@ -18,31 +18,12 @@
 </head>
 
 <body>
-    <div class="toplineWrap">
-        <div class="topline clear">
-            <div class="topline__left">
-                <nav class="desktopMenu clear">
-                    <a href="index.html">Home</a>
-                    <a href="#">Item 1</a>
-                    <a href="#">Item 2</a>
-                    <a href="#">Item 3</a>
-                    <a href="#">Item 4</a>
-                </nav>
-                <nav class="mobileMenu">
-                    <a href="#" class="mobileMenu__btn"></a>
-                    <div class="mobileMenu__items">
-                        <a href="#">Item 1</a>
-                        <a href="#">Item 2</a>
-                        <a href="#">Item 3</a>
-                        <a href="#">Item 4</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="topline__right">
-                <a id="account" href="#" class="profile" role="button" data-toggle="modal" data-target="#login-modal">Account</a>
-            </div>
-        </div>
-    </div>
+<script>
+    $(document).ready(function() {
+        $(".toplineWrap").load("navigation.html");
+    });
+</script>
+    <div class="toplineWrap"></div>
     
     <div class="topstripe"></div>
 
@@ -75,7 +56,7 @@
         <div class="content">
 
             <article id="single-event" class="singleEvent"><!-- IF EVENT IS PAST ADD CLASS "pastEvent" -->
-                <!-- <div class="singleEvent__header">
+                <div class="singleEvent__header">
                     <div class="eventDate">
                         <div class="eventDate__day">
                             18
@@ -131,9 +112,9 @@
                         <span>25 BGN</span>
                         <a href="#" class="btn btn-yellow">Get Ticket</a>
                     </div>
-                </div> -->
+                </div>
             </article>
-            
+            <hr />
             <!-- Load Facebook SDK for JavaScript -->
             <div id="fb-root"></div>
             <script>(function(d, s, id) {

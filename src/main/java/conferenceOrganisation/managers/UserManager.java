@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.User;
+import conferenceOrganisation.services.CurrentUser;
 
 @Singleton
 public class UserManager {
@@ -27,6 +28,9 @@ public class UserManager {
 
 	@Inject
 	LectureManager lectureManager;
+	
+	@Inject
+	CurrentUser currentUser;
 
 	@Inject
 	DatabaseConnection dbConnection;
@@ -97,6 +101,7 @@ public class UserManager {
 
 		while (rss.next()) {
 			user = loadUserProperties(rss);
+			currentUser.setCurrentUser(user);
 		}
 		statement.close();
 		return user;

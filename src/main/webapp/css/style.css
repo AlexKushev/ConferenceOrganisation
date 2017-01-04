@@ -107,6 +107,7 @@ span {
 
 .toplineWrap {
     width: 100%;
+    min-height: 35px;
     background: #0e0e0e;
 }
 
@@ -133,8 +134,7 @@ span {
 
 .topline__left {
     float: left;
-    height: 2.8em;
-    line-height: 2.8em;
+    line-height: 35px;
 }
 
 .desktopMenu {
@@ -156,14 +156,14 @@ span {
 .mobileMenu > a {
     display: block;
     background: #1c1c1c url(../img/icon-nav.png) no-repeat center center;
-    height: 36px;
+    height: 35px;
     width: 46px;
     position: absolute
 }
 
 .mobileMenu__items {
     position: absolute;
-    top: 36px;
+    top: 35px;
     display: none;
     width: 92%; // MUST FIX THIS SOMEDAY
 }
@@ -878,12 +878,17 @@ label span {
 }
 
 .form-group.float input:first-of-type {
-    width: 69%;
+    width: 58%;
+    margin-right: 1%;
+}
+
+.form-group.float input:nth-of-type(2) {
+    width: 20%;
     margin-right: 1%;
 }
 
 .form-group.float input:last-of-type {
-    width: 30%;
+    width: 20%;
 }
 
 .btn--floatRight {

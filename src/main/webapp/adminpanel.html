@@ -14,6 +14,11 @@
 </head>
 
 <body>
+<script>
+    $(document).ready(function() {
+        $(".toplineWrap").load("navigation.html");
+    });
+</script>
     <!-- BEGIN # MODAL LOGIN -->
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -101,32 +106,10 @@
         </div>
     </div>
     <!-- END # MODAL LOGIN -->
-    <div class="toplineWrap">
-        <div class="topline clear">
-            <div class="topline__left">
-                <nav class="desktopMenu clear">
-                    <a href="index.html">Home</a>
-                    <a href="#">Item 1</a>
-                    <a href="#">Item 2</a>
-                    <a href="#">Item 3</a>
-                    <a href="#">Item 4</a>
-                </nav>
-                <nav class="mobileMenu">
-                    <a href="#" class="mobileMenu__btn"></a>
-                    <div class="mobileMenu__items">
-                        <a href="#">Item 1</a>
-                        <a href="#">Item 2</a>
-                        <a href="#">Item 3</a>
-                        <a href="#">Item 4</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="topline__right">
-                <a id="account" href="#" class="profile" role="button" data-toggle="modal" data-target="#login-modal">Account</a>
-            </div>
-        </div>
-    </div>
+    <div class="toplineWrap"></div>
+
     <div class="topstripe"></div>
+    
     <div class="wrap">
         <header class="clear">
             <div class="headerLogo">
@@ -158,94 +141,6 @@
         </div>
 
         <div class="content">
-            <table cellpadding="0" cellspacing="0" class="managerTable">
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Building a Future Proof Artificial Intelligence</a>
-                        <span class="label label-warning">New</span>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-success btn-xs">Publish</a>
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
-                        <span class="label label-default">Pending</span>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Introduction to UX Design</a>
-                        <span class="label label-default">Pending</span>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Building a Future Proof Artificial Intelligence</a>
-                        <span class="label label-danger">Not Approved</span>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Achieving Sustainable Growth in Business in Information Technology</a>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="managerTable__title">
-                        <a href="#">Introduction to UX Design</a>
-                    </td>
-                    <td class="managerTable__date">12-28-2014</td>
-                    <td class="managerTable__CTA">
-                        <a href="#" class="btn btn-primary btn-xs">Add Lecture</a>
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
-                    </td>
-                </tr>
-            </table>
-
             <table cellpadding="0" cellspacing="0" class="managerTable">
                 <tr>
                     <td class="managerTable__title">
