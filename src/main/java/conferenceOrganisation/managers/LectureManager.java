@@ -35,6 +35,23 @@ public class LectureManager {
 		statement.close();
 	}
 
+	public void editLecture(Lecture lecture) throws SQLException, IOException {
+		String newTitle = lecture.getTitle();
+		String newDescription = lecture.getDescription();
+		String newLecturerName = lecture.getLecturerName();
+		String newLecturerEmail = lecture.getLecturerEmail();
+		String newLecturerDescription = lecture.getLecturerDescription();
+		String txtQuery = String.format(
+				"update lectures set lectures.title='%s', lectures.description='%s',"
+						+ "lectures.lecturerEmail='%s', lectures.lecturerDescription='%s', lectures.lecturerName='%s' "
+						+ "where lectures.lectureId=%d",
+				newTitle, newDescription, newLecturerEmail, newLecturerDescription, newLecturerName,
+				lecture.getLectureId());
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
 	public List<Lecture> getAllLectuersByEventId(int eventId) throws SQLException, IOException {
 		List<Lecture> lectures = new ArrayList<Lecture>();
 		String txtQuery = String.format("select * from lectures where lectures.eventId=%d", eventId);

@@ -31,7 +31,22 @@ public class HallManager {
 		if (generatedKeys.next()) {
 			newHall.setHallId(generatedKeys.getInt(1));
 		}
+		statement.close();
 		return newHall.getHallId();
+	}
+
+	public void editHall(Hall hall) throws SQLException, IOException {
+		String newHallName = hall.getName();
+		int newHallCapacity = hall.getCapacity();
+		String newHallLocation = hall.getLocation();
+		String newHallCity = hall.getCity();
+		String txtQuery = String.format(
+				"update halls set halls.name='%s', halls.capacity=%d, halls.location='%s',"
+						+ "halls.city='%s' where halls.hallId=%d",
+				newHallName, newHallCapacity, newHallLocation, newHallCity, hall.getHallId());
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
 	}
 
 	public Hall getHallById(int hallId) throws SQLException, IOException {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -95,6 +96,19 @@ public class EventService {
 			return Utils.RESPONSE_ERROR;
 		}
 		return Utils.RESPONSE_OK;
+	}
+
+	@Path("edit")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editEvent(Event event) {
+		try {
+			eventManager.editEvent(event);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to edit event with eventId : " + event.getEventId());
+			return Utils.RESPONSE_ERROR;
+		}
 	}
 
 }
