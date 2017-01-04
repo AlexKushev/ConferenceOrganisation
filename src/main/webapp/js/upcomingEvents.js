@@ -33,7 +33,7 @@ function createEventsHtml(eventsData) {
 	var i, len = eventsData.length;
 
 	if (len === 0) {
-		$('#events-container').text('No events :(');
+		$('#events-container').text('No upcoming events!');
 	}
 	else {
 		var upcomingEvents = [];
