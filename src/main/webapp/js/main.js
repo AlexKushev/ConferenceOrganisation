@@ -1,6 +1,6 @@
- $(function() {
-     $("body").load("../accountform.html");
- });
+ // $(function() {
+ //     $("body").load("../accountform.html");
+ // });
 
  $(document).ready(function() {
 
@@ -8,77 +8,11 @@
         loginButton = $('#login-button');
 
     registerButton.on('click', function() {
-        var userEmail = $('#register_email').val(),
-            userPassword = $('#register_password').val(),
-            userFirstName = $('#register_firstName').val(),
-            userLastName = $('#register_lastName').val();
-
-        var userData = {
-            user: {
-                email: userEmail,
-                password: userPassword,
-                firstName: userFirstName,
-                lastName: userLastName
-            }
-        };
-
-        if (!validateUserData(userEmail, userPassword, userFirstName, userLastName)) {
-            alert('Invalid data!');
-            return;
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: 'rest/user/register',
-            contentType: 'application/json',
-            data: JSON.stringify(userData)
-        }).done(function() {
-            alert('Successfully registered!');
-        }).fail(function() {
-            alert('Invalid data or user with this e-mail already exists!');
-        }).always(function() {
-            // submit
-        });
+        register();
     });
 
     loginButton.on('click', function() {
-        var userEmail = $('login_email'),
-            userPassword = $('login_password');
-
-        var userData = {
-            user: {
-                email: userEmail,
-                password: userPassword
-            }
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: 'rest/user/login',
-            contentType: 'application/json',
-            data: JSON.stringify(userData)
-        }).done(function() {
-            // destroy modal login 
-            $('#login-modal').modal('toggle');
-
-            // set current user
-            // $.ajax({
-            //     type: 'GET',
-            //     url: 'rest/user/current',
-            //     contentType: 'application/json',
-            //     dataType: 'application/json',
-            //     success: function(response) {
-            //         var currentUserData = response.user;
-                    
-            //     }
-            // })
-
-            alert("Successfully logged in!")
-        }).fail(function() {
-            alert("Wrong e-mail or password!")
-        }).always(function() {
-            
-        });
+        login();
     });
 
      $(window).scroll(function() {
@@ -97,6 +31,70 @@
      });
 
  });
+
+ function login() {
+    var userEmail = $('#login_email').val(),
+        userPassword = $('#login_password').val();
+
+
+    var userData = {
+        user: {
+            email: userEmail,
+            password: userPassword
+        }
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: 'rest/user/login',
+        contentType: 'application/json',
+        data: JSON.stringify(userData)
+    }).done(function() {
+        // destroy modal login 
+        $('#login-modal').modal('toggle');
+
+        alert("Successfully logged in!");
+
+    }).fail(function() {
+        alert("Wrong e-mail or password!");
+    }).always(function() {
+            
+    });
+ }
+
+ function register() {
+    var userEmail = $('#register_email').val(),
+        userPassword = $('#register_password').val(),
+        userFirstName = $('#register_firstName').val(),
+        userLastName = $('#register_lastName').val();
+
+    var userData = {
+        user: {
+            email: userEmail,
+            password: userPassword,
+            firstName: userFirstName,
+            lastName: userLastName
+        }
+    };
+
+    if (!validateUserData(userEmail, userPassword, userFirstName, userLastName)) {
+        alert('Invalid data!');
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: 'rest/user/register',
+        contentType: 'application/json',
+        data: JSON.stringify(userData)
+    }).done(function() {
+        alert('Successfully registered!');
+    }).fail(function() {
+        alert('Invalid data or user with this e-mail already exists!');
+    }).always(function() {
+        // submit
+    });
+ }
 
  function validateUserData(userEmail, userPassword, userFirstName, userLastName) {
     function validateLength(str, min, max) {
