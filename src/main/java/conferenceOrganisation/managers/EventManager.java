@@ -33,7 +33,7 @@ public class EventManager {
 	@Inject
 	DatabaseConnection dbConnection;
 
-	public void addEvent(Event event) throws SQLException, IOException {
+	public int addEvent(Event event) throws SQLException, IOException {
 		int hallId = hallManager.createHall(event.getHall());
 		User user = currentUser.getCurrentUser();
 		int userId = user.getUserId();
@@ -47,12 +47,16 @@ public class EventManager {
 				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW));
 		System.out.println(txtQuery);
 		Statement statement = null;
-
 		statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
+		ResultSet generatedKeys = statement.executeQuery("SELECT LAST_INSERT_ID()");
+		if (generatedKeys.next()) {
+			event.setEventId(generatedKeys.getInt(1));
+		}
 		currentUser.getCurrentUser().setEvents(getAllEventsByUserId(userId));
 
 		statement.close();
+		return event.getEventId();
 	}
 
 	public void editEvent(Event event) throws SQLException, IOException {

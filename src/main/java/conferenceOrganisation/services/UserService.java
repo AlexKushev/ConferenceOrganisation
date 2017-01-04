@@ -105,8 +105,8 @@ public class UserService {
 			return Utils.RESPONSE_ERROR;
 		}
 		try {
-			eventManager.addEvent(event);
-			return RESPONSE_OK;
+			int eventId = eventManager.addEvent(event);
+			return Response.ok(eventId, MediaType.TEXT_PLAIN).build();
 
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
