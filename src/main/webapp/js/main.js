@@ -6,8 +6,6 @@
 
     $('#logged-in-header').hide();
 
-    console.log("inside main");
-
     authUser();
 
     var registerButton = $('#register-button'),
@@ -131,7 +129,6 @@
  }
 
  function authUser() {
-    console.log("is authenticated?");
     $.getJSON('rest/user/current', function(response) {
         if (!response) {
             return;

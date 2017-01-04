@@ -85,7 +85,7 @@ function createEventsHtml(eventsData) {
         }
 
         if (pastEvents.length === 0) {
-            $('#past-events-container').text('No events yet :(');
+            $('#past-events-container').text('No past events!');
         }
     }
 }
