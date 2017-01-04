@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.User;
-import conferenceOrganisation.utils.Utils;
 
 @Singleton
 public class UserManager {
@@ -37,12 +36,16 @@ public class UserManager {
 		String lastName = user.getLastName();
 		String email = user.getEmail();
 		String password = user.getPassword();
+		// TODO add password encryption
 		String txtQuery = String.format(
-				"insert into users(firstName, lastName, email, password) values ('%s', '%s', '%s', '%s')", firstName,
-				lastName, email, Utils.getHashedPassword(password));
-		Statement statement = dbConnection.createStatement();
+				"insert into users(firstName, lastName, email, password, isAdmin) values ('%s', '%s', '%s', '%s', %d)",
+				firstName, lastName, email, password, 0);
+		Statement statement;
+
+		statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
+
 	}
 
 	public void editUser(User user) throws SQLException, IOException {
@@ -53,7 +56,7 @@ public class UserManager {
 		String txtQuery = String.format(
 				"update users set users.firstName = '%s', users.lastName='%s', users.email='%s'"
 						+ ", users.password = '%s' where users.userId=%d",
-				newFirstName, newLastName, newEmail, Utils.getHashedPassword(newPassword), user.getUserId());
+				newFirstName, newLastName, newEmail, newPassword, user.getUserId());
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
@@ -88,7 +91,7 @@ public class UserManager {
 	public User getUserByEmailAndPassword(String email, String password) throws SQLException, IOException {
 		User user = null;
 		String txtQuery = String.format("select * from users where users.email='%s' and users.password='%s'", email,
-				Utils.getHashedPassword(password));
+				password);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rss = statement.executeQuery(txtQuery);
 
