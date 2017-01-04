@@ -67,7 +67,6 @@ public class UserService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUser() {
-		System.out.println(currentUser.getCurrentUser());
 		if (currentUser.getCurrentUser() == null) {
 			return null;
 		}
