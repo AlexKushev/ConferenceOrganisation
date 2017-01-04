@@ -39,6 +39,19 @@ public class LectureService {
 		return Utils.RESPONSE_OK;
 	}
 
+	@Path("edit")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editLecture(Lecture lecture) {
+		try {
+			lectureManager.editLecture(lecture);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to edit lecture with id : " + lecture.getLectureId());
+			return Utils.RESPONSE_ERROR;
+		}
+	}
+
 	@Path("getByEventId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
