@@ -75,10 +75,10 @@ function getAllEventsCreatedByUser(userId) {
                 	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs publish">Publish</button>');
                 }
                 if (status == 'New' || status == 'Pending' || status == 'Not Approved') {
-                	$('#' + id + ' td.managerTable__CTA').append(' <a href="editevent.html" class="btn btn-primary btn-xs">Edit</a>');
+                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs edit">Edit</button>');
                 }
 
-                $('#' + id + ' td.managerTable__CTA').append(' <a href="#" class="btn btn-primary btn-xs">Add Lecture</a> <button class="btn btn-danger btn-xs delete">Delete</button>');
+                $('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs add-lecture">Add Lecture</button> <button class="btn btn-danger btn-xs delete">Delete</button>');
 			}
 		}
 	}).done(function() {
@@ -98,6 +98,24 @@ function getAllEventsCreatedByUser(userId) {
 			var eventId = $(grandParent).attr('id');
 			deleteEvent(eventId);
 		});
+
+		$('.edit').on('click', function(e) {
+			var target = e.currentTarget;
+			var parent = $(target).parent();
+			var grandParent = $(parent).parent();
+			var eventId = $(grandParent).attr('id');
+			sessionStorage.setItem('conferenceId', eventId);
+			window.location.href = 'editevent.html';
+		});
+
+		$('.add-lecture').on('click', function(e) {
+			var target = e.currentTarget;
+			var parent = $(target).parent();
+			var grandParent = $(parent).parent();
+			var eventId = $(grandParent).attr('id');
+			sessionStorage.setItem('conferenceId', eventId);
+			window.location.href = 'editlecture.html';
+		});
 	});
 }
 
@@ -107,7 +125,7 @@ function publishEvent(eventId) {
 		url: 'rest/events/review?eventId=' + eventId
 	}).done(function() {
 		alert('Successfully send event for review!');
-		location.reload();
+		window.location.reload();
 	}).fail(function() {
 		alert('Failed to send event for review');
 	});
@@ -119,7 +137,7 @@ function deleteEvent(eventId) {
 		url: 'rest/events/delete?eventId=' + eventId
 	}).done(function() {
 		alert("Seccessfully deleted!")
-		location.reload();
+		window.location.reload();
 	}).fail(function() {
 		alert("Failed to delete")
 	})
