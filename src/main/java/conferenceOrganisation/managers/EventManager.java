@@ -89,7 +89,7 @@ public class EventManager {
 
 	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.status='%s' where isDeleted=%d",
+		String txtQuery = String.format("select * from events where events.status='%s' AND isDeleted=%d",
 				String.valueOf(EventStatus.PUBLISHED), 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
