@@ -128,7 +128,7 @@ function loadMore() {
         itemsToShow = (itemsToShow + 10 <= articlesSize) ? itemsToShow + 10 : articlesSize;
         $('#past-events-container article:lt(' + itemsToShow + ')').show();
 
-        if (itemsToShow == articlesSize && itemsToShow !== 0) {
+        if (itemsToShow == articlesSize && itemsToShow !== 0 || itemsToShow === 0) {
             loadMoreButton.removeClass('active');
         }
     });
