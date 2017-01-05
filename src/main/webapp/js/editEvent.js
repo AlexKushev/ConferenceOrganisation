@@ -58,6 +58,8 @@ function loadConferenceData() {
 		$.getJSON('rest/lectures/getByEventId?eventId=' + eventId, function(res) {
         	var lecturesData = res.lecture;
 
+        	console.log(lecturesData);
+
         	var len = lecturesData.length;
 
         	if (len === 0) {
@@ -65,25 +67,52 @@ function loadConferenceData() {
         	}
         	else {
         		for (var i = 0; i < len; i++) {
-        			var lectureTitle = lecturesData[i].title,
+        			var id = lecturesData[i].lectureId,
+        				lectureTitle = lecturesData[i].title,
         				lecturerName = lecturesData[i].lecturerName;
 
         			var lectureHtml = '<tr>' +
                     	'<td class="managerTable__title">' +
-                        	'<a href="editlecture.html">Building a Future Proof Artificial Intelligence</a>' +
+                        	'<a href="editlecture.html">' + lectureTitle + '</a>' + // TODO: This will break everything if clicked
                     	'</td>' +
-                    	'<td class="managerTable__date">Ivan Ivanov</td>' +
-                    	'<td class="managerTable__CTA">' +
-                        	'<a href="editlecture.html" class="btn btn-primary btn-xs">Edit</a>' +
-                        	'<a href="#" class="btn btn-danger btn-xs">Delete</a>' +
+                    	'<td class="managerTable__date">' + lecturerName + '</td>' +
+                    	'<td id="' + id + '" class="managerTable__CTA">' +
+                        	'<button class="btn btn-primary btn-xs edit-lecture">Edit</button> ' +
+                        	'<button class="btn btn-danger btn-xs delete-lecture">Delete</button> ' +
                     	'</td>' +
                 	'</tr>';
 
                     $('#edit-lectures-table').append(lectureHtml);
         		}
         	}
+		}).done(function() {
+			$('.edit-lecture').on('click', function(e) {
+				var target = e.currentTarget;
+				var parent = $(target).parent();
+				var lectureId = $(parent).attr('id');
+				sessionStorage.setItem('editLectureId', lectureId);
+				window.location.href = 'editlecture.html';
+			});
+
+			$('.delete-lecture').on('click', function(e) {
+				var target = e.currentTarget;
+				var parent = $(target).parent();
+				var lectureId = $(parent).attr('id');
+				deleteLecture(lectureId);
+			});
 		});
 	});
+}
+
+function deleteLecture(lectureId) {
+	// TODO: No such service yet!
+	console.log('Delete lecture is not implemented yet!');
+
+	// $.ajax({
+	// 	type: 'POST',
+	// 	url: 'rest/lectures/delete'
+	// });
+
 }
 
 function editConference() {
