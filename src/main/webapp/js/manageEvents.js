@@ -104,7 +104,7 @@ function getAllEventsCreatedByUser(userId) {
 			var parent = $(target).parent();
 			var grandParent = $(parent).parent();
 			var eventId = $(grandParent).attr('id');
-			sessionStorage.setItem('conferenceId', eventId);
+			sessionStorage.setItem('editConferenceId', eventId);
 			window.location.href = 'editevent.html';
 		});
 
