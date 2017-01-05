@@ -64,6 +64,7 @@
         authUser();
 
         alert("Successfully logged in!");
+        location.reload();
 
     }).fail(function() {
         alert("Wrong e-mail or password!");
