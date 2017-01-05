@@ -912,6 +912,10 @@ label span {
     width: 20%;
 }
 
+.btnGroup {
+    float: right;
+}
+
 .btn--floatRight {
     float: right;
 }
