@@ -114,7 +114,7 @@ function getAllEventsCreatedByUser(userId) {
 			var grandParent = $(parent).parent();
 			var eventId = $(grandParent).attr('id');
 			sessionStorage.setItem('conferenceId', eventId);
-			window.location.href = 'editlecture.html';
+			window.location.href = 'addlecture.html';
 		});
 	});
 }
