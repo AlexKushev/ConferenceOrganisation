@@ -68,7 +68,7 @@ $(document).ready(function() {
         	var len = lecturesData.length;
 
         	if (len === 0) {
-        		$('#lectures-container').text('No lectures yet!');
+        		$('#lectures-container').append('<div class="alert alert-info">Currently there are no lectures for this event!</div>');
         	}
         	else {
         		for (var i = 0; i < len; i++) {

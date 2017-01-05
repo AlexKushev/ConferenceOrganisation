@@ -5,19 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
     <meta name="robots" content="noindex, nofollow" />
-
     <title>Conference Organisator</title>
-
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    
-           <style>
-      #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style> <!-- Севи <3  -->
-
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
@@ -26,70 +16,74 @@
 </head>
 
 <body>
-<script>
+    <script>
     $(document).ready(function() {
         $(".toplineWrap").load("navigation.html");
     });
-</script>
+    </script>
     <div class="toplineWrap"></div>
-    
     <div class="topstripe"></div>
-
     <div class="wrap">
         <header class="clear">
             <div class="headerLogo">
                 <a href="index.html"></a>
             </div>
-
             <!-- LOGGED IN  -->
             <div id="logged-in-header" class="headerBox" class="clear">
                 Be bold and ready to take on new challenges! Create Your first conference and make a difference!
                 <a href="addevent.html" class="headerBox__btn" role="button">Add New</a>
-            </div>         
-            
+            </div>
             <!-- NOT LOGGED IN -->
             <div id="not-logged-in-header" class="headerBox" class="clear">
                 <strong>Sign up</strong> today and get your place for the most interesting conferences in the IT industry.
                 <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
             </div>
         </header>
-
         <div class="filterLine clear">
             <div id="filter-line-tabs" class="filterLine__tabs clear">
                 <a href="index.html" class="active">Upcoming</a>
                 <a href="pastevents.html">Past</a>
             </div>
         </div>
-
         <div class="content">
-            <article id="single-event" class="singleEvent"><!-- IF EVENT IS PAST ADD CLASS "pastEvent" -->
+            <article id="single-event" class="singleEvent">
+                <!-- IF EVENT IS PAST ADD CLASS "pastEvent" -->
             </article>
+           
             <hr />
-             <div id="map"></div>
-    <script>
-      function initMap() {
-        var uluru = {lat: 42.696552, lng: 23.32601};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
+            
+            <div id="map"></div>
+            <script>
+            function initMap() {
+                var uluru = {
+                    lat: 42.696552,
+                    lng: 23.32601
+                };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+            </script>
+
             <!-- Load Facebook SDK for JavaScript -->
             <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-
+            <script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            </script>
             <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="5"></div>
+        
         </div>
         <a href="#" class="scrollTop">Scroll</a>
     </div>
