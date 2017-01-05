@@ -122,13 +122,15 @@ function loadMore() {
 
     if (itemsToShow < articlesSize) {
         loadMoreButton.addClass('active');
+    } else {
+      loadMoreButton.removeClass('active');
     }
 
     loadMoreButton.click(function () {
         itemsToShow = (itemsToShow + 10 <= articlesSize) ? itemsToShow + 10 : articlesSize;
         $('#past-events-container article:lt(' + itemsToShow + ')').show();
 
-        if (itemsToShow == articlesSize && itemsToShow !== 0 || itemsToShow === 0) {
+        if (itemsToShow == articlesSize) {
             loadMoreButton.removeClass('active');
         }
     });
