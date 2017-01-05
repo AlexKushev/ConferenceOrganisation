@@ -74,13 +74,13 @@ function getAllEventsCreatedByUser(userId) {
                 $('#manage-events-table').append(eventHtml);
 
                 if (status == 'New') {
-                	$('#event' + id + ' td.managerTable__CTA').append('<a href="#" class="btn btn-success btn-xs">Publish</a>');
+                	$('#event' + id + ' td.managerTable__CTA').append(' <a href="#" class="btn btn-success btn-xs">Publish</a>');
                 }
                 if (status == 'New' || status == 'Pending' || status == 'Not Approved') {
-                	$('#event' + id + ' td.managerTable__CTA').append('<a href="editevent.html" class="btn btn-primary btn-xs">Edit</a>');
+                	$('#event' + id + ' td.managerTable__CTA').append(' <a href="editevent.html" class="btn btn-primary btn-xs">Edit</a>');
                 }
 
-                $('#event' + id + ' td.managerTable__CTA').append('<a href="#" class="btn btn-primary btn-xs">Add Lecture</a><a href="#" class="btn btn-danger btn-xs">Delete</a>');
+                $('#event' + id + ' td.managerTable__CTA').append(' <a href="#" class="btn btn-primary btn-xs">Add Lecture</a> <a href="#" class="btn btn-danger btn-xs">Delete</a>');
 			}
 		}
 	});
