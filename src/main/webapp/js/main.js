@@ -149,7 +149,7 @@
             $('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
-            $('#account').text(currentUser.firstName + ' ' + currentUser.lastName);
+            $('#account').text(currentUser.firstName);
         }       
     }).done(function() {
         console.log("done");

@@ -19,7 +19,7 @@ function isAuthUser() {
 			$('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
-            $('#account').text(currentUser.firstName + ' ' + currentUser.lastName);
+            $('#account').text(currentUser.firstName);
 		}
 	});
 }
@@ -67,7 +67,7 @@ function addNewConference() {
 		console.log(res);
 		var conferenceId = res;
 		sessionStorage.setItem("conferenceId", conferenceId);
-		alert('Successfully added new conference!')
+		alert('Successfully added new conference!');
 		window.location.replace('addlecture.html');
 	}).fail(function() {
 		alert('Invalid data!');
