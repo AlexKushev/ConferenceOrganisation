@@ -4,7 +4,6 @@
 
  $(document).ready(function() {
 
-    $('#logged-in-header').hide();
     $('.profileMenu__btn--logout').hide();
     $('#account').attr("data-toggle", "modal");
     $('#account').attr("data-target", "#login-modal");
@@ -136,6 +135,7 @@
     $.getJSON('rest/user/current', function(response) {
         if (!response) {
             $('.profileMenu__btn--logout').hide();
+            $('#not-logged-in-header').addClass('active');
             return;
         }
         else {
@@ -144,8 +144,7 @@
             console.log(currentUser);
 
             $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
-            $('#not-logged-in-header').hide();
-            $('#logged-in-header').show();
+            $('#logged-in-header').addClass('active');
             $('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");

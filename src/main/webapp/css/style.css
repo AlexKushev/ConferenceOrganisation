@@ -296,13 +296,18 @@ a.headerBox__btn:hover {
     background: #a51c60;
 }
 
+#logged-in-header.headerBox,
+#not-logged-in-header.headerBox {
+    display: none;
+}
+
 #events-container article { 
     display:none;
 }
-
+/*
 #past-events-container article {
     display: none;
-}
+}*/
 
 .content {
     z-index: 1;
@@ -674,6 +679,10 @@ a.loader:hover {
         margin: 0;
     }
     .headerBox {
+        display: block;
+    }
+    #logged-in-header.active,
+    #not-logged-in-header.active {
         display: block;
     }
     .filterLine {
