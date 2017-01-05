@@ -8,21 +8,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 
 @Singleton
+@Startup
 public class DatabaseConnection {
-	
-	//TODO fix this shit :D
 
-	private Connection createConnection() throws IOException, SQLException {
+	public Connection connection;
+
+	@PostConstruct
+	public void init() throws IOException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("No driver!");
 		}
 
-		Connection connection = null;
+		Connection newConnection = null;
 
 		Properties prop = new Properties();
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -34,21 +38,18 @@ public class DatabaseConnection {
 		String databaseUrl = String.format("jdbc:mysql://%s:%s/%s", prop.getProperty("databaseNetworkAddress"),
 				prop.getProperty("databasePort"), prop.getProperty("databaseName"));
 
-		connection = DriverManager.getConnection(databaseUrl, prop.getProperty("databaseUserAccount"),
-				prop.getProperty("databasePassword"));
+		try {
+			newConnection = DriverManager.getConnection(databaseUrl, prop.getProperty("databaseUserAccount"),
+					prop.getProperty("databasePassword"));
+			System.out.println("Connection successfuly to the database.");
+		} catch (SQLException e) {
+			System.out.println("Connection failed");
+		}
 
-		return connection;
+		this.connection = newConnection;
 	}
 
 	public Statement createStatement() throws SQLException, IOException {
-
-		Connection connection = createConnection();
-		while (connection == null) {
-			System.out.println("Connection failed.");
-			connection = createConnection();
-		}
-
-		System.out.println("Connection successfuly to the database.");
 		return connection.createStatement();
 	}
 }

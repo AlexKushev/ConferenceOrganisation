@@ -89,6 +89,15 @@ function getAllEventsCreatedByUser(userId) {
 			var eventId = $(grandParent).attr('id');
 			publishEvent(eventId);
 		});
+		
+		$('.delete').on('click', function(e) {
+			var target = e.currentTarget;
+			console.log(target);
+			var parent = $(target).parent();
+			var grandParent = $(parent).parent();
+			var eventId = $(grandParent).attr('id');
+			deleteEvent(eventId);
+		});
 	});
 }
 
@@ -102,6 +111,18 @@ function publishEvent(eventId) {
 	}).fail(function() {
 		alert('Failed to send event for review');
 	});
+}
+
+function deleteEvent(eventId) {
+	$.ajax({
+		type: 'POST',
+		url: 'rest/events/delete?eventId=' + eventId
+	}).done(function() {
+		alert("Seccessfully deleted!")
+		location.reload();
+	}).fail(function() {
+		alert("Failed to delete")
+	})
 }
 
 function toTitleCase(str)
