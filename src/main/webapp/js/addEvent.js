@@ -89,7 +89,7 @@ function validateConferenceData(conferenceData) {
         return false;
     }
 
-    if (validateIfEmpty(event.title) || !validateLength(event.title, 4, 40) || event.price <= 0 || event.hall.capacity <= 0) {
+    if (validateIfEmpty(event.title) || !validateLength(event.title, 4, 40) || event.price < 0 || event.hall.capacity <= 0) {
         return false;
     }
 
