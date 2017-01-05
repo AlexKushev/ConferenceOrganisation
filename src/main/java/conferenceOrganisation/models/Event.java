@@ -41,6 +41,8 @@ public class Event implements Serializable {
 	private double rating;
 	
 	private int evaluatersCount;
+	
+	private int isDeleted;
 
 	private List<Lecture> lectures = new ArrayList<Lecture>();
 
@@ -138,6 +140,14 @@ public class Event implements Serializable {
 
 	public void setEvaluatersCount(int evaluatersCount) {
 		this.evaluatersCount = evaluatersCount;
+	}
+	
+	public int getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public List<Lecture> getLectures() {

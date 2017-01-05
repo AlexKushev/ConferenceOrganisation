@@ -111,4 +111,16 @@ public class EventService {
 		}
 	}
 
+	@Path("delete")
+	@POST
+	public Response deleteEvent(@QueryParam("eventId") int eventId) {
+		try {
+			eventManager.deleteEventByEventId(eventId);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to delete event with eventId : " + eventId);
+			return Utils.RESPONSE_ERROR;
+		}
+	}
+
 }

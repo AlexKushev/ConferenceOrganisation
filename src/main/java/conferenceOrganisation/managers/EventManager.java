@@ -43,8 +43,8 @@ public class EventManager {
 		double price = event.getPrice();
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
 		String txtQuery = String.format(
-				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status) values (%d, %d, '%s', '%s', '%s', %.2f, %d, '%s')",
-				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW));
+				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status, isDeleted) values (%d, %d, '%s', '%s', '%s', %.2f, %d, '%s', %d)",
+				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW), 0);
 		System.out.println(txtQuery);
 		Statement statement = null;
 		statement = dbConnection.createStatement();
@@ -76,7 +76,7 @@ public class EventManager {
 
 	public List<Event> getAllEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = "select * from events e";
+		String txtQuery = "select * from events where events.isDeleted=0";
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -89,8 +89,8 @@ public class EventManager {
 
 	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.status='%s'",
-				String.valueOf(EventStatus.PUBLISHED));
+		String txtQuery = String.format("select * from events where events.status='%s' where isDeleted=%d",
+				String.valueOf(EventStatus.PUBLISHED), 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -112,8 +112,8 @@ public class EventManager {
 	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
 		CitiesContainer cyties = new CitiesContainer();
 		String txtQuery = String.format(
-				"select distinct(city) from halls where hallId IN (select hallId from events where events.status='%s')",
-				String.valueOf(EventStatus.PUBLISHED));
+				"select distinct(city) from halls where hallId IN (select hallId from events where events.status='%s' AND events.isDeleted=%d)",
+				String.valueOf(EventStatus.PUBLISHED), 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -125,8 +125,8 @@ public class EventManager {
 	public List<Event> getAllEventsByCity(String city) throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
 		String txtQuery = String.format(
-				"select * from events where events.hallId IN (select hallId from halls where city='%s') AND events.status='%s'",
-				city, String.valueOf(EventStatus.PUBLISHED));
+				"select * from events where events.hallId IN (select hallId from halls where city='%s') AND events.status='%s' AND events.isDeleted=%d",
+				city, String.valueOf(EventStatus.PUBLISHED), 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -150,8 +150,8 @@ public class EventManager {
 
 	public List<Event> getAllPendingEvents() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.status='%s'",
-				String.valueOf(EventStatus.PENDING));
+		String txtQuery = String.format("select * from events where events.status='%s' AND events.isDeleted=%d",
+				String.valueOf(EventStatus.PENDING), 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -180,7 +180,8 @@ public class EventManager {
 
 	public List<Event> getAllEventsByUserId(int userId) throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = String.format("select * from events where events.creatorId=%d", userId);
+		String txtQuery = String.format("select * from events where events.creatorId=%d AND events.isDeleted=%d",
+				userId, 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -232,6 +233,13 @@ public class EventManager {
 		statement.close();
 	}
 
+	public void deleteEventByEventId(int eventId) throws SQLException, IOException {
+		String txtQuery = String.format("update events set events.isDeleted=%d where events.eventId=%d", 1, eventId);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
 	private Event loadEventProperties(ResultSet rs) throws SQLException, IOException {
 		Event event = new Event();
 		event.setEventId(rs.getInt("eventId"));
@@ -243,6 +251,7 @@ public class EventManager {
 		event.setDate(rs.getString("date"));
 		event.setPrice(rs.getDouble("price"));
 		event.setAvailableSeats(rs.getInt("availableSeats"));
+		event.setIsDeleted(rs.getInt("isDeleted"));
 		event.setStatus(EventStatus.valueOf(rs.getString("status")));
 		event.setRating(rs.getDouble("rating"));
 		event.setEvaluatersCount(rs.getInt("evaluatersCount"));

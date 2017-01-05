@@ -12,6 +12,8 @@ import javax.ejb.Singleton;
 
 @Singleton
 public class DatabaseConnection {
+	
+	//TODO fix this shit :D
 
 	private Connection createConnection() throws IOException, SQLException {
 		try {
