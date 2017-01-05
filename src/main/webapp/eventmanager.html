@@ -5,12 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
     <meta name="robots" content="noindex, nofollow" />
+
     <title>Conference Organisator</title>
+
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/manageEvents.js"></script>
 </head>
 
 <body>
@@ -113,18 +117,18 @@
             <div class="headerLogo">
                 <a href="index.html"></a>
             </div>
-            <!-- LOGGED IN 
+            <!-- LOGGED IN  -->
             <div class="headerBox" class="clear">
                 Be bold and ready to take on new challenges! Create Your first conference and make a difference!
-                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Add New</a>
+                <a href="addevent.html" class="headerBox__btn" role="button">Add New</a>
             </div>
-            -->
+           
 
             <!-- NOT LOGGED IN -->
-            <div class="headerBox" class="clear">
+            <!-- <div class="headerBox" class="clear">
                 <strong>Sign up</strong> today and get your place for the most interesting conferences in the IT industry.
                 <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
-            </div>
+            </div> -->
         </header>
 
         <!-- NO FILTERS FOR USERS -->
@@ -139,7 +143,7 @@
         </div>
 
         <div class="content">
-            <table cellpadding="0" cellspacing="0" class="managerTable">
+            <table id="manage-events-table" cellpadding="0" cellspacing="0" class="managerTable">
                 <tr>
                     <td class="managerTable__title">
                         <a href="#">Building a Future Proof Artificial Intelligence</a>
