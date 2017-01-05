@@ -13,8 +13,7 @@ import javax.ejb.Singleton;
 @Singleton
 public class DatabaseConnection {
 
-	public Statement createStatement() throws SQLException, IOException {
-
+	private Connection createConnection() throws IOException, SQLException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -23,29 +22,31 @@ public class DatabaseConnection {
 
 		Connection connection = null;
 
-		try {
-			Properties prop = new Properties();
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			InputStream input = classLoader
-					.getResourceAsStream("conferenceOrganisation/database/connection/config.properties");
+		Properties prop = new Properties();
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input = classLoader
+				.getResourceAsStream("conferenceOrganisation/database/connection/config.properties");
 
-			prop.load(input);
+		prop.load(input);
 
-			String databaseUrl = String.format("jdbc:mysql://%s:%s/%s", prop.getProperty("databaseNetworkAddress"),
-					prop.getProperty("databasePort"), prop.getProperty("databaseName"));
+		String databaseUrl = String.format("jdbc:mysql://%s:%s/%s", prop.getProperty("databaseNetworkAddress"),
+				prop.getProperty("databasePort"), prop.getProperty("databaseName"));
 
-			connection = DriverManager.getConnection(databaseUrl, prop.getProperty("databaseUserAccount"),
-					prop.getProperty("databasePassword"));
-		} catch (SQLException e) {
-			System.out.println("Connection failed");
-		}
+		connection = DriverManager.getConnection(databaseUrl, prop.getProperty("databaseUserAccount"),
+				prop.getProperty("databasePassword"));
 
-		if (connection != null) {
-			System.out.println("Connected successfuly to the database.");
-		} else {
+		return connection;
+	}
+
+	public Statement createStatement() throws SQLException, IOException {
+
+		Connection connection = createConnection();
+		while (connection == null) {
 			System.out.println("Connection failed.");
+			connection = createConnection();
 		}
 
+		System.out.println("Connection successfuly to the database.");
 		return connection.createStatement();
 	}
 }

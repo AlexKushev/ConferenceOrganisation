@@ -641,7 +641,7 @@ footer {
 }
 
 a.loader {
-    display: block;
+    display: none;
     width: 80px;
     line-height: 80px;
     margin: 35px auto 0;
@@ -651,6 +651,10 @@ a.loader {
     font-weight: bold;
     text-align: center;
     cursor: pointer;
+}
+
+a.loader.active {
+    display: block;
 }
 
 a.loader:hover {
