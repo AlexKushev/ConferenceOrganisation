@@ -1,7 +1,5 @@
 $(document).ready(function() {
 	isAuthUser();
-
-	// getAllEventsCreatedByUser(currentUserId);
 });
 
 function isAuthUser() {
@@ -61,7 +59,7 @@ function getAllEventsCreatedByUser(userId) {
 
 				status = toTitleCase(status);
 
-				var eventHtml = '<tr id="event' + id + '">' +
+				var eventHtml = '<tr id="' + id + '">' +
                     '<td class="managerTable__title">' +
                         '<a href="#">' + title + '</a>' +
                         '<span class="label ' + statusLabelClass + '">' + status + '</span>' +
@@ -74,15 +72,35 @@ function getAllEventsCreatedByUser(userId) {
                 $('#manage-events-table').append(eventHtml);
 
                 if (status == 'New') {
-                	$('#event' + id + ' td.managerTable__CTA').append(' <a href="#" class="btn btn-success btn-xs">Publish</a>');
+                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs publish">Publish</button>');
                 }
                 if (status == 'New' || status == 'Pending' || status == 'Not Approved') {
-                	$('#event' + id + ' td.managerTable__CTA').append(' <a href="editevent.html" class="btn btn-primary btn-xs">Edit</a>');
+                	$('#' + id + ' td.managerTable__CTA').append(' <a href="editevent.html" class="btn btn-primary btn-xs">Edit</a>');
                 }
 
-                $('#event' + id + ' td.managerTable__CTA').append(' <a href="#" class="btn btn-primary btn-xs">Add Lecture</a> <a href="#" class="btn btn-danger btn-xs">Delete</a>');
+                $('#' + id + ' td.managerTable__CTA').append(' <a href="#" class="btn btn-primary btn-xs">Add Lecture</a> <button class="btn btn-danger btn-xs delete">Delete</button>');
 			}
 		}
+	}).done(function() {
+		$('.publish').on('click', function(e) {
+			var target = e.currentTarget;
+			var parent = $(target).parent();
+			var grandParent = $(parent).parent();
+			var eventId = $(grandParent).attr('id');
+			publishEvent(eventId);
+		});
+	});
+}
+
+function publishEvent(eventId) {
+	$.ajax({
+		type: 'POST',
+		url: 'rest/events/review?eventId=' + eventId
+	}).done(function() {
+		alert('Successfully send event for review!');
+		location.reload();
+	}).fail(function() {
+		alert('Failed to send event for review');
 	});
 }
 
