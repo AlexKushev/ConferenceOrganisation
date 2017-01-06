@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    loadCities();
+
     var selectedOption = $('#filter-by-city').val();
 
     if (selectedOption === 'All') {
@@ -18,6 +20,20 @@ $(document).ready(function() {
         }
     });
 });
+
+function loadCities() {
+    $.getJSON('rest/events/cities', function(response) {
+        var cities = response.citiesContainer.cities;
+
+        var city, 
+            i, 
+            len = cities.length;
+        for (i = 0; i < len; i++) {
+            city = cities[i];
+            $('#filter-by-city').append('<option value="' + city + '">' + city + '</option>');
+        }
+    });
+}
 
 function createEventsHtml(eventsData) {
     $('#events-container').empty();
