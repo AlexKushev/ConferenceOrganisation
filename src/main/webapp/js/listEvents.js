@@ -83,8 +83,8 @@ function createEventsHtml(eventsData) {
                 monthName = monthNames[date.getMonth()];
                 dayName = days[date.getDay()];
 
-                eventHtml = '<article class="event">' +
-                    '<a href="event.html?id=' + id + '" class="clear">' +
+                eventHtml = '<article id="' + id + '" class="event">' +
+                    '<a href="event.html" class="clear event-details">' +
                     '<div class="event__date eventDate">' +
                     '<div class="eventDate__day">' + day + '</div>' +
                     '<div class="eventDate__month">' + monthName.toUpperCase() + '</div>' +
@@ -108,6 +108,13 @@ function createEventsHtml(eventsData) {
                 $('#events-container').append(eventHtml);
             }
         }
+
+        $('.event-details').on('click', function(e) {
+                var target = e.currentTarget;
+                var parent = $(target).parent();
+                var conferenceId = $(parent).attr('id');
+                sessionStorage.setItem('detailsConferenceId', conferenceId);
+        });
 
         if (eventsList.length === 0) {
             $('#events-container').text('No events to show!');
