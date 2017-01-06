@@ -59,10 +59,10 @@ function createEventsHtml(eventsData) {
 
         var currentPage = document.location.pathname.match(/[^\/]+$/)[0];
 
-        for (i = 0; i < len; i++) {
+        for (i = len - 1; i >= 0; i--) {
             id = eventsData[i].eventId;
             title = eventsData[i].title;
-            price = eventsData[i].price;
+            price = eventsData[i].price !== 0 ? eventsData[i].price + ' BGN' : '<span class="free">Free</span>' ;
             location = eventsData[i].hall.location;
             city = eventsData[i].hall.city;
             datetime = eventsData[i].date.split(' ');
@@ -95,7 +95,7 @@ function createEventsHtml(eventsData) {
                     '<div class="event__title eventTitle">' +
                     '<h1>' + title + '</h1>' +
                     '<div class="eventTitle__details eventTitle__details--block eventTitle__details--location">' + location + ', ' + city + '</div>' +
-                    '<div class="eventTitle__details eventTitle__details--block eventTitle__details--price">' + price + ' BGN</div>' +
+                    '<div class="eventTitle__details eventTitle__details--block eventTitle__details--price">' + price + '</div>' +
                     '</div>' +
                     '<div class="event__dateTime">' +
                     day + ' ' + monthName + ' ' + '(' + dayName + ')' + //12 Dec (Tue)

@@ -67,6 +67,22 @@ public class UserManager {
 		statement.close();
 	}
 
+	public void editEmail(User user) throws SQLException, IOException {
+		String txtQuery = String.format("update users set users.email='%s' where users.userId=%d", user.getEmail(),
+				user.getUserId());
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
+	public void editPassword(User user) throws SQLException, IOException {
+		String txtQuery = String.format("update users set users.password='%s' where users.userId=%d",
+				Utils.getHashedPassword(user.getPassword()), user.getUserId());
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+
 	public List<User> getAllUsers() throws SQLException, IOException {
 		String txtQuery = "select * from users u";
 		Statement statement = dbConnection.createStatement();
@@ -136,10 +152,11 @@ public class UserManager {
 			return newPassword;
 		}
 	}
-	
+
 	public boolean canCurrentUserBuyTicketForEvent(int eventId) throws SQLException, IOException {
 		int userId = currentUser.getCurrentUser().getUserId();
-		String txtQuery = String.format("select * from tickets where tickets.ownerId=%d AND tickets.eventId=%d", userId, eventId);
+		String txtQuery = String.format("select * from tickets where tickets.ownerId=%d AND tickets.eventId=%d", userId,
+				eventId);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		Ticket ticket = null;

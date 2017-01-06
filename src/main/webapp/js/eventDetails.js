@@ -122,13 +122,13 @@ $(document).ready(function() {
                     '</div>' +
                     '<div class="modal-body">' +
                     '<p>' +
-                        '<strong>Number of Tickets:</strong>' +
-                        '<input id="ticketsNumber" type="number" name="ticketsNumber" value="1" class="ticketsNumber" />' +
-                        '<span class="totalTicketPrice">' + price + ' BGN</span>' +
+                        '<strong>Ticket Price: ' +
+                        '<span class="totalTicketPrice">' + price + ' BGN</span></strong>' +
                     '</p>' +
                     '<p>' +
-                        '<strong>Payment Methods:</strong><br />' +
-                        'Bank Transfer - IBAN: 0000 0000 0000 0000' +
+                        '<strong>Bank Transfer:</strong><br />' +
+                        'IBAN: 0000 0000 0000 0000<br />' +
+                        'Reason: Your <strong><em>E-mail</em></strong> and the <strong><em>Event Name</em></strong>.' +
                     '</p>' +
                     '</div>' +
                     '<div class="modal-footer">' +

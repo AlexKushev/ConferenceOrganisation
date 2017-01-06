@@ -156,6 +156,32 @@ public class UserService {
 		}
 	}
 
+	@Path("editPassword")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editPassword(User user) {
+		try {
+			userManager.editPassword(user);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to edit password to user with userId : " + user.getUserId());
+			return Utils.RESPONSE_ERROR;
+		}
+	}
+
+	@Path("editEmail")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editEmail(User user) {
+		try {
+			userManager.editEmail(user);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to edit email to user with userId : " + user.getUserId());
+			return Utils.RESPONSE_ERROR;
+		}
+	}
+
 	@Path("canUserBuyTicket")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
