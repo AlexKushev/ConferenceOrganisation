@@ -9,10 +9,12 @@
     <title>Conference Organisator</title>
 
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/toastr/css/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="lib/toastr/js/toastr.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/listEvents.js"></script>
 </head>
@@ -47,7 +49,7 @@
                     </div>
                     <div class="modal-footer">
                         <div>
-                            <button id="login-button" type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                            <button id="login-button" type="button" class="btn btn-primary btn-lg btn-block">Login</button>
                         </div>
                         <div>
                             <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
@@ -67,7 +69,7 @@
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button id="reset_password_button" type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                                <button id="reset_password_button" type="button" class="btn btn-primary btn-lg btn-block">Send</button>
                             </div>
                             <div>
                                 <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
@@ -90,7 +92,7 @@
                     </div>
                     <div class="modal-footer">
                         <div>
-                            <button id="register-button" type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                            <button id="register-button" type="button" class="btn btn-primary btn-lg btn-block">Register</button>
                         </div>
                         <div>
                             <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>

@@ -69,7 +69,6 @@
      var userEmail = $('#login_email').val(),
          userPassword = $('#login_password').val();
 
-
      var userData = {
          user: {
              email: userEmail,
@@ -81,21 +80,23 @@
          type: 'POST',
          url: 'rest/user/login',
          contentType: 'application/json',
-         data: JSON.stringify(userData)
-     }).done(function() {
-         // destroy modal login 
-         $('#login-modal').modal('toggle');
+         data: JSON.stringify(userData),
+         statusCode: {
+            200: function() {
+                // destroy modal login 
+                $('#login-modal').modal('toggle');
 
-         // set current user
-         authUser();
+                // set current user
+                authUser();
 
-         alert("Successfully logged in!");
-         location.reload();
-
-     }).fail(function() {
-         alert("Wrong e-mail or password!");
-     }).always(function() {
-
+                // alert("Successfully logged in!");
+                // window.location.reload();
+                toastr.success('Successfully logged in!');
+            },
+            401: function() {
+                toastr.error('Wrong e-mail or password!');
+            }
+         }
      });
  }
 
@@ -115,7 +116,7 @@
      };
 
      if (!validateUserData(userEmail, userPassword, userFirstName, userLastName)) {
-         alert('Invalid data!');
+         toastr.error('Invalid data!');
          return;
      }
 
@@ -125,11 +126,10 @@
          contentType: 'application/json',
          data: JSON.stringify(userData)
      }).done(function() {
-         alert('Successfully registered!');
+        $('#login-modal').modal('toggle');
+        toastr.success('Successfully registered!');
      }).fail(function() {
-         alert('Invalid data or user with this e-mail already exists!');
-     }).always(function() {
-         // submit
+        toastr.error('Invalid data or user with this e-mail already exists!');
      });
  }
  
@@ -140,10 +140,10 @@
 		type: 'POST',
 		url: 'rest/user/resetPassword?email=' + userEmail
 	 }).done(function() {
-		 alert('We send you email with your new password!');
-		 window.location.reload();
+        $('#login-modal').modal('toggle');
+		toastr.success('We send you e-mail with your new password!');
 	 }).fail(function() {
-		 alert('Failed to reset password');
+		toastr.error('Failed to reset password! Invalid e-mail!');
 	 })
 
  }
@@ -190,6 +190,7 @@
             }
 
             $('#logged-in-header').addClass('active');
+            $('#not-logged-in-header').removeClass('active');
             $('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
@@ -206,18 +207,18 @@
     });
  }
 
- function logout() {
-     $.ajax({
-         type: 'GET',
-         url: 'rest/user/logout',
-         statusCode: {
-             204: function() {
-                 alert("Successfully logged out!");
-                 window.location.replace('index.html');
-             }
-         }
-     });
- }
+function logout() {
+    $.ajax({
+        type: 'GET',
+        url: 'rest/user/logout',
+        statusCode: {
+            204: function() {
+                alert("Successfully logged out!");
+                window.location.replace('index.html');
+            }
+        }
+    });
+}
 
  // Mobile Menu Toggle
  $(document).on('click', '.mobileMenu__btn', function() {
