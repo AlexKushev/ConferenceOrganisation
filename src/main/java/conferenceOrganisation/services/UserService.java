@@ -155,4 +155,16 @@ public class UserService {
 			return Utils.RESPONSE_ERROR;
 		}
 	}
+
+	@Path("canUserBuyTicket")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public boolean canUserBuyTicketForEvent(@QueryParam("eventId") int eventId) {
+		try {
+			return userManager.canCurrentUserBuyTicketForEvent(eventId);
+		} catch (SQLException | IOException e) {
+			//
+			return false;
+		}
+	}
 }

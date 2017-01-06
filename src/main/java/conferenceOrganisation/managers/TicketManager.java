@@ -36,10 +36,7 @@ public class TicketManager {
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
-			Ticket ticket = new Ticket();
-			ticket.setTicketId(rs.getInt("ticketId"));
-			ticket.setOwnerId(rs.getInt("ownerId"));
-			ticket.setEventId(rs.getInt("eventId"));
+			Ticket ticket = loadTicketProperties(rs);
 			tickets.add(ticket);
 		}
 		statement.close();
@@ -52,10 +49,7 @@ public class TicketManager {
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
-			Ticket ticket = new Ticket();
-			ticket.setTicketId(rs.getInt("ticketId"));
-			ticket.setOwnerId(rs.getInt("ownerId"));
-			ticket.setEventId(rs.getInt("eventId"));
+			Ticket ticket = loadTicketProperties(rs);
 			tickets.add(ticket);
 		}
 		statement.close();
@@ -72,5 +66,13 @@ public class TicketManager {
 		eventManager.reduceEventAvailabeSeatsByOneByEventId(eventId);
 		statement.close();
 		return true;
+	}
+
+	public Ticket loadTicketProperties(ResultSet rs) throws SQLException {
+		Ticket ticket = new Ticket();
+		ticket.setTicketId(rs.getInt("ticketId"));
+		ticket.setOwnerId(rs.getInt("ownerId"));
+		ticket.setEventId(rs.getInt("eventId"));
+		return ticket;
 	}
 }
