@@ -59,7 +59,7 @@ function createEventsHtml(eventsData) {
 
         var currentPage = document.location.pathname.match(/[^\/]+$/)[0];
 
-        for (i = 0; i < len; i++) {
+        for (i = len - 1; i >= 0; i--) {
             id = eventsData[i].eventId;
             title = eventsData[i].title;
             price = eventsData[i].price;
