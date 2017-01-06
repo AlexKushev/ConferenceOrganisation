@@ -2,6 +2,7 @@ package conferenceOrganisation.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -67,17 +68,26 @@ public class LectureService {
 	@Path("getByEventId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Lecture> getAllLecturesByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
-		List<Lecture> lectures = lectureManager.getAllLectuersByEventId(eventId);
+	public List<Lecture> getAllLecturesByEventId(@QueryParam("eventId") int eventId) {
+		List<Lecture> lectures = new ArrayList<>();
+		try {
+			lectures = lectureManager.getAllLectuersByEventId(eventId);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all lectures by eventId : " + eventId);
+		}
 		return lectures;
 	}
 
 	@Path("getByLectureId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Lecture getLectureByLectureId(@QueryParam("lectureId") int lectureId) throws SQLException, IOException {
-		// TODO catch if lecture is null
-		Lecture lecture = lectureManager.getLectureByLectureId(lectureId);
+	public Lecture getLectureByLectureId(@QueryParam("lectureId") int lectureId) {
+		Lecture lecture = new Lecture();
+		try {
+			lecture = lectureManager.getLectureByLectureId(lectureId);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get lecture with id : " + lectureId);
+		}
 		return lecture;
 	}
 }

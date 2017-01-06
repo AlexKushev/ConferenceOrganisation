@@ -43,12 +43,18 @@ public class UserService {
 	@Path("login")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response loginUser(User user) throws SQLException, IOException {
-		User foundUser = userManager.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
-		if (foundUser == null) {
-			return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
+	public Response loginUser(User user) {
+		User foundUser;
+		try {
+			foundUser = userManager.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
+			if (foundUser == null) {
+				return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
+			}
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get user.");
+			return Utils.RESPONSE_ERROR;
 		}
-		return RESPONSE_OK;
 	}
 
 	@Path("register")
@@ -67,9 +73,8 @@ public class UserService {
 			return RESPONSE_OK;
 		} catch (SQLException e) {
 			System.out.println("Problem occurs while trying to add new user (User with same email already exist");
+			return Utils.RESPONSE_ERROR;
 		}
-
-		return Response.status(401).build();
 	}
 
 	@Path("current")
@@ -124,7 +129,6 @@ public class UserService {
 				Thread thread = new Thread(new Runnable() {
 					@Override
 					public void run() {
-
 						Utils.sendNewPasswordEmail(toEmail, newPassword);
 					}
 				});
@@ -134,11 +138,33 @@ public class UserService {
 				return Utils.RESPONSE_ERROR;
 			}
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Utils.RESPONSE_ERROR;
 		}
-
 	}
 
+	@Path("edit")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editUser(User user) {
+		try {
+			userManager.editUser(user);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to edit user with userId : " + user.getUserId());
+			return Utils.RESPONSE_ERROR;
+		}
+	}
+
+	@Path("canUserBuyTicket")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public boolean canUserBuyTicketForEvent(@QueryParam("eventId") int eventId) {
+		try {
+			return userManager.canCurrentUserBuyTicketForEvent(eventId);
+		} catch (SQLException | IOException e) {
+			//
+			return false;
+		}
+	}
 }

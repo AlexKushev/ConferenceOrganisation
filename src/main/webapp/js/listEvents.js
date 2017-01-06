@@ -55,6 +55,7 @@ function createEventsHtml(eventsData) {
         var dateCondition;
         var eventsList = [];
         var currentDate = new Date();
+        var eventButtonText;
 
         var currentPage = document.location.pathname.match(/[^\/]+$/)[0];
 
@@ -74,8 +75,10 @@ function createEventsHtml(eventsData) {
 
             if (currentPage.indexOf('index') != -1) {
                 dateCondition = date.getTime() >= currentDate.getTime();
+                eventButtonText = 'Tickets';
             } else if (currentPage.indexOf('pastevents') != -1) {
                 dateCondition = date.getTime() < currentDate.getTime();
+                eventButtonText = 'Details';
             }
 
             if (dateCondition) {
@@ -99,7 +102,7 @@ function createEventsHtml(eventsData) {
                     '<br /> at ' + hours + ':' + minutes + //20:00
                     '</div>' +
                     '<div class="eventCTA clear">' +
-                    '<span class="eventCTA__btn">Tickets</span>' +
+                    '<span class="eventCTA__btn">' + eventButtonText + '</span>' +
                     '<span class="eventCTA__arrow"></span>' +
                     '</div>' +
                     '</a>' +

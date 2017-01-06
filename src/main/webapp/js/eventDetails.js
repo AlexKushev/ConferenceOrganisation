@@ -1,3 +1,6 @@
+var lat;
+var lng;
+
 $(document).ready(function() {
 
 	var eventId = sessionStorage.getItem('detailsConferenceId');
@@ -30,12 +33,17 @@ $(document).ready(function() {
 
 		var monthName = monthNames[dateObj.getMonth()];
 
+        var buyTicketsButton; 
+
         // if past event
 		if (dateObj.getTime() < currentDate.getTime()) {
             $('#filter-line-tabs a:first-child').removeClass('active');
             $('#filter-line-tabs a:last-child').addClass('active');
 			$('#single-event').addClass('pastEvent');
-		}
+            buyTicketsButton = '<button type="button" class="btn btn-default" disabled>Get Ticket</button>';
+		} else {
+            buyTicketsButton = '<button type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>';
+        }
 
 		var eventHtml = '<div class="singleEvent__header">' +
                     '<div class="eventDate">' +
@@ -61,7 +69,7 @@ $(document).ready(function() {
                     '<span><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
                         '<span class="ticketPrice">' + price + ' BGN </span>' +
-                        '<button type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>' +
+                        buyTicketsButton +
                     '</div>' +
                 '</div>';
 
@@ -124,6 +132,17 @@ $(document).ready(function() {
         '</div>';
         $('.wrap').append(buyTicketsPopup);
         
+    	var splittedAddress = address.split(" ");
+    	$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + splittedAddress[2] + '+' + splittedAddress[0] + '+' + splittedAddress[1], + '+' + city + '&key=AIzaSyA3QcohwAtZCgvMNzaaOH-Wga_C6ca-T6Q', function(response) {    		
+    		lat = response.results[0].geometry.location.lat;
+    		lng = response.results[0].geometry.location.lng;   
+    		
+    		var script = document.createElement("script");
+    	    script.type = "text/javascript"; 
+    	    document.getElementsByTagName("head")[0].appendChild(script);
+    	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA3QcohwAtZCgvMNzaaOH-Wga_C6ca-T6Q&callback=initMap";
+    	});
+        
         $('#ticketsNumber').on('change', function () {
             var ticketsNumber = $('#ticketsNumber').val();
             $('.totalTicketPrice').text(price * ticketsNumber + ' BGN');
@@ -146,5 +165,20 @@ function buyTicket() {
         alert('Successfully bought ticket!');
     }).fail(function() {
         alert('Failed to buy ticket!');
+    });
+}
+
+function initMap() {
+    var uluru = {
+        lat: lat,
+        lng: lng
+    };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: uluru
+    });
+    var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
     });
 }

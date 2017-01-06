@@ -11,6 +11,7 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 
 import conferenceOrganisation.database.connection.DatabaseConnection;
+import conferenceOrganisation.models.Ticket;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
 import conferenceOrganisation.utils.Utils;
@@ -41,7 +42,6 @@ public class UserManager {
 		String lastName = user.getLastName();
 		String email = user.getEmail();
 		String password = user.getPassword();
-		// TODO add password encryption
 		String txtQuery = String.format(
 				"insert into users(firstName, lastName, email, password, isAdmin) values ('%s', '%s', '%s', '%s', %d)",
 				firstName, lastName, email, Utils.getHashedPassword(password), 0);
@@ -135,6 +135,21 @@ public class UserManager {
 			statement.close();
 			return newPassword;
 		}
+	}
+	
+	public boolean canCurrentUserBuyTicketForEvent(int eventId) throws SQLException, IOException {
+		int userId = currentUser.getCurrentUser().getUserId();
+		String txtQuery = String.format("select * from tickets where tickets.ownerId=%d AND tickets.eventId=%d", userId, eventId);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		Ticket ticket = null;
+		while (rs.next()) {
+			ticket = ticketManager.loadTicketProperties(rs);
+		}
+		if (ticket == null) {
+			return true;
+		}
+		return false;
 	}
 
 	private User loadUserProperties(ResultSet rs) throws SQLException, IOException {

@@ -2,6 +2,7 @@ package conferenceOrganisation.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -41,24 +42,39 @@ public class AdminService {
 	@Path("users")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getAllUsers() throws SQLException, IOException {
-		List<User> users = userManager.getAllUsers();
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<>();
+		try {
+			users = userManager.getAllUsers();
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all users.");
+		}
 		return users;
 	}
 
 	@Path("events")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Event> getAllEvents() throws SQLException, IOException {
-		List<Event> events = eventManager.getAllEventsForAdmin();
+	public List<Event> getAllEvents() {
+		List<Event> events = new ArrayList<>();
+		try {
+			events = eventManager.getAllEventsForAdmin();
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all events.");
+		}
 		return events;
 	}
 
 	@Path("pendingEvents")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Event> getAllPendingEvents() throws SQLException, IOException {
-		List<Event> events = eventManager.getAllPendingEvents();
+	public List<Event> getAllPendingEvents() {
+		List<Event> events = new ArrayList<>();
+		try {
+			events = eventManager.getAllPendingEvents();
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all pending events");
+		}
 		return events;
 	}
 

@@ -640,6 +640,23 @@ span.eventCTA__arrow {
     background: #eee;
 }
 
+.regularForm--left,
+.regularForm--right {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+/*    float: left;
+    margin-right: 2%;
+    width: 48%;*/
+}
+
+.regularForm--right {
+/*    float: left;
+    padding-left: 2%;
+    width: 50%;
+    border-left: 1px solid #eee;*/
+}
+
 footer {
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -705,6 +722,26 @@ a.loader:hover {
     }
     span.eventCTA__arrow {
         display: none;
+    }
+
+    .regularForm--left,
+    .regularForm--right {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .regularForm--left {   
+        float: left;
+        margin-right: 2%;
+        width: 48%;
+    }
+
+    .regularForm--right {
+        float: left;
+        padding-left: 2%;
+        width: 50%;
+        border-left: 1px solid #eee;
     }
 }
 

@@ -16,7 +16,6 @@
     <script src="js/main.js"></script>
     <script src="js/eventDetails.js"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3QcohwAtZCgvMNzaaOH-Wga_C6ca-T6Q&callback=initMap"></script>
 </head>
 
 <body>
@@ -144,22 +143,6 @@
             <hr />
             
             <div id="map"></div>
-            <script>
-            function initMap() {
-                var uluru = {
-                    lat: 42.696552,
-                    lng: 23.32601
-                };
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 12,
-                    center: uluru
-                });
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map
-                });
-            }
-            </script>
 
             <!-- Load Facebook SDK for JavaScript -->
             <div id="fb-root"></div>

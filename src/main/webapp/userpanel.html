@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Conference Organisator</title>
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script> 
+</head>
+
+<body>
+    <div class="toplineWrap"></div>
+
+    <div class="topstripe"></div>
+    
+    <div class="wrap">
+        <header class="clear">
+            <div class="headerLogo">
+                <a href="index.html"></a>
+            </div>
+
+            <!-- LOGGED IN  -->
+            <div id="logged-in-header" class="headerBox" class="clear">
+                Be bold and ready to take on new challenges! Create Your first conference and make a difference!
+                <a href="addevent.html" class="headerBox__btn" role="button">Add New</a>
+            </div>         
+            
+            <!-- NOT LOGGED IN -->
+            <div id="not-logged-in-header" class="headerBox" class="clear">
+                <strong>Sign up</strong> today and get your place for the most interesting conferences in the IT industry.
+                <a href="#" class="headerBox__btn" role="button" data-toggle="modal" data-target="#login-modal">Join Now</a>
+            </div>
+        </header>
+
+		<div class="filterLine clear">
+            <div id="filter-line-tabs" class="filterLine__tabs clear">
+                <a href="index.html">Upcoming</a>
+                <a href="pastevents.html">Past</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>User Panel</h1>
+            <hr />
+            <div class="clear">
+                <form method="post" role="form" accept-charset="utf-8" class="regularForm regularForm--left clear">
+                    <div class="form-group">
+                        <label for="oldPassword">Change E-mail</label>
+                        <input type="text" class="form-control" id="oldPassword" placeholder="New E-mail" name="oldPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Enter Password</label>
+                        <input type="text" class="form-control" id="password" placeholder="Password" name="password">
+                    </div>
+                    <div class="btnGroup">
+                        <button id="change-email-button" type="button" class="btn btn-primary">Change E-mail</button>
+                    </div>
+                </form>
+                <form method="post" role="form" accept-charset="utf-8" class="regularForm regularForm--right clear">
+                    <div class="form-group">
+                        <label for="oldPassword">Change Password</label>
+                        <input type="text" class="form-control" id="oldPassword" placeholder="Old Password" name="oldPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="text" class="form-control" id="newPassword" placeholder="New Password" name="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Repeat Password</label>
+                        <input type="text" class="form-control" id="newPasswordRe" placeholder="Repeat Password" name="newPasswordRe">
+                    </div>
+                    <div class="btnGroup">
+                        <button id="change-password-button" type="button" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+            <h1>Purchased Tickets</h1>
+            <hr />
+            <table cellpadding="0" cellspacing="0" class="managerTable">
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Building a Future Proof Artificial Intelligence</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Introduction to UX Design</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Building a Future Proof Artificial Intelligence</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Achieving Sustainable Growth in Business in Information Technology</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Smart Cities – Exhibition and Conference for South - East Europe</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="managerTable__title">
+                        <a href="#">Introduction to UX Design</a>
+                    </td>
+                    <td class="managerTable__date">12-28-2014</td>
+                    <td class="managerTable__CTA">
+                        <a href="#" class="btn btn-primary btn-xs">View Event</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <a href="#" class="scrollTop">Scroll</a>
+    </div>
+    <footer>
+        © 2016 Conference Organisator
+    </footer>
+</body>
+
+</html>
