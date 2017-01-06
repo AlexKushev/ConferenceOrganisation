@@ -117,7 +117,7 @@ $(document).ready(function() {
                     '</p>' +
                     '</div>' +
                     '<div class="modal-footer">' +
-                        '<button type="button" class="btn btn-yellow">Buy Tickets</button>' +
+                        '<button type="button" class="btn btn-yellow">Buy Now</button>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
