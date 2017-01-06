@@ -28,8 +28,8 @@ public class LectureManager {
 		String lecturerDescription = lecture.getLecturerDescription();
 		String txtQuery = String.format(
 				"insert into lectures (eventId, title, description, lecturerEmail, lecturerDescription,"
-						+ "lecturerName) values (%d, '%s', '%s', '%s', '%s', '%s') ",
-				eventId, title, description, lecturerEmail, lecturerDescription, lecturerName);
+						+ "lecturerName, isDeleted) values (%d, '%s', '%s', '%s', '%s', '%s', %d) ",
+				eventId, title, description, lecturerEmail, lecturerDescription, lecturerName, 0);
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();
@@ -54,7 +54,8 @@ public class LectureManager {
 
 	public List<Lecture> getAllLectuersByEventId(int eventId) throws SQLException, IOException {
 		List<Lecture> lectures = new ArrayList<Lecture>();
-		String txtQuery = String.format("select * from lectures where lectures.eventId=%d", eventId);
+		String txtQuery = String.format("select * from lectures where lectures.eventId=%d AND lectures.isDeleted=%d",
+				eventId, 0);
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {
@@ -63,6 +64,25 @@ public class LectureManager {
 		}
 		statement.close();
 		return lectures;
+	}
+
+	public void deleteLectureByLectureId(int lectureId) throws SQLException, IOException {
+		String txtQuery = String.format("update lectures set lectures.isDeleted=%d where lectures.lectureId=%d", 1,
+				lectureId);
+		Statement statement = dbConnection.createStatement();
+		statement.executeUpdate(txtQuery);
+		statement.close();
+	}
+	
+	public Lecture getLectureByLectureId(int lectureId) throws SQLException, IOException {
+		String txtQuery = String.format("select * from lectures where lectures.lectureId=%d", lectureId);
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		Lecture lecture = null;
+		while (rs.next()) {
+			lecture = loadLectureProperties(rs);
+		}
+		return lecture;
 	}
 
 	private Lecture loadLectureProperties(ResultSet rs) throws SQLException {

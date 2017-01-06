@@ -52,11 +52,32 @@ public class LectureService {
 		}
 	}
 
+	@Path("delete")
+	@POST
+	public Response deleteLectureByLectureId(@QueryParam("lectureId") int lectureId) {
+		try {
+			lectureManager.deleteLectureByLectureId(lectureId);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to delete lecture with lectireId : " + lectureId);
+			return Utils.RESPONSE_ERROR;
+		}
+	}
+
 	@Path("getByEventId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Lecture> getAllLecturesByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
 		List<Lecture> lectures = lectureManager.getAllLectuersByEventId(eventId);
 		return lectures;
+	}
+
+	@Path("getByLectureId")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Lecture getLectureByLectureId(@QueryParam("lectureId") int lectureId) throws SQLException, IOException {
+		// TODO catch if lecture is null
+		Lecture lecture = lectureManager.getLectureByLectureId(lectureId);
+		return lecture;
 	}
 }
