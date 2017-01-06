@@ -9,11 +9,16 @@
     $('#account').attr("data-target", "#login-modal");
     $('#account').text('Account');
 
+    console.log($('#account'));
+
     authUser();
 
     var registerButton = $('#register-button'),
         loginButton = $('#login-button'),
         logoutButton = $('#logout-button');
+
+    console.log(logoutButton);
+    console.log(loginButton);
 
     registerButton.on('click', function() {
         register();

@@ -125,7 +125,7 @@ function publishEvent(eventId) {
 		alert('Successfully send event for review!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Failed to send event for review');
+		alert('Failed to send event for review!');
 	});
 }
 
@@ -134,10 +134,10 @@ function deleteEvent(eventId) {
 		type: 'POST',
 		url: 'rest/events/delete?eventId=' + eventId
 	}).done(function() {
-		alert("Seccessfully deleted!")
+		alert("Seccessfully deleted event!")
 		window.location.reload();
 	}).fail(function() {
-		alert("Failed to delete")
+		alert("Failed to delete event!")
 	})
 }
 

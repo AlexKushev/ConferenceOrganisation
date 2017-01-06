@@ -19,10 +19,25 @@ function isAuthUser() {
 }
 
 function loadLectureData() {
-	alert('Not implemented (Waiting for Alex to write the service)');
+	var lectureId = sessionStorage.getItem('editLectureId');
+	$.getJSON('rest/lectures/getByLectureId?lectureId=' + lectureId, function(response) {
+		var lectureData = response.lecture;
+
+		var title = lectureData.title,
+			description = lectureData.description,
+			lecturerName = lectureData.lecturerName,
+			lecturerDescription = lectureData.lecturerDescription,
+			lecturerEmail = lectureData.lecturerEmail;
+
+		$('#lectureTopic').val(title);
+		$('#lectureDescription').val(description);
+		$('#lecturerName').val(lecturerName);
+		$('#lecturerInfo').val(lecturerDescription);
+		$('#lecturerEmail').val(lecturerEmail);
+	});
 }
 
-function editLectureData() {
+function editLecture() {
 	var lectureTitle = $('#lectureTopic').val(),
 		lectureDescription = $('#lectureDescription').val(),
 		lecturerName = $('#lecturerName').val(),
