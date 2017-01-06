@@ -134,8 +134,6 @@ $(document).ready(function() {
         
     	var splittedAddress = address.split(" ");
     	$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + splittedAddress[2] + '+' + splittedAddress[0] + '+' + splittedAddress[1], + '+' + city + '&key=AIzaSyA3QcohwAtZCgvMNzaaOH-Wga_C6ca-T6Q', function(response) {    		
-    		var splittedAddress = address.split(" ");
-    		
     		lat = response.results[0].geometry.location.lat;
     		lng = response.results[0].geometry.location.lng;   
     		
