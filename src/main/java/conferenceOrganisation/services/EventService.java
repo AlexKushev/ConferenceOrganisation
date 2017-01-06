@@ -2,6 +2,7 @@ package conferenceOrganisation.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -33,8 +34,13 @@ public class EventService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Event> getAllPublishedEvents() throws SQLException, IOException {
-		List<Event> events = eventManager.getAllPublishedEvents();
+	public List<Event> getAllPublishedEvents() {
+		List<Event> events = new ArrayList<>();
+		try {
+			events = eventManager.getAllPublishedEvents();
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all published events.");
+		}
 		return events;
 	}
 
@@ -53,24 +59,39 @@ public class EventService {
 	@Path("cities")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public CitiesContainer getAllCytiesWithEvent() throws SQLException, IOException {
-		CitiesContainer cyties = eventManager.getAllCytiesWithEvent();
+	public CitiesContainer getAllCytiesWithEvent() {
+		CitiesContainer cyties = new CitiesContainer();
+		try {
+			cyties = eventManager.getAllCytiesWithEvent();
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get available cities");
+		}
 		return cyties;
 	}
 
 	@Path("eventsByCity")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Event> getAllEventsByCity(@QueryParam("city") String city) throws SQLException, IOException {
-		List<Event> events = eventManager.getAllEventsByCity(city);
+	public List<Event> getAllEventsByCity(@QueryParam("city") String city) {
+		List<Event> events = new ArrayList<>();
+		try {
+			events = eventManager.getAllEventsByCity(city);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all events by city : " + city);
+		}
 		return events;
 	}
 
 	@Path("eventByEventId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Event getEventByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
-		Event event = eventManager.getEventByEventId(eventId);
+	public Event getEventByEventId(@QueryParam("eventId") int eventId) {
+		Event event = new Event();
+		try {
+			event = eventManager.getEventByEventId(eventId);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get event with id : " + eventId);
+		}
 		return event;
 	}
 

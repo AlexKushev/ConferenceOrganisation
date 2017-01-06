@@ -2,6 +2,7 @@ package conferenceOrganisation.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -18,23 +19,33 @@ import conferenceOrganisation.models.Ticket;
 @Stateless
 @Path("tickets")
 public class TicketService {
-	
+
 	@Inject
 	TicketManager ticketManager;
 
 	@Path("ticketsByUserId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Ticket> getAllTicketsByUserId(@QueryParam("ownerId") int ownerId) throws SQLException, IOException {
-		List<Ticket> tickets = ticketManager.getAllTicketsByUserId(ownerId);	
+	public List<Ticket> getAllTicketsByUserId(@QueryParam("ownerId") int ownerId) {
+		List<Ticket> tickets = new ArrayList<>();
+		try {
+			tickets = ticketManager.getAllTicketsByUserId(ownerId);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all tickets by userId : " + ownerId);
+		}
 		return tickets;
 	}
-	
+
 	@Path("ticketsByEventId")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Ticket> getAllTicketsByEventId(@QueryParam("eventId") int eventId) throws SQLException, IOException {
-		List<Ticket> tickets = ticketManager.getAllTicketsByEventId(eventId);	
+	public List<Ticket> getAllTicketsByEventId(@QueryParam("eventId") int eventId) {
+		List<Ticket> tickets = new ArrayList<>();
+		try {
+			tickets = ticketManager.getAllTicketsByEventId(eventId);
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to get all tickets by eventId : " + eventId);
+		}
 		return tickets;
 	}
 }

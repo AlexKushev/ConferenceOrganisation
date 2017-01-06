@@ -41,7 +41,6 @@ public class UserManager {
 		String lastName = user.getLastName();
 		String email = user.getEmail();
 		String password = user.getPassword();
-		// TODO add password encryption
 		String txtQuery = String.format(
 				"insert into users(firstName, lastName, email, password, isAdmin) values ('%s', '%s', '%s', '%s', %d)",
 				firstName, lastName, email, Utils.getHashedPassword(password), 0);
