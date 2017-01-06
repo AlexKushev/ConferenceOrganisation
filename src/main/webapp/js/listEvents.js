@@ -34,7 +34,7 @@ function createEventsHtml(eventsData) {
     if (len === 0) {
         $('#events-container').text('No events to show!');
     } else {
-        var id, title, price, location, datetime, year, month, day, hours, minutes, date;
+        var id, title, price, location, city, datetime, year, month, day, hours, minutes, date;
         var monthName, dayName, eventHtml;
         var dateCondition;
         var eventsList = [];
@@ -47,6 +47,7 @@ function createEventsHtml(eventsData) {
             title = eventsData[i].title;
             price = eventsData[i].price;
             location = eventsData[i].hall.location;
+            city = eventsData[i].hall.city;
             datetime = eventsData[i].date.split(' ');
             year = datetime[0].split('-')[0];
             month = datetime[0].split('-')[1];
@@ -74,7 +75,7 @@ function createEventsHtml(eventsData) {
                     '</div>' +
                     '<div class="event__title eventTitle">' +
                     '<h1>' + title + '</h1>' +
-                    '<div class="eventTitle__details eventTitle__details--block eventTitle__details--location">' + location + '</div>' +
+                    '<div class="eventTitle__details eventTitle__details--block eventTitle__details--location">' + location + ', ' + city + '</div>' +
                     '<div class="eventTitle__details eventTitle__details--block eventTitle__details--price">' + price + ' BGN</div>' +
                     '</div>' +
                     '<div class="event__dateTime">' +
