@@ -205,7 +205,9 @@ a.mobileMenu__btn.active {
 }
 
 .profileMenu__btn {
-    display: inline-block;
+    display: block;
+    float: left;
+    margin-left: 1px;
     background-color: #1c1c1c;
     background-size: 18px 18px;
     background-repeat: no-repeat;
