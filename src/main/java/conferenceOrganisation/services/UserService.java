@@ -114,7 +114,7 @@ public class UserService {
 		}
 	}
 
-	@Path("newPassword")
+	@Path("resetPassword")
 	@POST
 	public Response resetUserPassword(@QueryParam("email") String email) {
 		final String toEmail = email;

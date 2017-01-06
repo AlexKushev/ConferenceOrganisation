@@ -29,7 +29,8 @@
 
      var registerButton = $('#register-button'),
          loginButton = $('#login-button'),
-         logoutButton = $('#logout-button');
+         logoutButton = $('#logout-button'),
+         resetPasswordButton = $('#reset_password_button');
 
      registerButton.on('click', function() {
          register();
@@ -41,6 +42,10 @@
 
      logoutButton.on('click', function(e) {
          logout();
+     });
+     
+     resetPasswordButton.on('click', function() {
+    	 resetPassword();
      });
 
      $(window).scroll(function() {
@@ -126,6 +131,21 @@
      }).always(function() {
          // submit
      });
+ }
+ 
+ function resetPassword() {
+	 var userEmail = $('#lost_email').val();
+	 
+	 $.ajax({
+		type: 'POST',
+		url: 'rest/user/resetPassword?email=' + userEmail
+	 }).done(function() {
+		 alert('We send you email with your new password!');
+		 window.location.reload();
+	 }).fail(function() {
+		 alert('Failed to reset password');
+	 })
+
  }
 
  function validateUserData(userEmail, userPassword, userFirstName, userLastName) {
