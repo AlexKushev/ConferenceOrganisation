@@ -30,12 +30,17 @@ $(document).ready(function() {
 
 		var monthName = monthNames[dateObj.getMonth()];
 
+        var buyTicketsButton; 
+
         // if past event
 		if (dateObj.getTime() < currentDate.getTime()) {
             $('#filter-line-tabs a:first-child').removeClass('active');
             $('#filter-line-tabs a:last-child').addClass('active');
 			$('#single-event').addClass('pastEvent');
-		}
+            buyTicketsButton = '<button type="button" class="btn btn-default" disabled>Get Ticket</button>';
+		} else {
+            buyTicketsButton = '<button type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>';
+        }
 
 		var eventHtml = '<div class="singleEvent__header">' +
                     '<div class="eventDate">' +
@@ -61,7 +66,7 @@ $(document).ready(function() {
                     '<span><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
                         '<span class="ticketPrice">' + price + ' BGN </span>' +
-                        '<button type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>' +
+                        buyTicketsButton +
                     '</div>' +
                 '</div>';
 
