@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	editConferenceButton.on('click', function() {
 		editConference();
-	})
+	});
 });
 
 function isAuthUser() {
@@ -30,6 +30,7 @@ function isAuthUser() {
 
 function loadConferenceData() {
 	var eventId = sessionStorage.getItem('editConferenceId');
+
 	$.getJSON('rest/events/eventByEventId?eventId=' + eventId, function(response) {
 		var eventData = response.event;
 
@@ -160,7 +161,7 @@ function editConference() {
 		alert('Successfully edited conference!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Invalid data!');
+		alert('Invalid data! Cannot edit conference!');
 	});
 }
 
