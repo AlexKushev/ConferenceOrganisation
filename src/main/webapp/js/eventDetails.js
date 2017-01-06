@@ -108,7 +108,7 @@ $(document).ready(function() {
                     '<div class="modal-body">' +
                     '<p>' +
                         '<strong>Number of Tickets:</strong>' +
-                        '<input type="number" name="ticketsNumber" value="1" class="ticketsNumber" />' +
+                        '<input id="ticketsNumber" type="number" name="ticketsNumber" value="1" class="ticketsNumber" />' +
                         '<span class="totalTicketPrice">' + price + ' BGN</span>' +
                     '</p>' +
                     '<p>' +
@@ -117,21 +117,34 @@ $(document).ready(function() {
                     '</p>' +
                     '</div>' +
                     '<div class="modal-footer">' +
-                        '<button type="button" class="btn btn-yellow">Buy Now</button>' +
+                        '<button id="buy-ticket-button" type="button" class="btn btn-yellow">Buy Now</button>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
         '</div>';
         $('.wrap').append(buyTicketsPopup);
+        
+        $('#ticketsNumber').on('change', function () {
+            var ticketsNumber = $('#ticketsNumber').val();
+            $('.totalTicketPrice').text(price * ticketsNumber + ' BGN');
+        });
+
+        var buyTicketButton = $('#buy-ticket-button');
+        buyTicketButton.on('click', function() {
+            buyTicket();
+        });
 	});
-
-    // console.log('update');
-
-    // $('.ticketsNumber').on("click", function () {
-    //     var value = this.value;
-    //     $('.totalTicketsPrice').text(price * value);
-    //     console.log('change');
-    // });
-    
-
 });
+
+function buyTicket() {
+    var eventId = sessionStorage.getItem('detailsConferenceId');
+
+    $.ajax({
+        type: 'POST',
+        url: 'rest/user/bookTicket?eventId=' + eventId
+    }).done(function() {
+        alert('Successfully bought ticket!');
+    }).fail(function() {
+        alert('Failed to buy ticket!');
+    });
+}
