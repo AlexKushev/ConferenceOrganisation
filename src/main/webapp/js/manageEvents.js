@@ -49,6 +49,9 @@ function getAllEventsCreatedByUser(userId) {
     				case 'NOT_APPROVED':
         				statusLabelClass = 'label-danger';
         				break;
+        			case 'PUBLISHED':
+        				statusLabelClass = 'label-success';
+        				break;
     				default:
         				statusLabelClass = 'label-default';
 				}
@@ -71,14 +74,21 @@ function getAllEventsCreatedByUser(userId) {
 
                 $('#manage-events-table').append(eventHtml);
 
-                if (status == 'New') {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs publish">Publish</button>');
+                if (status == 'New' || status == 'Not Approved') {
+                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs publish">Publish</button> <button class="btn btn-primary btn-xs edit">Edit</button>');
                 }
-                if (status == 'New' || status == 'Pending' || status == 'Not Approved') {
+                if (status == 'Pending') {
                 	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs edit">Edit</button>');
                 }
 
-                $('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs add-lecture">Add Lecture</button> <button class="btn btn-danger btn-xs delete">Delete</button>');
+                $('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs add-lecture">Add Lecture</button>');
+
+                if (status == 'Published') {
+                	$('#' + id + ' td.managerTable__CTA').append(' <button disabled class="btn btn-danger btn-xs">Delete</button>');
+                }
+                else {
+                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-danger btn-xs delete">Delete</button>');
+                }
 			}
 		}
 	}).done(function() {

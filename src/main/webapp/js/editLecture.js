@@ -44,7 +44,6 @@ function editLectureData() {
 	var lectureData = {
 		lecture: {
 			lectureId: lectureId,
-			eventId: eventId,
 			title: lectureTitle,
 			description: lectureDescription,
 			lecturerName: lecturerName,
