@@ -460,12 +460,13 @@ a.headerBox__btn:hover {
     font-weight: bold;
 }
 
-.eventTitle__details--time {
-    background-image: url('../img/icon-time.png');
+.eventTitle__details--price .free {
+    color: #139616;
+    text-transform: uppercase;
 }
 
-.eventTitle__details--freeprice {
-    color: #139616;
+.eventTitle__details--time {
+    background-image: url('../img/icon-time.png');
 }
 
 .event__dateTime {
