@@ -98,8 +98,6 @@ $(document).ready(function() {
         	}
         });
 
-        var totalTicketsPrice = price;
-
         var buyTicketsPopup = '<div class="modal fade" id="myModal" role="dialog">' +
             '<div class="modal-dialog modal-sm buyTickets">' +
                 '<div class="modal-content">' +
@@ -110,8 +108,8 @@ $(document).ready(function() {
                     '<div class="modal-body">' +
                     '<p>' +
                         '<strong>Number of Tickets:</strong>' +
-                        '<input type="number" name="ticketsNumber" value="1" />' +
-                        '<span class="totalTicketPrice">' + totalTicketsPrice + ' BGN</span>' +
+                        '<input type="number" name="ticketsNumber" value="1" class="ticketsNumber" />' +
+                        '<span class="totalTicketPrice">' + price + ' BGN</span>' +
                     '</p>' +
                     '<p>' +
                         '<strong>Payment Methods:</strong><br />' +
@@ -127,6 +125,13 @@ $(document).ready(function() {
         $('.wrap').append(buyTicketsPopup);
 	});
 
+    // console.log('update');
+
+    // $('.ticketsNumber').on("click", function () {
+    //     var value = this.value;
+    //     $('.totalTicketsPrice').text(price * value);
+    //     console.log('change');
+    // });
     
 
 });
