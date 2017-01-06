@@ -42,7 +42,7 @@ $(document).ready(function() {
 			$('#single-event').addClass('pastEvent');
             buyTicketsButton = '<button type="button" class="btn btn-default" disabled>Get Ticket</button>';
 		} else {
-            buyTicketsButton = '<button type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>';
+            buyTicketsButton = '<button id="get-ticket-button" type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>';
         }
 
 		var eventHtml = '<div class="singleEvent__header">' +
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 '</div>' +
                 '<hr />' +
                 '<div class="singleEvent__footer  clear">' +
-                    '<span><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
+                    '<span id="seats"><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
                         '<span class="ticketPrice">' + price + ' BGN </span>' +
                         buyTicketsButton +
@@ -74,6 +74,13 @@ $(document).ready(function() {
                 '</div>';
 
         $('#single-event').append(eventHtml);
+
+        $.getJSON('rest/user/canUserBuyTicket?eventId=' + eventId, function(response) {
+            var canUserBuyTicket = response;
+            if (!canUserBuyTicket) {
+                $('#get-ticket-button').attr('disabled', true);
+            }
+        });
 
         $.getJSON('rest/lectures/getByEventId?eventId=' + eventId, function(res) {
         	var lecturesData = res.lecture;
@@ -150,21 +157,24 @@ $(document).ready(function() {
 
         var buyTicketButton = $('#buy-ticket-button');
         buyTicketButton.on('click', function() {
-            buyTicket();
+            buyTicket(availableSeats, maxSeats);
         });
 	});
 });
 
-function buyTicket() {
+function buyTicket(a, m) {
     var eventId = sessionStorage.getItem('detailsConferenceId');
 
     $.ajax({
         type: 'POST',
         url: 'rest/user/bookTicket?eventId=' + eventId
     }).done(function() {
-        alert('Successfully bought ticket!');
+        $('#myModal').modal('toggle');
+        toastr.success('Successfully bought ticket!');
+        $('#get-ticket-button').attr('disabled', true);
+        $('#seats').html('<strong>Seats</strong>:' + (a + 1) + '/' + m);
     }).fail(function() {
-        alert('Failed to buy ticket!');
+        toastr.error('Failed to buy ticket!');
     });
 }
 
