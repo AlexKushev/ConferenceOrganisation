@@ -178,7 +178,10 @@
             $('#desktop-menu').append(' <a href="eventmanager.html">Event Manager</a>');
             $('#mobile-menu').append(' <a href="eventmanager.html">Event Manager</a>');
 
-            // if user is admin add this -> <a href="adminpanel.html">Admin Panel</a>
+            if (currentUser.isAdmin === 1) {
+                $('#desktop-menu').append(' <a href="adminpanel.html">Admin Panel</a>');
+                $('#mobile-menu').append(' <a href="adminpanel.html">Admin Panel</a>');
+            }
         }       
     });
  }
