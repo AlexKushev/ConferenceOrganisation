@@ -92,13 +92,15 @@ function loadConferenceData() {
 }
 
 function deleteLecture(lectureId) {
-	// TODO: No such service yet!
-	alert('Delete lecture is not implemented yet!');
-
-	// $.ajax({
-	// 	type: 'POST',
-	// 	url: 'rest/lectures/delete'
-	// });
+	$.ajax({
+		type: 'POST',
+		url: 'rest/lectures/delete?lectureId=' + lectureId
+	}).done(function() {
+		alert('Successfully deleted lecture!');
+		window.location.reload();
+	}).fail(function() {
+		alert('Failed to delete lecture!');
+	});
 
 }
 
