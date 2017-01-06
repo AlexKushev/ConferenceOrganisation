@@ -138,7 +138,18 @@ public class UserService {
 			e.printStackTrace();
 			return Utils.RESPONSE_ERROR;
 		}
-
 	}
 
+	@Path("edit")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON) 
+	public Response editUser(User user) {
+		try {
+			userManager.editUser(user);
+			return Utils.RESPONSE_OK;
+		} catch (SQLException | IOException e) {
+			System.out.println("Exception while trying to edit user with userId : " + user.getUserId());
+			return Utils.RESPONSE_ERROR;
+		}
+	}
 }
