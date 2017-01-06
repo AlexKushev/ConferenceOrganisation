@@ -1,9 +1,5 @@
  $(document).ready(function() {
 
-    console.log('updated4');
-
-    // $(".toplineWrap").load("navigation.html");
-
     var navigation = '<div class="topline clear">' +
 	    '<div class="topline__left">' +
 	        '<nav id="desktop-menu" class="desktopMenu clear">' +
@@ -24,23 +20,16 @@
 
 	$('.toplineWrap').append(navigation);
 
-
     $('.profileMenu__btn--logout').hide();
     $('#account').attr("data-toggle", "modal");
     $('#account').attr("data-target", "#login-modal");
     $('#account').text('Account');
-
-    console.log($('#account'));
-    console.log($('.profileMenu__btn--logout'));
 
     authUser();
 
     var registerButton = $('#register-button'),
         loginButton = $('#login-button'),
         logoutButton = $('#logout-button');
-
-    console.log(logoutButton);
-    console.log(loginButton);
 
     registerButton.on('click', function() {
         register();
@@ -51,10 +40,7 @@
     });
 
     logoutButton.on('click', function(e) {
-        // e.preventDefault();
-        // logout();
-        console.log('Clicked logout');
-        return false;
+        logout();
     });
 
      $(window).scroll(function() {
@@ -177,8 +163,6 @@
         else {
             var currentUser = response.user;
 
-            console.log('here');
-
             $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
             var currentPage = document.location.pathname.match(/[^\/]+$/)[0];
             if (currentPage.indexOf('addevent') != -1) {
@@ -200,7 +184,6 @@
  }
 
  function logout() {
-    console.log('Trying to logout...');
     $.ajax({
         type: 'GET',
         url: 'rest/user/logout',
