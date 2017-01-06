@@ -1,12 +1,15 @@
 $(document).ready(function() {
-	console.log('here');
-
 	isAuthUser();
 
-	var addLectureButton = $('#add-lecture-button');
+	var addLectureButton = $('#add-lecture-button'),
+		doneButton = $('#done-button');
 
 	addLectureButton.on('click', function() {
-		addNewLecture();
+		addNewLecture('addlecture.html');
+	});
+
+	doneButton.on('click', function() {
+		addNewLecture('eventmanager.html');
 	});
 });
 
@@ -18,7 +21,7 @@ function isAuthUser() {
 	});
 }
 
-function addNewLecture() {
+function addNewLecture(href) {
 	var eventId = sessionStorage.getItem('conferenceId');
 
 	if (!eventId) {
@@ -53,8 +56,9 @@ function addNewLecture() {
 		contentType: 'application/json',
 		data: JSON.stringify(lectureData)
 	}).done(function() {
-		alert('Successfully added new lecture!')
-		window.location.replace('eventmanager.html');
+		alert('Successfully added new lecture!');
+		console.log(href);
+		window.location.replace(href);
 	}).fail(function() {
 		alert('Invalid data!');
 	});
