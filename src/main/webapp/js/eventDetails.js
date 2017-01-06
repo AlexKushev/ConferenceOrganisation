@@ -28,7 +28,10 @@ $(document).ready(function() {
 
 		var monthName = monthNames[dateObj.getMonth()];
 
+        // if past event
 		if (dateObj.getTime() < currentDate.getTime()) {
+            $('#filter-line-tabs a:first-child').removeClass('active');
+            $('#filter-line-tabs a:last-child').addClass('active');
 			$('#single-event').addClass('pastEvent');
 		}
 
