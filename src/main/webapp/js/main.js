@@ -12,7 +12,8 @@
     authUser();
 
     var registerButton = $('#register-button'),
-        loginButton = $('#login-button');
+        loginButton = $('#login-button'),
+        logoutButton = $('#logout-button');
 
     registerButton.on('click', function() {
         register();
@@ -20,6 +21,13 @@
 
     loginButton.on('click', function() {
         login();
+    });
+
+    logoutButton.on('click', function(e) {
+        // e.preventDefault();
+        // logout();
+        console.log('Clicked logout');
+        return false;
     });
 
      $(window).scroll(function() {
@@ -161,6 +169,20 @@
 
             // if user is admin add this -> <a href="adminpanel.html">Admin Panel</a>
         }       
+    });
+ }
+
+ function logout() {
+    console.log('Trying to logout...');
+    $.ajax({
+        type: 'GET',
+        url: 'rest/user/logout',
+        statusCode: {
+            204: function() {
+                alert("Successfully logged out!");
+                window.location.replace('index.html');
+            }
+        }
     });
  }
 
