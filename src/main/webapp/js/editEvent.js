@@ -8,7 +8,7 @@ $(document).ready(function() {
 	var editConferenceButton = $('#edit-conference-button');
 
 	editConferenceButton.on('click', function() {
-		editConference(conferenceI);
+		editConference();
 	})
 });
 
@@ -43,7 +43,7 @@ function loadConferenceData() {
 			location = eventData.hall.location,
 			hallName = eventData.hall.name,
 			city = eventData.hall.city,
-			availableSeats = eventData.hall.capacity;
+			seats = eventData.hall.capacity;
 
 		$('#eventTopic').val(title);
 		$('#eventDescription').val(description);
@@ -53,7 +53,7 @@ function loadConferenceData() {
 		$('#eventAddress').val(location);
 		$('#eventHall').val(hallName);
 		$('#eventCity').val(city);
-		$('#eventSeats').val(availableSeats);
+		$('#eventSeats').val(seats);
 
 		$.getJSON('rest/lectures/getByEventId?eventId=' + eventId, function(res) {
         	var lecturesData = res.lecture;
@@ -116,5 +116,72 @@ function deleteLecture(lectureId) {
 }
 
 function editConference() {
+	var title = $('#eventTopic').val(),
+		description = $('#eventDescription').val(),
+		date = $('#eventDate').val(),
+		time = $('#eventTime').val(),
+		price = $('#eventPrice').val(),
+		location = $('#eventAddress').val(),
+		hallName = $('#eventHall').val(),
+		city = $('#eventCity').val(),
+		seats = $('#eventSeats').val();
 
+	var eventId = sessionStorage.getItem('editConferenceId');
+
+	var conferenceData = {
+		event: {
+			eventId: eventId, 
+			title: title,
+			description: description,
+			date: date + ' ' + time,
+			price: price,
+			hall: {
+				name: hallName,
+				location: location,
+				city: city,
+				capacity: seats
+			}
+		}
+	};
+
+	console.log(JSON.stringify(conferenceData));
+
+	if (!validateConferenceData(conferenceData)) {
+        alert('Invalid data!');
+        return;
+    }
+
+	$.ajax({
+		type: 'POST',
+		url: 'rest/events/edit',
+		contentType: 'application/json',
+		data: JSON.stringify(conferenceData)
+	}).done(function() {
+		alert('Successfully edited conference!');
+		window.location.reload();
+	}).fail(function() {
+		alert('Invalid data!');
+	});
 }
+
+function validateConferenceData(conferenceData) {
+	var event = conferenceData.event;
+
+    function validateLength(str, min, max) {
+        return str.length >= min && str.length <= max;
+    }
+
+    function validateIfEmpty(str) {
+        if (str.trim() === null || str.trim() === '' || str.trim() === ' ') {
+            return true;
+        }
+
+        return false;
+    }
+
+    if (validateIfEmpty(event.title) || !validateLength(event.title, 4, 40) || event.price < 0 || event.hall.capacity <= 0) {
+        return false;
+    }
+
+    return true;
+ }
