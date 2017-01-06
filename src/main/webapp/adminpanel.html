@@ -5,12 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" xmlns="">
     <meta name="robots" content="noindex, nofollow" />
+
     <title>Conference Organisator</title>
+
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
 </head>
 
 <body>
@@ -124,7 +128,6 @@
             </div>
         </header>
 
-        <!-- NO FILTERS FOR USERS -->
         <div class="filterLine clear">
             <div class="filterLine__filters">
                 <span>Filter:</span> 
@@ -136,7 +139,7 @@
         </div>
 
         <div class="content">
-            <table cellpadding="0" cellspacing="0" class="managerTable">
+            <table id="manage-events-table" cellpadding="0" cellspacing="0" class="managerTable">
                 <tr>
                     <td class="managerTable__title">
                         <a href="#">Building a Future Proof Artificial Intelligence</a>
@@ -205,7 +208,7 @@
             </table>
         </div>
         <a href="#" class="scrollTop">Scroll</a>
-        <a class="loader">Load More</a>
+        <a id="load-more-button" class="loader">Load More</a>
     </div>
     <footer>
         © 2016 Conference Organisator

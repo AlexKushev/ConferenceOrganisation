@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	isAuthUser();
+
+	getAllEvents();
 });
 
 function isAuthUser() {
@@ -7,20 +9,17 @@ function isAuthUser() {
 		if (!response) {
 			window.location.replace('index.html');
 		}
-	}).done(function(response) {
-		var currentUserId = response.user.userId;
-		getAllEventsCreatedByUser(currentUserId);
 	});
 }
 
-function getAllEventsCreatedByUser(userId) {
-	$.getJSON('rest/events/eventsByCreatorId?creatorId=' + userId, function(response) {
+function getAllEvents() {
+	$.getJSON('rest/admin/events', function(response) {
 		var eventsData = response.event;
 
 		var i, len = eventsData.length;
 
 		if (len === 0) {
-			$('#manage-events-table').text('You have not created any events!');
+			$('#manage-events-table').text('There are no events!');
 		}
 		else {
 			for (i = 0; i < len; i++) {
@@ -31,6 +30,7 @@ function getAllEventsCreatedByUser(userId) {
 
 				var statusLabelClass;
 
+				// TODO: Remove NEW and NOT_APPROVED when get all events by admin is fixed!
 				switch(status) {
     				case 'NEW':
     					statusLabelClass = 'label-warning';
@@ -51,96 +51,68 @@ function getAllEventsCreatedByUser(userId) {
 
 				status = toTitleCase(status);
 
-				var eventHtml = '<tr id="' + id + '">' +
+				var eventHtml = '<tr id="' + id + '">'+
                     '<td class="managerTable__title">' +
                         '<a href="#">' + title + '</a>' +
                         '<span class="label ' + statusLabelClass + '">' + status + '</span>' +
                     '</td>' +
                     '<td class="managerTable__date">' + date + '</td>' +
-                    '<td class="managerTable__CTA">' +
-                    '</td>' +
+                    '<td class="managerTable__CTA"></td>' +
                 '</tr>';
 
                 $('#manage-events-table').append(eventHtml);
 
-                if (status == 'New' || status == 'Not Approved') {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs publish">Publish</button> <button class="btn btn-primary btn-xs edit">Edit</button>');
-                }
                 if (status == 'Pending') {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs edit">Edit</button>');
-                }
-
-                $('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-primary btn-xs add-lecture">Add Lecture</button>');
-
-                if (status == 'Published') {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button disabled class="btn btn-danger btn-xs">Delete</button>');
+                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs accept">Accept</button> <button class="btn btn-danger btn-xs decline">Decline</button> ');
                 }
                 else {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-danger btn-xs delete">Delete</button>');
+                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs accept" disabled>Accept</button> <button class="btn btn-danger btn-xs decline" disabled>Decline</button> ');
                 }
 			}
 		}
 	}).done(function() {
 		loadMore();
 
-		$('.publish').on('click', function(e) {
+		$('.accept').on('click', function(e) {
 			var target = e.currentTarget;
 			var parent = $(target).parent();
 			var grandParent = $(parent).parent();
 			var eventId = $(grandParent).attr('id');
-			publishEvent(eventId);
+			acceptEvent(eventId);
 		});
 		
-		$('.delete').on('click', function(e) {
+		$('.decline').on('click', function(e) {
 			var target = e.currentTarget;
 			var parent = $(target).parent();
 			var grandParent = $(parent).parent();
 			var eventId = $(grandParent).attr('id');
-			deleteEvent(eventId);
-		});
-
-		$('.edit').on('click', function(e) {
-			var target = e.currentTarget;
-			var parent = $(target).parent();
-			var grandParent = $(parent).parent();
-			var eventId = $(grandParent).attr('id');
-			sessionStorage.setItem('editConferenceId', eventId);
-			window.location.href = 'editevent.html';
-		});
-
-		$('.add-lecture').on('click', function(e) {
-			var target = e.currentTarget;
-			var parent = $(target).parent();
-			var grandParent = $(parent).parent();
-			var eventId = $(grandParent).attr('id');
-			sessionStorage.setItem('conferenceId', eventId);
-			window.location.href = 'addlecture.html';
+			declineEvent(eventId);
 		});
 	});
 }
 
-function publishEvent(eventId) {
+function acceptEvent(eventId) {
 	$.ajax({
 		type: 'POST',
-		url: 'rest/events/review?eventId=' + eventId
+		url: 'rest/admin/acceptEvent?eventId=' + eventId
 	}).done(function() {
-		alert('Successfully send event for review!');
+		alert('Successfully approved event for publishing!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Failed to send event for review!');
+		alert('Failed to approve event for publishing!');
 	});
 }
 
-function deleteEvent(eventId) {
+function declineEvent(eventId) {
 	$.ajax({
 		type: 'POST',
-		url: 'rest/events/delete?eventId=' + eventId
+		url: 'rest/admin/declineEvent?eventId=' + eventId
 	}).done(function() {
-		alert("Seccessfully deleted event!")
+		alert('Successfully declined event for publishing!');
 		window.location.reload();
 	}).fail(function() {
-		alert("Failed to delete event!")
-	})
+		alert('Failed to decline event for publishing!');
+	});
 }
 
 function loadMore() {
