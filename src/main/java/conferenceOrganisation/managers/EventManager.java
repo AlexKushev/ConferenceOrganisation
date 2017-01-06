@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import conferenceOrganisation.models.Ticket;
 import conferenceOrganisation.models.User;
 import conferenceOrganisation.services.CurrentUser;
 import conferenceOrganisation.utils.EventStatus;
+import conferenceOrganisation.utils.Utils;
 
 @Singleton
 public class EventManager {
@@ -40,9 +42,10 @@ public class EventManager {
 		String title = event.getTitle();
 		String description = event.getDescription();
 		String date = event.getDate();
-		double price = event.getPrice();
+		double price = Utils.formatDoubleValuesToFixGlobalizationProblem(event.getPrice());
+		System.out.println("Price : " + price);
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
-		String txtQuery = String.format(
+		String txtQuery = String.format(Locale.UK,
 				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status, isDeleted) values (%d, %d, '%s', '%s', '%s', %.2f, %d, '%s', %d)",
 				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW), 0);
 		System.out.println(txtQuery);

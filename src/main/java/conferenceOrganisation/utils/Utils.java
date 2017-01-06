@@ -3,6 +3,9 @@ package conferenceOrganisation.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -128,6 +131,16 @@ public class Utils {
 		} catch (MessagingException me) {
 			me.printStackTrace();
 		}
+	}
+
+	public static double formatDoubleValuesToFixGlobalizationProblem(double value) {
+		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+		otherSymbols.setDecimalSeparator('.');
+		otherSymbols.setGroupingSeparator('.');
+		DecimalFormat df = new DecimalFormat("#.#", otherSymbols);
+
+		double formattedValue = Double.valueOf(df.format(value));
+		return formattedValue;
 	}
 
 }
