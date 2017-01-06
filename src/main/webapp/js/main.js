@@ -145,9 +145,7 @@
             console.log('here');
 
             $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
-
             var currentPage = document.location.pathname.match(/[^\/]+$/)[0];
-
             if (currentPage.indexOf('addevent') != -1) {
                 $('#filter-line-tabs a:last-child').addClass('active');
             }
@@ -157,6 +155,11 @@
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
             $('#account').text(currentUser.firstName);
+
+            $('#desktop-menu').append(' <a href="eventmanager.html">Event Manager</a>');
+            $('#mobile-menu').append(' <a href="eventmanager.html">Event Manager</a>');
+
+            // if user is admin add this -> <a href="adminpanel.html">Admin Panel</a>
         }       
     });
  }
