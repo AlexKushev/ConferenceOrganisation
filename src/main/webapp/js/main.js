@@ -10,6 +10,7 @@
     $('#account').text('Account');
 
     console.log($('#account'));
+    console.log($('.profileMenu__btn--logout'));
 
     authUser();
 

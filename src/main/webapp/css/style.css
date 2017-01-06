@@ -306,10 +306,6 @@ a.headerBox__btn:hover {
 #events-container article { 
     display:none;
 }
-/*
-#past-events-container article {
-    display: none;
-}*/
 
 .content {
     z-index: 1;
@@ -593,6 +589,10 @@ span.eventCTA__arrow {
 .eventManager__item div {
     display: table-cell;
     border: 1px solid #ccc;
+}
+
+#manage-events-table tr { 
+    display:none;
 }
 
 .managerTable {

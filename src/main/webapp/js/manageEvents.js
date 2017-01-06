@@ -81,6 +81,8 @@ function getAllEventsCreatedByUser(userId) {
 			}
 		}
 	}).done(function() {
+		loadMore();
+
 		$('.publish').on('click', function(e) {
 			var target = e.currentTarget;
 			var parent = $(target).parent();
@@ -139,6 +141,30 @@ function deleteEvent(eventId) {
 	}).fail(function() {
 		alert("Failed to delete event!")
 	})
+}
+
+function loadMore() {
+    var loadMoreButton = $('#load-more-button');
+
+    var eventsSize = $("#manage-events-table tr").size();
+    var itemsToShow = 8;
+
+    $('#manage-events-table tr:lt(' + itemsToShow + ')').show();
+
+    if (itemsToShow < eventsSize) {
+        loadMoreButton.addClass('active');
+    } else {
+        loadMoreButton.removeClass('active');
+    }
+
+    loadMoreButton.click(function() {
+        itemsToShow = (itemsToShow + 10 <= eventsSize) ? itemsToShow + 10 : eventsSize;
+        $('#manage-events-table tr:lt(' + itemsToShow + ')').show();
+
+        if (itemsToShow == eventsSize) {
+            loadMoreButton.removeClass('active');
+        }
+    });
 }
 
 function toTitleCase(str)
