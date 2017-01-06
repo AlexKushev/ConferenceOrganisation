@@ -77,9 +77,9 @@ public class EventManager {
 		statement.close();
 	}
 
-	public List<Event> getAllEvents() throws SQLException, IOException {
+	public List<Event> getAllEventsForAdmin() throws SQLException, IOException {
 		List<Event> events = new ArrayList<Event>();
-		String txtQuery = "select * from events where events.isDeleted=0";
+		String txtQuery = "select * from events where events.isDeleted=0 AND (events.status='PENDING' OR events.status='PUBLISHED')";
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);
 		while (rs.next()) {

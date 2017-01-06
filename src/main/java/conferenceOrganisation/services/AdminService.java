@@ -50,7 +50,7 @@ public class AdminService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Event> getAllEvents() throws SQLException, IOException {
-		List<Event> events = eventManager.getAllEvents();
+		List<Event> events = eventManager.getAllEventsForAdmin();
 		return events;
 	}
 
