@@ -1,7 +1,23 @@
 $(document).ready(function() {
 	isAuthUser();
 
-	getAllEvents();
+	var selectedOption = $('#filter-by-status').val();
+
+    if (selectedOption === 'All') {
+        getAllEvents();
+    } else {
+        getPendingEvents();
+    }
+
+    $('#filter-by-status').change(function() {
+        selectedOption = $('#filter-by-status').val();
+
+        if (selectedOption === 'All') {
+            getAllEvents();
+        } else {
+            getPendingEvents();
+        }
+    });
 });
 
 function isAuthUser() {
@@ -12,46 +28,46 @@ function isAuthUser() {
 	});
 }
 
-function getAllEvents() {
-	$.getJSON('rest/admin/events', function(response) {
-		var eventsData = response.event;
+function createEventHtml(eventsData) {
+	$('#manage-events-table').empty();
+    $('#manage-events-table tr').hide();
 
-		var i, len = eventsData.length;
+	var i, len = eventsData.length;
 
-		if (len === 0) {
-			$('#manage-events-table').text('There are no events!');
-		}
-		else {
-			for (i = 0; i < len; i++) {
-				var	id = eventsData[i].eventId,
-					title = eventsData[i].title,
-					date = eventsData[i].date.split(' ')[0],
-					status = eventsData[i].status;
+	if (len === 0) {
+		$('#manage-events-table').text('There are no events!');
+	}
+	else {
+		for (i = 0; i < len; i++) {
+			var	id = eventsData[i].eventId,
+				title = eventsData[i].title,
+				date = eventsData[i].date.split(' ')[0],
+				status = eventsData[i].status;
 
-				var statusLabelClass;
+			var statusLabelClass;
 
-				// TODO: Remove NEW and NOT_APPROVED when get all events by admin is fixed!
-				switch(status) {
-    				case 'NEW':
-    					statusLabelClass = 'label-warning';
-        				break;
-    				case 'NOT_APPROVED':
-        				statusLabelClass = 'label-danger';
-        				break;
-        			case 'PUBLISHED':
-        				statusLabelClass = 'label-success';
-        				break;
-    				default:
-        				statusLabelClass = 'label-default';
-				}
+			// TODO: Remove NEW and NOT_APPROVED when get all events by admin is fixed!
+			switch(status) {
+    			case 'NEW':
+    				statusLabelClass = 'label-warning';
+        			break;
+    			case 'NOT_APPROVED':
+        			statusLabelClass = 'label-danger';
+        			break;
+        		case 'PUBLISHED':
+        			statusLabelClass = 'label-success';
+        			break;
+    			default:
+        			statusLabelClass = 'label-default';
+			}
 
-				if (status == 'NOT_APPROVED') {
-					status = 'NOT APPROVED';
-				}
+			if (status == 'NOT_APPROVED') {
+				status = 'NOT APPROVED';
+			}
 
-				status = toTitleCase(status);
+			status = toTitleCase(status);
 
-				var eventHtml = '<tr id="' + id + '">'+
+			var eventHtml = '<tr id="' + id + '">'+
                     '<td class="managerTable__title">' +
                         '<a href="#">' + title + '</a>' +
                         '<span class="label ' + statusLabelClass + '">' + status + '</span>' +
@@ -60,34 +76,50 @@ function getAllEvents() {
                     '<td class="managerTable__CTA"></td>' +
                 '</tr>';
 
-                $('#manage-events-table').append(eventHtml);
+            $('#manage-events-table').append(eventHtml);
 
-                if (status == 'Pending') {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs accept">Accept</button> <button class="btn btn-danger btn-xs decline">Decline</button> ');
-                }
-                else {
-                	$('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs accept" disabled>Accept</button> <button class="btn btn-danger btn-xs decline" disabled>Decline</button> ');
-                }
-			}
+            if (status == 'Pending') {
+                $('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs accept">Accept</button> <button class="btn btn-danger btn-xs decline">Decline</button> ');
+            }
+            else {
+                $('#' + id + ' td.managerTable__CTA').append(' <button class="btn btn-success btn-xs accept" disabled>Accept</button> <button class="btn btn-danger btn-xs decline" disabled>Decline</button> ');
+            }
 		}
+	}
+
+	$('.accept').on('click', function(e) {
+		var target = e.currentTarget;
+		var parent = $(target).parent();
+		var grandParent = $(parent).parent();
+		var eventId = $(grandParent).attr('id');
+		acceptEvent(eventId);
+	});
+		
+	$('.decline').on('click', function(e) {
+		var target = e.currentTarget;
+		var parent = $(target).parent();
+		var grandParent = $(parent).parent();
+		var eventId = $(grandParent).attr('id');
+		declineEvent(eventId);
+	});
+}
+
+function getPendingEvents() {
+	$.getJSON('rest/admin/pendingEvents', function(response) {
+		var eventsData = response.event;
+		createEventHtml(eventsData);
 	}).done(function() {
 		loadMore();
+	});
+}
 
-		$('.accept').on('click', function(e) {
-			var target = e.currentTarget;
-			var parent = $(target).parent();
-			var grandParent = $(parent).parent();
-			var eventId = $(grandParent).attr('id');
-			acceptEvent(eventId);
-		});
+function getAllEvents() {
+	$.getJSON('rest/admin/events', function(response) {
+		var eventsData = response.event;
+		createEventHtml(eventsData);
 		
-		$('.decline').on('click', function(e) {
-			var target = e.currentTarget;
-			var parent = $(target).parent();
-			var grandParent = $(parent).parent();
-			var eventId = $(grandParent).attr('id');
-			declineEvent(eventId);
-		});
+	}).done(function() {
+		loadMore();
 	});
 }
 
