@@ -1,12 +1,29 @@
- // $(function() {
- //     $("body").load("../accountform.html");
- // });
-
  $(document).ready(function() {
 
-    console.log('updated3');
+    console.log('updated4');
 
-    $(".toplineWrap").load("navigation.html");
+    // $(".toplineWrap").load("navigation.html");
+
+    var navigation = '<div class="topline clear">' +
+	    '<div class="topline__left">' +
+	        '<nav id="desktop-menu" class="desktopMenu clear">' +
+	            '<a href="index.html">Home</a>' +
+	        '</nav>' +
+	        '<nav class="mobileMenu">' +
+	            '<a href="#" class="mobileMenu__btn"></a>' +
+	            '<div id="mobile-menu" class="mobileMenu__items">' +
+	                '<a href="index.html">Home</a>' +
+	           '</div>' +
+	        '</nav>' +
+	    '</div>' +
+	    '<div class="topline__right profileMenu">' +
+	        '<a id="account" href="#" class="profileMenu__btn profileMenu__btn--account" role="button" data-toggle="modal" data-target="#login-modal">Account</a>' +
+	        '<button id="logout-button" type="button" class="profileMenu__btn profileMenu__btn--logout">Logout</button>' +
+	    '</div>' +
+	'</div>';
+
+	$('.toplineWrap').append(navigation);
+
 
     $('.profileMenu__btn--logout').hide();
     $('#account').attr("data-toggle", "modal");
