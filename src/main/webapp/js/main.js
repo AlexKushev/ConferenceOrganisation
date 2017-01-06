@@ -4,6 +4,10 @@
 
  $(document).ready(function() {
 
+    console.log('updated3');
+
+    $(".toplineWrap").load("navigation.html");
+
     $('.profileMenu__btn--logout').hide();
     $('#account').attr("data-toggle", "modal");
     $('#account').attr("data-target", "#login-modal");
