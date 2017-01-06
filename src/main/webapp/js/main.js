@@ -142,7 +142,16 @@
         else {
             var currentUser = response.user;
 
+            console.log('here');
+
             $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
+
+            var currentPage = document.location.pathname.match(/[^\/]+$/)[0];
+
+            if (currentPage.indexOf('addevent') != -1) {
+                $('#filter-line-tabs a:last-child').addClass('active');
+            }
+
             $('#logged-in-header').addClass('active');
             $('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
