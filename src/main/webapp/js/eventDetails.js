@@ -10,9 +10,11 @@ $(document).ready(function() {
 
 		var title = eventData.title,
 			description = eventData.description,
-			location = eventData.hall.location,
+			address = eventData.hall.location,
+            city = eventData.hall.city,
 			price = eventData.price,
-			availableSeats = eventData.availableSeats;
+            maxSeats = eventData.hall.capacity,
+			availableSeats = maxSeats - eventData.availableSeats;
 
 		var datetime = eventData.date.split(' '),
 			date = datetime[0].split('-'),
@@ -44,7 +46,7 @@ $(document).ready(function() {
                         '<h1>' + title +'</h1>' +
                         '<div class="eventTitle__details eventTitle__details--inline eventTitle__details--time">' + hours + ':' + minutes + ' </div> ' +
                         '<div class="eventTitle__details eventTitle__details--inline eventTitle__details--location">' +
-                            '<a href="http://maps.google.com/?q=' + location + '" target="_blank">' + location + '</a>' +
+                            '<a href="http://maps.google.com/?q=' + address + ', ' + city + '" target="_blank">' + address + ', ' + city + '</a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -56,7 +58,7 @@ $(document).ready(function() {
                 '</div>' +
                 '<hr />' +
                 '<div class="singleEvent__footer  clear">' +
-                    '<span><strong>Seats</strong>: 0/' + availableSeats +'</span>' +
+                    '<span><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
                         '<span>' + price + ' BGN </span>' +
                         '<a href="#" class="btn btn-yellow">Get Ticket</a>' +
