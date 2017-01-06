@@ -29,8 +29,6 @@ function isAuthUser() {
 function addNewLecture() {
 	var eventId = sessionStorage.getItem('conferenceId');
 
-	console.log(eventId);
-
 	if (!eventId) {
 		window.location.replace('index.html');
 	}
@@ -51,8 +49,6 @@ function addNewLecture() {
 			lecturerEmail: lecturerEmail
 		}
 	};
-
-	console.log(JSON.stringify(lectureData));
 
 	if (!validateLectureData(lectureData)) {
         alert('Invalid data!');

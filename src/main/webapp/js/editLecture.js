@@ -52,8 +52,6 @@ function editLectureData() {
 		}
 	};
 
-	console.log(JSON.stringify(lectureData));
-
 	if (!validateLectureData(lectureData)) {
         alert('Invalid data!');
         return;

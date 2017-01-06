@@ -51,8 +51,6 @@ function addNewConference() {
 		}
 	};
 
-	console.log(JSON.stringify(conferenceData));
-
 	if (!validateConferenceData(conferenceData)) {
         alert('Invalid data!');
         return;
@@ -64,7 +62,6 @@ function addNewConference() {
 		contentType: 'application/json',
 		data: JSON.stringify(conferenceData)
 	}).done(function(res) {
-		console.log(res);
 		var conferenceId = res;
 		sessionStorage.setItem("conferenceId", conferenceId);
 		alert('Successfully added new conference!');

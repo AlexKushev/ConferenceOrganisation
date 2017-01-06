@@ -142,8 +142,6 @@
         else {
             var currentUser = response.user;
 
-            console.log(currentUser);
-
             $('#filter-line-tabs').append('<a href="addevent.html">Add New</a>');
             $('#logged-in-header').addClass('active');
             $('.profileMenu__btn--logout').show();
@@ -151,10 +149,6 @@
             $('#account').removeAttr("data-target");
             $('#account').text(currentUser.firstName);
         }       
-    }).done(function() {
-        console.log("done");
-    }).fail(function() {
-        console.log("failed");
     });
  }
 

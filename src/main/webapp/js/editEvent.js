@@ -34,8 +34,6 @@ function loadConferenceData() {
 	$.getJSON('rest/events/eventByEventId?eventId=' + eventId, function(response) {
 		var eventData = response.event;
 
-		console.log(eventData);
-
 		var title = eventData.title,
 			description = eventData.description,
 			date = eventData.date.split(' ')[0],
@@ -58,8 +56,6 @@ function loadConferenceData() {
 
 		$.getJSON('rest/lectures/getByEventId?eventId=' + eventId, function(res) {
         	var lecturesData = res.lecture;
-
-        	console.log(lecturesData);
 
         	var len = lecturesData.length;
 
@@ -107,7 +103,7 @@ function loadConferenceData() {
 
 function deleteLecture(lectureId) {
 	// TODO: No such service yet!
-	console.log('Delete lecture is not implemented yet!');
+	alert('Delete lecture is not implemented yet!');
 
 	// $.ajax({
 	// 	type: 'POST',
@@ -144,8 +140,6 @@ function editConference() {
 			}
 		}
 	};
-
-	console.log(JSON.stringify(conferenceData));
 
 	if (!validateConferenceData(conferenceData)) {
         alert('Invalid data!');

@@ -13,7 +13,7 @@ function isAuthUser() {
 			$('.profileMenu__btn--logout').show();
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
-            $('#account').text(currentUser.firstName + ' ' + currentUser.lastName);
+            $('#account').text(currentUser.firstName);
 		}
 	}).done(function(response) {
 		var currentUserId = response.user.userId;
@@ -23,9 +23,6 @@ function isAuthUser() {
 
 function getAllEventsCreatedByUser(userId) {
 	$.getJSON('rest/events/eventsByCreatorId?creatorId=' + userId, function(response) {
-		console.log('data returned from server');
-		console.log(response);
-
 		var eventsData = response.event;
 
 		var i, len = eventsData.length;
@@ -102,7 +99,6 @@ function getAllEventsCreatedByUser(userId) {
 		
 		$('.delete').on('click', function(e) {
 			var target = e.currentTarget;
-			console.log(target);
 			var parent = $(target).parent();
 			var grandParent = $(parent).parent();
 			var eventId = $(grandParent).attr('id');
