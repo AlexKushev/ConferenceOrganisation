@@ -60,8 +60,8 @@ $(document).ready(function() {
                 '<div class="singleEvent__footer  clear">' +
                     '<span><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
-                        '<span>' + price + ' BGN </span>' +
-                        '<a href="#" class="btn btn-yellow">Get Ticket</a>' +
+                        '<span class="ticketPrice">' + price + ' BGN </span>' +
+                        '<button type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>' +
                     '</div>' +
                 '</div>';
 
@@ -97,6 +97,36 @@ $(document).ready(function() {
         		}
         	}
         });
+
+        var totalTicketsPrice = price;
+
+        var buyTicketsPopup = '<div class="modal fade" id="myModal" role="dialog">' +
+            '<div class="modal-dialog modal-sm buyTickets">' +
+                '<div class="modal-content">' +
+                    '<div class="modal-header">' +
+                        '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+                        '<h4 class="modal-title">Buy Tickets</h4>' +
+                    '</div>' +
+                    '<div class="modal-body">' +
+                    '<p>' +
+                        '<strong>Number of Tickets:</strong>' +
+                        '<input type="number" name="ticketsNumber" value="1" />' +
+                        '<span class="totalTicketPrice">' + totalTicketsPrice + ' BGN</span>' +
+                    '</p>' +
+                    '<p>' +
+                        '<strong>Payment Methods:</strong><br />' +
+                        'Bank Transfer - IBAN: 0000 0000 0000 0000' +
+                    '</p>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-yellow">Buy Tickets</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+        $('.wrap').append(buyTicketsPopup);
 	});
+
+    
 
 });

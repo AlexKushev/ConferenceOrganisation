@@ -815,24 +815,24 @@ a.loader:hover {
     margin: 10px auto;
 }
 
-.modal-content {
+.loginRegister .modal-content {
     background-color: #ececec;
     border-radius: 5px;
     outline: 0;
 }
 
-.modal-header {
+.loginRegister .modal-header {
     min-height: 16.43px;
     padding: 15px 15px 15px 15px;
     border-bottom: 0px;
 }
 
-.modal-body {
+.loginRegister .modal-body {
     position: relative;
     padding: 5px 15px 5px 15px;
 }
 
-.modal-footer {
+.loginRegister .modal-footer {
     padding: 15px 15px 15px 15px;
     text-align: left;
     border-top: 0px;
@@ -840,6 +840,36 @@ a.loader:hover {
 
 .checkbox {
     margin-bottom: 0px;
+}
+
+.buyTickets .modal-title {
+    font-weight: bold;
+}
+
+.buyTickets .modal-footer {
+    text-align: right;
+}
+
+.buyTickets strong {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.buyTickets p {
+    font-size: .9em;
+}
+
+.buyTickets .totalTicketPrice {
+    font-style: italic;
+}
+
+.buyTickets input {
+    width: 46px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 2px 8px;
 }
 
 .btn:focus,
@@ -891,6 +921,9 @@ a.loader:hover {
 @media (min-width: 768px) {
     .modal-dialog {
         margin: 30px auto;
+    }
+    .modal-sm.buyTickets {
+        width: 340px;
     }
 }
 
