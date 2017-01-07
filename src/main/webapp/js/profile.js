@@ -79,7 +79,7 @@ function changePassword() {
 				repeatNewPassword = $('#newPasswordRe').val();
 
 			var userData = {
-				user: {
+				userPasswordChange: {
 					userId: id,
 					newPassword: newPassword,
 					oldPassword: oldPassword

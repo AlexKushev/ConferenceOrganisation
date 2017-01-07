@@ -171,7 +171,7 @@ public class UserManager {
 	}
 
 	public boolean checkUserByIdAndPassword(int userId, String password) throws SQLException, IOException {
-		String txtQuery = String.format("select * from users where users.userId=%d AND users.email='%s'", userId,
+		String txtQuery = String.format("select * from users where users.userId=%d AND users.password='%s'", userId,
 				Utils.getHashedPassword(password));
 		Statement statement = dbConnection.createStatement();
 		ResultSet rs = statement.executeQuery(txtQuery);

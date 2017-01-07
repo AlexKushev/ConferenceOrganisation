@@ -160,15 +160,17 @@ public class UserService {
 	@Path("editPassword")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editPassword(UserPasswordChange user) {
+	public Response editPassword(UserPasswordChange userPasswordChange) {
 		try {
-			if (!userManager.checkUserByIdAndPassword(user.getUserId(), user.getOldPassword())) {
+			if (!userManager.checkUserByIdAndPassword(userPasswordChange.getUserId(),
+					userPasswordChange.getOldPassword())) {
 				return Utils.RESPONSE_ERROR;
 			}
-			userManager.editPassword(user);
+			userManager.editPassword(userPasswordChange);
 			return Utils.RESPONSE_OK;
 		} catch (SQLException | IOException e) {
-			System.out.println("Exception while trying to edit password to user with userId : " + user.getUserId());
+			System.out.println(
+					"Exception while trying to edit password to user with userId : " + userPasswordChange.getUserId());
 			return Utils.RESPONSE_ERROR;
 		}
 	}
