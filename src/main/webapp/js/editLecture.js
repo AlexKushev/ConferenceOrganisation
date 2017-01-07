@@ -58,7 +58,7 @@ function editLecture() {
 	};
 
 	if (!validateLectureData(lectureData)) {
-        alert('Invalid data!');
+		toastr.error('Invalid data!');
         return;
     }
 
@@ -68,10 +68,10 @@ function editLecture() {
 		contentType: 'application/json',
 		data: JSON.stringify(lectureData)
 	}).done(function() {
-		alert('Successfully edited lecture!')
+		toastr.success('Successfully edited lecture!')
 		window.location.reload();
 	}).fail(function() {
-		alert('Invalid data! Cannot edit lecture!');
+		toastr.error('Invalid data! Cannot edit lecture!');
 	});
 }
 

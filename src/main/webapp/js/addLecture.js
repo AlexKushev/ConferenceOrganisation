@@ -46,7 +46,7 @@ function addNewLecture(href) {
 	};
 
 	if (!validateLectureData(lectureData)) {
-        alert('Invalid data!');
+		toastr.error('Invalid data!');
         return;
     }
 
@@ -56,11 +56,11 @@ function addNewLecture(href) {
 		contentType: 'application/json',
 		data: JSON.stringify(lectureData)
 	}).done(function() {
-		alert('Successfully added new lecture!');
+		toastr.success('Successfully added new lecture!');
 		console.log(href);
 		window.location.replace(href);
 	}).fail(function() {
-		alert('Invalid data!');
+		toastr.error('Invalid data!');
 	});
 }
 
