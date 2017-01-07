@@ -68,12 +68,14 @@
                     <br />
                     <input type="time" class="form-control" id="eventTime" placeholder="Starting Hour" name="eventTime">
                 </div>
-                <div class="form-group float clear">
+                <div class="form-group place clear">
                     <label for="eventAddress">Address</label>
                     <br />
-                    <input type="text" class="form-control" id="eventAddress" placeholder="Street Address" name="eventAddress">
-                    <input id="eventHall" type="text" class="form-control" placeholder="Hall" name="eventHall">
-                    <input id="eventCity" type="text" class="form-control" placeholder="City" name="eventCity">
+                    <input type="text" class="form-control place__address" id="eventAddress" placeholder="Street Address" name="eventAddress">
+                    <input id="eventHall" type="text" class="form-control place__hall" placeholder="Hall" name="eventHall">
+                    <input id="eventCity" type="text" class="form-control place__city" placeholder="City" name="eventCity">
+
+                    <input type="hidden" name="exampleName" value="exampleValue">
                 </div>
                 <div class="form-group">
                     <label for="eventDescription">Description</label>

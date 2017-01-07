@@ -984,23 +984,24 @@ label span {
     font-size: .8em;
 }
 
-.form-group.float input {
+.place input {
     float: left;
 }
 
-.form-group.float input:first-of-type {
+.place__address {
     width: 58%;
     margin-right: 1%;
 }
 
-.form-group.float input:nth-of-type(2) {
+.place__hall {
     width: 20%;
     margin-right: 1%;
 }
 
-.form-group.float input:last-of-type {
+.place__city {
     width: 20%;
 }
+
 
 .btnGroup {
     float: right;
