@@ -169,6 +169,21 @@ public class UserManager {
 		return false;
 	}
 
+	public boolean checkUserByIdAndPassword(int userId, String password) throws SQLException, IOException {
+		String txtQuery = String.format("select * from users where users.userId=%d AND users.email='%s'", userId,
+				Utils.getHashedPassword(password));
+		Statement statement = dbConnection.createStatement();
+		ResultSet rs = statement.executeQuery(txtQuery);
+		User user = null;
+		while (rs.next()) {
+			user = loadUserProperties(rs);
+		}
+		if (user == null) {
+			return false;
+		}
+		return true;
+	}
+
 	private User loadUserProperties(ResultSet rs) throws SQLException, IOException {
 		User user = new User();
 		user.setUserId(rs.getInt("userId"));
