@@ -53,7 +53,7 @@ function getAllEventsCreatedByUser(userId) {
 
 				var eventHtml = '<tr id="' + id + '">' +
                     '<td class="managerTable__title">' +
-                        '<a href="#">' + title + '</a>' +
+                        '<a href="event.html" class="event-details">' + title + '</a>' +
                         '<span class="label ' + statusLabelClass + '">' + status + '</span>' +
                     '</td>' +
                     '<td class="managerTable__date">' + date + '</td>' +
@@ -115,6 +115,14 @@ function getAllEventsCreatedByUser(userId) {
 			var eventId = $(grandParent).attr('id');
 			sessionStorage.setItem('conferenceId', eventId);
 			window.location.href = 'addlecture.html';
+		});
+
+		$('.event-details').on('click', function(e) {
+			var target = e.currentTarget;
+			var parent = $(target).parent();
+			var grandParent = $(parent).parent();
+			var eventId = $(grandParent).attr('id');
+			sessionStorage.setItem('detailsConferenceId', eventId);
 		});
 	});
 }
