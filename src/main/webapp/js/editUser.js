@@ -5,11 +5,53 @@ $(document).ready(function() {
 	changeEmailButton.on('click', function() {
 		changeEmail();
 	});
+
+	changePasswordButton.on('click', function() {
+		changePassword();
+	});
 });
+
+function changePassword() {
+	$.getJSON('rest/user/current', function(response) {
+		if (response) {
+			var currentUser = response.user;
+
+			var id = currentUser.userId,
+				password = $('#oldPassword').val(),
+				newPassword = $('#newPassword').val(),
+				repeatNewPassword = $('#newPasswordRe').val();
+
+			var userData = {
+				user: {
+					userId: id,
+					newPassword: newPassword,
+					oldPassword: oldPassword
+				}
+			};
+
+			if (!validateEmail(newEmail)) {
+				toastr.error('Invalid new password address!');
+				return;
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: 'rest/user/editEmail',
+				contentType: 'application/json',
+				data: JSON.stringify(userData)
+			}).done(function() {
+				toastr.success('Successfully changed password!');
+			}).fail(function() {
+				toastr.error('Failed to change password! Old password is invalid!');
+			}).always(function() {
+				// $('#change-password-form').submit();
+			});
+		}
+	});
+}
 
 function changeEmail() {
 	$.getJSON('rest/user/current', function(response) {
-		console.log('here');
 		if (response) {
 			var currentUser = response.user;
 
@@ -25,7 +67,7 @@ function changeEmail() {
 				}
 			};
 
-			if (!validateEmail(newEmail)) {
+			if (!validateData(userData)) {
 				toastr.error('Invalid e-mail address!');
 				return;
 			}
@@ -38,7 +80,7 @@ function changeEmail() {
 			}).done(function() {
 				toastr.success('Successfully changed e-mail!');
 			}).fail(function() {
-				toastr.error('Failed to change e-mail!');
+				toastr.error('Failed to change e-mail! Wrong password!');
 			}).always(function() {
 				// $('#change-email-form').submit();
 			});
@@ -46,7 +88,27 @@ function changeEmail() {
 	});
 }
 
+function validateLength(str, min, max) {
+    return str.length >= min && str.length <= max;
+}
+
+function validateIfEmpty(str) {
+    if (str.trim() === null || str.trim() === '' || str.trim() === ' ') {
+        return true;
+    }
+
+    return false;
+}
+
 function validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function validateData(newPassword, repeatNewPassword) {
+	if (validateIfEmpty(newPassword) || !validateLength(newPassword, 5, 20) || validateIfEmpty(repeatNewPassword) || !validateLength(repeatNewPassword, 2, 20) || newPassword != repeatNewPassword) {
+        return false;
+    }
+
+    return true;	
 }
