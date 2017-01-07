@@ -580,6 +580,12 @@ span.eventCTA__arrow {
     font-style: italic;
 }
 
+.singleEvent__footer span.free {
+    color: #139616;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .eventManager {
     display: table;
     width: 100%;

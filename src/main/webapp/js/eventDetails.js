@@ -15,7 +15,7 @@ $(document).ready(function() {
 			description = eventData.description,
 			address = eventData.hall.location,
             city = eventData.hall.city,
-			price = eventData.price,
+			price = eventData.price !== 0 ? eventData.price + ' BGN' : '<span class="free">Free</span>',
             maxSeats = eventData.hall.capacity,
 			availableSeats = maxSeats - eventData.availableSeats;
 
@@ -68,7 +68,7 @@ $(document).ready(function() {
                 '<div class="singleEvent__footer  clear">' +
                     '<span id="seats"><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
-                        '<span class="ticketPrice">' + price + ' BGN </span>' +
+                        '<span class="ticketPrice">' + price + ' </span>' +
                         buyTicketsButton +
                     '</div>' +
                 '</div>';
