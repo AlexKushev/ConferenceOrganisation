@@ -98,6 +98,9 @@ function changePassword() {
 				data: JSON.stringify(userData)
 			}).done(function() {
 				toastr.success('Successfully changed password!');
+				setTimeout(function() { 
+					window.location.reload();
+				}, 1000);
 			}).fail(function() {
 				toastr.error('Failed to change password! Old password is invalid!');
 			}).always(function() {
@@ -136,6 +139,9 @@ function changeEmail() {
 				data: JSON.stringify(userData)
 			}).done(function() {
 				toastr.success('Successfully changed e-mail!');
+				setTimeout(function() { 
+					window.location.reload();
+				}, 1000);
 			}).fail(function() {
 				toastr.error('Failed to change e-mail! Wrong password!');
 			}).always(function() {

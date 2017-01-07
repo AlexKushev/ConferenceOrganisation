@@ -68,8 +68,10 @@ function editLecture() {
 		contentType: 'application/json',
 		data: JSON.stringify(lectureData)
 	}).done(function() {
-		toastr.success('Successfully edited lecture!')
-		window.location.reload();
+		toastr.success('Successfully edited lecture!');
+		setTimeout(function() { 
+			window.location.reload();
+		}, 1000);
 	}).fail(function() {
 		toastr.error('Invalid data! Cannot edit lecture!');
 	});
