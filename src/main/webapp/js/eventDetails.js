@@ -40,9 +40,18 @@ $(document).ready(function() {
             $('#filter-line-tabs a:first-child').removeClass('active');
             $('#filter-line-tabs a:last-child').addClass('active');
 			$('#single-event').addClass('pastEvent');
-            buyTicketsButton = '<button type="button" class="btn btn-default" disabled>Get Ticket</button>';
+            singleEventFooter = '<span id="seats"><strong>Seats</strong>: ' + availableSeats + '/' + maxSeats +'</span>' +
+            '<div>' +
+                '<div class="rating">' +
+                '<span class="rating__star">☆</span><span class="rating__star">☆</span><span class="rating__star">☆</span><span class="rating__star">☆</span><span class="rating__star">☆</span> <span class="rating__average">4.5/5</span>' +
+                '</div>' +
+            '</div>';
 		} else {
-            buyTicketsButton = '<button id="get-ticket-button" type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>';
+            singleEventFooter = '<span id="seats"><strong>Seats</strong>: ' + availableSeats + '/' + maxSeats +'</span>' +
+            '<div>' +
+                '<span class="ticketPrice">' + price + ' </span>' +
+                '<button id="get-ticket-button" type="button" class="btn btn-yellow" data-toggle="modal" data-target="#myModal">Get Ticket</button>' +
+            '</div>';
         }
 
 		var eventHtml = '<div class="singleEvent__header">' +
@@ -65,13 +74,7 @@ $(document).ready(function() {
 					'<div id="lectures-container"></div>' +
                 '</div>' +
                 '<hr />' +
-                '<div class="singleEvent__footer  clear">' +
-                    '<span id="seats"><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
-                    '<div>' +
-                        '<span class="ticketPrice">' + price + ' </span>' +
-                        buyTicketsButton +
-                    '</div>' +
-                '</div>';
+                '<div class="singleEvent__footer  clear">' + singleEventFooter + '</div>';
 
         $('#single-event').append(eventHtml);
         
