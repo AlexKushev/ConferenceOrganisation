@@ -86,7 +86,7 @@ function loadConferenceData() {
 				var target = e.currentTarget;
 				var parent = $(target).parent();
 				var grandParent = $(parent).parent();
-				var lectureId = $(parent).attr('id');
+				var lectureId = $(grandParent).attr('id');
 				deleteLecture(lectureId);
 			});
 		});
