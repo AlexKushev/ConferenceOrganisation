@@ -43,12 +43,10 @@ public class EventManager {
 		String description = event.getDescription();
 		String date = event.getDate();
 		double price = Utils.formatDoubleValuesToFixGlobalizationProblem(event.getPrice());
-		System.out.println("Price : " + price);
 		int availableSeats = hallManager.getHallById(hallId).getCapacity();
 		String txtQuery = String.format(Locale.UK,
 				"insert into events(creatorId, hallId, title, description, date, price, availableSeats, status, isDeleted) values (%d, %d, '%s', '%s', '%s', %.2f, %d, '%s', %d)",
 				userId, hallId, title, description, date, price, availableSeats, String.valueOf(EventStatus.NEW), 0);
-		System.out.println(txtQuery);
 		Statement statement = null;
 		statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
