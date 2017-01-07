@@ -13,7 +13,7 @@
          '</nav>' +
          '</div>' +
          '<div class="topline__right profileMenu">' +
-         '<a id="account" href="userpanel.html" class="profileMenu__btn profileMenu__btn--account" role="button" data-toggle="modal" data-target="#login-modal">Account</a>' +
+         '<a id="account" href="#" class="profileMenu__btn profileMenu__btn--account" role="button" data-toggle="modal" data-target="#login-modal">Account</a>' +
          '<button id="logout-button" type="button" class="profileMenu__btn profileMenu__btn--logout">Logout</button>' +
          '</div>' +
          '</div>';
@@ -178,6 +178,7 @@
         if (!response) {
             $('.profileMenu__btn--logout').hide();
             $('#not-logged-in-header').addClass('active');
+            $('#account').attr('href', '#');
             return;
         }
         else {
@@ -192,6 +193,8 @@
             $('#logged-in-header').addClass('active');
             $('#not-logged-in-header').removeClass('active');
             $('.profileMenu__btn--logout').show();
+
+            $('#account').attr('href', 'userpanel.html');
             $('#account').removeAttr("data-toggle");
             $('#account').removeAttr("data-target");
             $('#account').text(currentUser.firstName);
