@@ -32,7 +32,9 @@ function loadConferenceData() {
 			location = eventData.hall.location,
 			hallName = eventData.hall.name,
 			city = eventData.hall.city,
-			seats = eventData.hall.capacity;
+			seats = eventData.hall.capacity,
+			hallId = eventData.hall.hallId;
+		
 
 		$('#eventTopic').val(title);
 		$('#eventDescription').val(description);
@@ -43,6 +45,7 @@ function loadConferenceData() {
 		$('#eventHall').val(hallName);
 		$('#eventCity').val(city);
 		$('#eventSeats').val(seats);
+		$('#hallId').val(hallId);
 
 		$.getJSON('rest/lectures/getByEventId?eventId=' + eventId, function(res) {
         	var lecturesData = res.lecture;
@@ -117,8 +120,9 @@ function editConference() {
 		location = $('#eventAddress').val(),
 		hallName = $('#eventHall').val(),
 		city = $('#eventCity').val(),
-		seats = $('#eventSeats').val();
-
+		seats = $('#eventSeats').val(),
+		hallId = $('#hallId').val();
+	
 	var eventId = sessionStorage.getItem('editConferenceId');
 
 	var conferenceData = {
@@ -129,6 +133,7 @@ function editConference() {
 			date: date + ' ' + time,
 			price: price,
 			hall: {
+				hallId: hallId,
 				name: hallName,
 				location: location,
 				city: city,
