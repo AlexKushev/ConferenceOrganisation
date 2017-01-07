@@ -9,7 +9,62 @@ $(document).ready(function() {
 	changePasswordButton.on('click', function() {
 		changePassword();
 	});
+
+	getUserTickets();
 });
+
+function getUserTickets() {
+	$.getJSON('rest/user/current', function(response) {
+		if (response) {
+			var currentUser = response.user;
+			var id = currentUser.userId;
+
+			$.getJSON('rest/tickets/ticketsByUserId?ownerId=' + id, function(res) {
+				var ticketsData = res.ticket;
+
+				var i, len = ticketsData.length;
+
+				if (len === 0) {
+					$('#tickets-table').text('No tickets!');
+				}
+				else {
+					for (i = 0; i < len; i++) {
+						var eventId = ticketsData[i].eventId;
+
+						$.getJSON('rest/events/eventByEventId?eventId=' + eventId, function(resp) {
+							var eventData = resp.event;
+
+							var conferenceId = eventData.eventId,
+								title = eventData.title,
+								date = eventData.date.split(' ')[0];
+
+							var ticketHtml = '<tr id="' + conferenceId + '">' +
+                    			'<td class="managerTable__title">' +
+                        			'<a href="#">' + title + '</a>' +
+                    			'</td>' +
+                    			'<td class="managerTable__date">' + date + '</td>' +
+                    			'<td class="managerTable__CTA">' +
+                        			'<button class="btn btn-primary btn-xs view-event">View Event</button>' +
+                    			'</td>' +
+                			'</tr>';
+
+                			$('#tickets-table').append(ticketHtml);
+
+                			$('.view-event').on('click', function(e) {
+                				var target = e.currentTarget;
+								var parent = $(target).parent();
+								var grandParent = $(parent).parent();
+								var eventId = $(grandParent).attr('id');
+								sessionStorage.setItem('detailsConferenceId', eventId);
+								window.location.href = 'event.html';
+                			});
+						});
+					}
+				}
+			});
+		}
+	});
+}
 
 function changePassword() {
 	$.getJSON('rest/user/current', function(response) {
