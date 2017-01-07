@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 function isAuthUser() {
 	$.getJSON('rest/user/current', function(response) {
-		if (!response) {
+		if (!response || response.user.isAdmin !== 1) {
 			window.location.replace('index.html');
 		}
 	});

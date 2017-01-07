@@ -9,11 +9,14 @@
     <title>Conference Organisator</title>
 
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/toastr/css/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="lib/toastr/js/toastr.min.js"></script>
     <script src="js/main.js"></script> 
+    <script src="js/editUser.js"></script>
 </head>
 
 <body>
@@ -51,14 +54,14 @@
             <h1>User Panel</h1>
             <hr />
             <div class="clear">
-                <form method="post" role="form" accept-charset="utf-8" class="regularForm regularForm--left clear">
+                <form id="change-email-form" method="post" role="form" accept-charset="utf-8" class="regularForm regularForm--left clear">
                     <div class="form-group">
-                        <label for="oldPassword">Change E-mail</label>
-                        <input type="text" class="form-control" id="oldPassword" placeholder="New E-mail" name="oldPassword">
+                        <label for="newEmail">Change E-mail</label>
+                        <input type="text" class="form-control" id="newEmail" placeholder="New E-mail" name="newEmail">
                     </div>
                     <div class="form-group">
                         <label for="password">Enter Password</label>
-                        <input type="text" class="form-control" id="password" placeholder="Password" name="password">
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                     </div>
                     <div class="btnGroup">
                         <button id="change-email-button" type="button" class="btn btn-primary">Change E-mail</button>
@@ -67,15 +70,15 @@
                 <form method="post" role="form" accept-charset="utf-8" class="regularForm regularForm--right clear">
                     <div class="form-group">
                         <label for="oldPassword">Change Password</label>
-                        <input type="text" class="form-control" id="oldPassword" placeholder="Old Password" name="oldPassword">
+                        <input type="password" class="form-control" id="oldPassword" placeholder="Old Password" name="oldPassword">
                     </div>
                     <div class="form-group">
                         <label for="newPassword">New Password</label>
-                        <input type="text" class="form-control" id="newPassword" placeholder="New Password" name="newPassword">
+                        <input type="password" class="form-control" id="newPassword" placeholder="New Password" name="newPassword">
                     </div>
                     <div class="form-group">
-                        <label for="newPassword">Repeat Password</label>
-                        <input type="text" class="form-control" id="newPasswordRe" placeholder="Repeat Password" name="newPasswordRe">
+                        <label for="newPasswordRe">Repeat Password</label>
+                        <input type="password" class="form-control" id="newPasswordRe" placeholder="Repeat Password" name="newPasswordRe">
                     </div>
                     <div class="btnGroup">
                         <button id="change-password-button" type="button" class="btn btn-primary">Change Password</button>
