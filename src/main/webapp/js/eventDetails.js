@@ -17,7 +17,8 @@ $(document).ready(function() {
             city = eventData.hall.city,
 			price = eventData.price !== 0 ? eventData.price + ' BGN' : '<span class="free">Free</span>',
             maxSeats = eventData.hall.capacity,
-			availableSeats = maxSeats - eventData.availableSeats;
+			availableSeats = maxSeats - eventData.availableSeats,
+            rating = eventData.rating;
 
 		var datetime = eventData.date.split(' '),
 			date = datetime[0].split('-'),
@@ -43,7 +44,7 @@ $(document).ready(function() {
             singleEventFooter = '<span id="seats"><strong>Seats</strong>: ' + availableSeats + '/' + maxSeats +'</span>' +
             '<div>' +
                 '<div class="rating">' +
-                '<span class="rating__star">☆</span><span class="rating__star">☆</span><span class="rating__star">☆</span><span class="rating__star">☆</span><span class="rating__star">☆</span> <span class="rating__average">4.5/5</span>' +
+                '<span id="1" class="rating__star">☆</span><span id="2" class="rating__star">☆</span><span id="3" class="rating__star">☆</span><span id="4" class="rating__star">☆</span><span id="5" class="rating__star">☆</span> <span class="rating__average">' + rating + '/5</span>' +
                 '</div>' +
             '</div>';
 		} else {
@@ -77,6 +78,20 @@ $(document).ready(function() {
                 '<div class="singleEvent__footer  clear">' + singleEventFooter + '</div>';
 
         $('#single-event').append(eventHtml);
+
+        $('.rating__star').on('click', function(e) {
+            var target = e.currentTarget;
+            var rating = $(target).attr('id');
+
+            var i;
+            for (i = 1; i <= rating; i++) {
+                $('#' + i).addClass('.active');
+                console.log(i);
+            }
+
+            console.log(rating);
+            rateEvent(eventId, rating);
+        });
         
         $.getJSON('rest/user/current', function(response) {
     		if (!response) {
@@ -172,6 +187,23 @@ $(document).ready(function() {
         });
 	});
 });
+
+function rateEvent(eventId, rating) {
+    $.ajax({
+        type: 'POST',
+        url: 'rest/events/addRating?eventId=' + eventId + '&score=' + rating
+    }).done(function() {
+        toastr.success('Successfully rated conference!');
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000);
+    }).fail(function() {
+        toastr.error('Failed to rate conference!');
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000);
+    });
+}
 
 function buyTicket(a, m) {
     var eventId = sessionStorage.getItem('detailsConferenceId');
