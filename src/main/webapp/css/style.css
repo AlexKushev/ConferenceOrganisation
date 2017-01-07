@@ -1023,11 +1023,6 @@ height: 400px;
 width: 100%;
 }
 
-.rating > span:hover:before {
-   content: "\2605";
-   position: absolute;
-}
-
 .rating {
   /*unicode-bidi: bidi-override;*/
   direction: rtl;
@@ -1039,6 +1034,12 @@ width: 100%;
   width: 1.1em;
   font-size: 1.3em;
 }
+
+.rating__star:hover:before {
+   content: "\2605";
+   position: absolute;
+}
+
 .rating__star:hover:before,
 .rating__star:hover ~ .rating__star:before {
    content: "\2605";
