@@ -218,7 +218,7 @@ public class EventManager {
 		int currentEvaluatresCount = event.getEvaluatersCount();
 		double newRating = ((currentRating * currentEvaluatresCount) + score) / (currentEvaluatresCount + 1);
 		String txtQuery = String.format(
-				"update events set events.rating=%.2f, events.evaluatersCount=%d where events=%d", newRating,
+				"update events set events.rating=%.2f, events.evaluatersCount=%d where events.eventId=%d", newRating,
 				currentEvaluatresCount + 1, eventId);
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);

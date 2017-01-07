@@ -114,6 +114,7 @@ public class EventService {
 			eventManager.giveRatingToEvent(eventId, score);
 		} catch (SQLException | IOException e) {
 			System.out.println("Exception while trying to add new rating to event with id : " + eventId);
+			e.printStackTrace();
 			return Utils.RESPONSE_ERROR;
 		}
 		return Utils.RESPONSE_OK;
