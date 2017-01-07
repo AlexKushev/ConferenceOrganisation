@@ -44,7 +44,7 @@ $(document).ready(function() {
             singleEventFooter = '<span id="seats"><strong>Seats</strong>: ' + availableSeats + '/' + maxSeats +'</span>' +
             '<div>' +
                 '<div class="rating">' +
-                '<span id="1" class="rating__star">☆</span><span id="2" class="rating__star">☆</span><span id="3" class="rating__star">☆</span><span id="4" class="rating__star">☆</span><span id="5" class="rating__star">☆</span> <span class="rating__average">' + rating + '/5</span>' +
+                '<span id="5" class="rating__star">☆</span><span id="4" class="rating__star">☆</span><span id="3" class="rating__star">☆</span><span id="2" class="rating__star">☆</span><span id="1" class="rating__star">☆</span> <span class="rating__average">' + rating + '/5</span>' +
                 '</div>' +
             '</div>';
 		} else {
@@ -86,7 +86,6 @@ $(document).ready(function() {
             var i;
             for (i = 1; i <= rating; i++) {
                 $('#' + i).addClass('.active');
-                console.log(i);
             }
 
             console.log(rating);
