@@ -133,7 +133,9 @@ function publishEvent(eventId) {
 		url: 'rest/events/review?eventId=' + eventId
 	}).done(function() {
 		toastr.success('Successfully send event for review!');
-		window.location.reload();
+		setTimeout(function() { 
+			window.location.reload(); 
+		}, 1000);
 	}).fail(function() {
 		toastr.error('Failed to send event for review!');
 	});
@@ -145,7 +147,9 @@ function deleteEvent(eventId) {
 		url: 'rest/events/delete?eventId=' + eventId
 	}).done(function() {
 		toastr.success("Seccessfully deleted event!")
-		window.location.reload();
+		setTimeout(function() { 
+			window.location.reload(); 
+		}, 1000);
 	}).fail(function() {
 		alert("Failed to delete event!")
 	})

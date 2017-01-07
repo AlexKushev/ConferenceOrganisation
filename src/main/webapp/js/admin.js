@@ -129,7 +129,9 @@ function acceptEvent(eventId) {
 		url: 'rest/admin/acceptEvent?eventId=' + eventId
 	}).done(function() {
 		toastr.success('Successfully approved event for publishing!');
-		window.location.reload();
+		setTimeout(function() { 
+			window.location.reload();
+		}, 1000);
 	}).fail(function() {
 		toastr.error('Failed to approve event for publishing!');
 	});
@@ -141,7 +143,9 @@ function declineEvent(eventId) {
 		url: 'rest/admin/declineEvent?eventId=' + eventId
 	}).done(function() {
 		toastr.success('Successfully declined event for publishing!');
-		window.location.reload();
+		setTimeout(function() { 
+			window.location.reload();
+		}, 1000);
 	}).fail(function() {
 		toastr.error('Failed to decline event for publishing!');
 	});

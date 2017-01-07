@@ -57,7 +57,10 @@ function addNewConference() {
 		var conferenceId = res;
 		sessionStorage.setItem("conferenceId", conferenceId);
 		toastr.success('Successfully added new conference!');
-		window.location.replace('addlecture.html');
+		setTimeout(function() { 
+			window.location.replace('addlecture.html');
+		}, 1000);
+		
 	}).fail(function() {
 		toastr.error('Invalid data!');
 	});

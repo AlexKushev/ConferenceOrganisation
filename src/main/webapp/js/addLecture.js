@@ -57,8 +57,9 @@ function addNewLecture(href) {
 		data: JSON.stringify(lectureData)
 	}).done(function() {
 		toastr.success('Successfully added new lecture!');
-		console.log(href);
-		window.location.replace(href);
+		setTimeout(function() { 
+			window.location.replace(href);
+		}, 1000);		
 	}).fail(function() {
 		toastr.error('Invalid data!');
 	});

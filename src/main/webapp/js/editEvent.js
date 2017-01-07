@@ -99,7 +99,9 @@ function deleteLecture(lectureId) {
 		url: 'rest/lectures/delete?lectureId=' + lectureId
 	}).done(function() {
 		toastr.success('Successfully deleted lecture!');
-		window.location.reload();
+		setTimeout(function() { 
+			window.location.reload();
+		}, 1000);
 	}).fail(function() {
 		toastr.error('Failed to delete lecture!');
 	});
@@ -147,7 +149,9 @@ function editConference() {
 		data: JSON.stringify(conferenceData)
 	}).done(function() {
 		toastr.success('Successfully edited conference!');
-		window.location.reload();
+		setTimeout(function() { 
+			window.location.reload();
+		}, 1000);
 	}).fail(function() {
 		toastr.error('Invalid data! Cannot edit conference!');
 	});
