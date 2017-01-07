@@ -15,7 +15,7 @@ $(document).ready(function() {
 			description = eventData.description,
 			address = eventData.hall.location,
             city = eventData.hall.city,
-			price = eventData.price !== 0 ? eventData.price + ' BGN' : '<span class="free">Free</span>',
+			price = eventData.price,
             maxSeats = eventData.hall.capacity,
 			availableSeats = maxSeats - eventData.availableSeats;
 
@@ -68,18 +68,23 @@ $(document).ready(function() {
                 '<div class="singleEvent__footer  clear">' +
                     '<span id="seats"><strong>Seats</strong>:' + availableSeats + '/' + maxSeats +'</span>' +
                     '<div>' +
-                        '<span class="ticketPrice">' + price + ' </span>' +
+                        '<span class="ticketPrice">' + price + ' BGN </span>' +
                         buyTicketsButton +
                     '</div>' +
                 '</div>';
 
         $('#single-event').append(eventHtml);
         
-       
-        $.getJSON('rest/user/canUserBuyTicket?eventId=' + eventId, function(response) {
-        	var canUserBuyTicket = response;
-    		if (!canUserBuyTicket) {
+        $.getJSON('rest/user/current', function(response) {
+    		if (!response) {
     			$('#get-ticket-button').attr('disabled', true);
+    		} else {
+    			$.getJSON('rest/user/canUserBuyTicket?eventId=' + eventId, function(response) {
+    				var canUserBuyTicket = response;
+    				if (!canUserBuyTicket) {
+    					$('#get-ticket-button').attr('disabled', true);
+    				}
+    			});
     		}
     	});
 
