@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import conferenceOrganisation.database.connection.DatabaseConnection;
 import conferenceOrganisation.models.Ticket;
 import conferenceOrganisation.models.User;
+import conferenceOrganisation.models.UserPasswordChange;
 import conferenceOrganisation.services.CurrentUser;
 import conferenceOrganisation.utils.Utils;
 
@@ -75,9 +76,9 @@ public class UserManager {
 		statement.close();
 	}
 
-	public void editPassword(User user) throws SQLException, IOException {
+	public void editPassword(UserPasswordChange user) throws SQLException, IOException {
 		String txtQuery = String.format("update users set users.password='%s' where users.userId=%d",
-				Utils.getHashedPassword(user.getPassword()), user.getUserId());
+				Utils.getHashedPassword(user.getNewPassword()), user.getUserId());
 		Statement statement = dbConnection.createStatement();
 		statement.executeUpdate(txtQuery);
 		statement.close();

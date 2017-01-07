@@ -20,6 +20,7 @@ import conferenceOrganisation.managers.TicketManager;
 import conferenceOrganisation.managers.UserManager;
 import conferenceOrganisation.models.Event;
 import conferenceOrganisation.models.User;
+import conferenceOrganisation.models.UserPasswordChange;
 import conferenceOrganisation.utils.Utils;
 
 @Stateless
@@ -159,8 +160,11 @@ public class UserService {
 	@Path("editPassword")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editPassword(User user) {
+	public Response editPassword(UserPasswordChange user) {
 		try {
+			if (!userManager.checkUserByIdAndPassword(user.getUserId(), user.getOldPassword())) {
+				return Utils.RESPONSE_ERROR;
+			}
 			userManager.editPassword(user);
 			return Utils.RESPONSE_OK;
 		} catch (SQLException | IOException e) {
