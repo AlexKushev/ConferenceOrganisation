@@ -58,12 +58,12 @@ function loadConferenceData() {
         				lectureTitle = lecturesData[i].title,
         				lecturerName = lecturesData[i].lecturerName;
 
-        			var lectureHtml = '<tr>' +
+        			var lectureHtml = '<tr id="' + id + '">' +
                     	'<td class="managerTable__title">' +
-                        	'<a href="editlecture.html">' + lectureTitle + '</a>' + // TODO: This will break everything if clicked
+                        	'<a href="editlecture.html" class="edit-lecture">' + lectureTitle + '</a>' +
                     	'</td>' +
                     	'<td class="managerTable__date">' + lecturerName + '</td>' +
-                    	'<td id="' + id + '" class="managerTable__CTA">' +
+                    	'<td class="managerTable__CTA">' +
                         	'<button class="btn btn-primary btn-xs edit-lecture">Edit</button> ' +
                         	'<button class="btn btn-danger btn-xs delete-lecture">Delete</button> ' +
                     	'</td>' +
@@ -76,7 +76,8 @@ function loadConferenceData() {
 			$('.edit-lecture').on('click', function(e) {
 				var target = e.currentTarget;
 				var parent = $(target).parent();
-				var lectureId = $(parent).attr('id');
+				var grandParent = $(parent).parent();
+				var lectureId = $(grandParent).attr('id');
 				sessionStorage.setItem('editLectureId', lectureId);
 				window.location.href = 'editlecture.html';
 			});
@@ -84,6 +85,7 @@ function loadConferenceData() {
 			$('.delete-lecture').on('click', function(e) {
 				var target = e.currentTarget;
 				var parent = $(target).parent();
+				var grandParent = $(parent).parent();
 				var lectureId = $(parent).attr('id');
 				deleteLecture(lectureId);
 			});
