@@ -25,6 +25,10 @@ function loadCities() {
     $.getJSON('rest/events/cities', function(response) {
         var cities = response.citiesContainer.cities;
 
+        if(typeof cities === 'string') {
+            cities = [cities];
+        }
+
         var city, 
             i, 
             len = cities.length;
