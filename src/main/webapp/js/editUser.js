@@ -17,7 +17,7 @@ function changePassword() {
 			var currentUser = response.user;
 
 			var id = currentUser.userId,
-				password = $('#oldPassword').val(),
+				oldPassword = $('#oldPassword').val(),
 				newPassword = $('#newPassword').val(),
 				repeatNewPassword = $('#newPasswordRe').val();
 
@@ -29,14 +29,14 @@ function changePassword() {
 				}
 			};
 
-			if (!validateEmail(newEmail)) {
-				toastr.error('Invalid new password address!');
+			if (!validateData(newPassword, repeatNewPassword)) {
+				toastr.error('Invalid new password!');
 				return;
 			}
 
 			$.ajax({
 				type: 'POST',
-				url: 'rest/user/editEmail',
+				url: 'rest/user/editPassword',
 				contentType: 'application/json',
 				data: JSON.stringify(userData)
 			}).done(function() {
@@ -67,7 +67,7 @@ function changeEmail() {
 				}
 			};
 
-			if (!validateData(userData)) {
+			if (!validateEmail(email)) {
 				toastr.error('Invalid e-mail address!');
 				return;
 			}
@@ -106,7 +106,7 @@ function validateEmail(email) {
 }
 
 function validateData(newPassword, repeatNewPassword) {
-	if (validateIfEmpty(newPassword) || !validateLength(newPassword, 5, 20) || validateIfEmpty(repeatNewPassword) || !validateLength(repeatNewPassword, 2, 20) || newPassword != repeatNewPassword) {
+	if (validateIfEmpty(newPassword) || !validateLength(newPassword, 5, 20) || validateIfEmpty(repeatNewPassword) || !validateLength(repeatNewPassword, 2, 20) || newPassword !== repeatNewPassword) {
         return false;
     }
 
