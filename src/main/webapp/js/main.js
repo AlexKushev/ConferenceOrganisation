@@ -48,6 +48,18 @@
     	 resetPassword();
      });
 
+     $('#login_email').keypress(function(e) {
+        if (e.which == 13) {
+            login();
+        }
+     });
+
+     $('#login_password').keypress(function(e) {
+        if(e.which == 13) {
+            login();
+        }
+    });
+
      $(window).scroll(function() {
          if ($(this).scrollTop() > 350) {
              $('.scrollTop').show();
@@ -89,8 +101,6 @@
                 // set current user
                 authUser();
 
-                // alert("Successfully logged in!");
-                // window.location.reload();
                 toastr.success('Successfully logged in!');
             },
             401: function() {
