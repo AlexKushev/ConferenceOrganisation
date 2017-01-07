@@ -74,13 +74,15 @@ $(document).ready(function() {
                 '</div>';
 
         $('#single-event').append(eventHtml);
-
+        
+       
         $.getJSON('rest/user/canUserBuyTicket?eventId=' + eventId, function(response) {
-            var canUserBuyTicket = response;
-            if (!canUserBuyTicket) {
-                $('#get-ticket-button').attr('disabled', true);
-            }
-        });
+        	var canUserBuyTicket = response;
+    		if (!canUserBuyTicket) {
+    			$('#get-ticket-button').attr('disabled', true);
+    		}
+    	});
+
 
         $.getJSON('rest/lectures/getByEventId?eventId=' + eventId, function(res) {
         	var lecturesData = res.lecture;
