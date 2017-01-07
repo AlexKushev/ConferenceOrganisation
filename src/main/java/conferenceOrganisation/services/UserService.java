@@ -174,6 +174,9 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editEmail(User user) {
 		try {
+			if (!userManager.checkUserByIdAndPassword(user.getUserId(), user.getPassword())) {
+				return Utils.RESPONSE_ERROR;
+			}
 			userManager.editEmail(user);
 			return Utils.RESPONSE_OK;
 		} catch (SQLException | IOException e) {

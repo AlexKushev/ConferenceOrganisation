@@ -44,7 +44,7 @@ function addNewConference() {
 	};
 
 	if (!validateConferenceData(conferenceData)) {
-        alert('Invalid data!');
+		toastr.error('Invalid data!');
         return;
     }
 
@@ -56,10 +56,10 @@ function addNewConference() {
 	}).done(function(res) {
 		var conferenceId = res;
 		sessionStorage.setItem("conferenceId", conferenceId);
-		alert('Successfully added new conference!');
+		toastr.success('Successfully added new conference!');
 		window.location.replace('addlecture.html');
 	}).fail(function() {
-		alert('Invalid data!');
+		toastr.error('Invalid data!');
 	});
 }
 

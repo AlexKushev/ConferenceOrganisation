@@ -96,10 +96,10 @@ function deleteLecture(lectureId) {
 		type: 'POST',
 		url: 'rest/lectures/delete?lectureId=' + lectureId
 	}).done(function() {
-		alert('Successfully deleted lecture!');
+		toastr.success('Successfully deleted lecture!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Failed to delete lecture!');
+		toastr.error('Failed to delete lecture!');
 	});
 
 }
@@ -134,7 +134,7 @@ function editConference() {
 	};
 
 	if (!validateConferenceData(conferenceData)) {
-        alert('Invalid data!');
+		toastr.error('Invalid data!');
         return;
     }
 
@@ -144,10 +144,10 @@ function editConference() {
 		contentType: 'application/json',
 		data: JSON.stringify(conferenceData)
 	}).done(function() {
-		alert('Successfully edited conference!');
+		toastr.success('Successfully edited conference!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Invalid data! Cannot edit conference!');
+		toastr.error('Invalid data! Cannot edit conference!');
 	});
 }
 

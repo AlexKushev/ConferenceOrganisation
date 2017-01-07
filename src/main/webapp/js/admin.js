@@ -128,10 +128,10 @@ function acceptEvent(eventId) {
 		type: 'POST',
 		url: 'rest/admin/acceptEvent?eventId=' + eventId
 	}).done(function() {
-		alert('Successfully approved event for publishing!');
+		toastr.success('Successfully approved event for publishing!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Failed to approve event for publishing!');
+		toastr.error('Failed to approve event for publishing!');
 	});
 }
 
@@ -140,10 +140,10 @@ function declineEvent(eventId) {
 		type: 'POST',
 		url: 'rest/admin/declineEvent?eventId=' + eventId
 	}).done(function() {
-		alert('Successfully declined event for publishing!');
+		toastr.success('Successfully declined event for publishing!');
 		window.location.reload();
 	}).fail(function() {
-		alert('Failed to decline event for publishing!');
+		toastr.error('Failed to decline event for publishing!');
 	});
 }
 

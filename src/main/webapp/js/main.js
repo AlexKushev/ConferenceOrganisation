@@ -213,7 +213,7 @@ function logout() {
         url: 'rest/user/logout',
         statusCode: {
             204: function() {
-                alert("Successfully logged out!");
+            	toastr.success("Successfully logged out!");
                 window.location.replace('index.html');
             }
         }
