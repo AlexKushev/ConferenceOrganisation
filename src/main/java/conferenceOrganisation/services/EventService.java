@@ -108,9 +108,9 @@ public class EventService {
 	@POST
 	public Response giveRatingToEvent(@QueryParam("eventId") int eventId, @QueryParam("score") int score) {
 		try {
-			/*if (!eventManager.checkIfUserIsAbleToGiveRatingToSpecificEvent(eventId)) {
+			if (!eventManager.checkIfUserIsAbleToGiveRatingToSpecificEvent(eventId)) {
 				return Utils.RESPONSE_ERROR;
-			}*/
+			}
 			eventManager.giveRatingToEvent(eventId, score);
 		} catch (SQLException | IOException e) {
 			System.out.println("Exception while trying to add new rating to event with id : " + eventId);
