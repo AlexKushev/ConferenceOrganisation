@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	isAuthUser();
+
 	var changeEmailButton = $('#change-email-button'),
 		changePasswordButton = $('#change-password-button');
 
@@ -139,6 +141,14 @@ function changeEmail() {
 			}).always(function() {
 				// $('#change-email-form').submit();
 			});
+		}
+	});
+}
+
+function isAuthUser() {
+	$.getJSON('rest/user/current', function(response) {
+		if (!response) {
+			window.location.replace('index.html');
 		}
 	});
 }
