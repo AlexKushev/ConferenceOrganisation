@@ -23,7 +23,7 @@ function getAllEventsCreatedByUser(userId) {
 			$('#manage-events-table').text('You have not created any events!');
 		}
 		else {
-			for (i = 0; i < len; i++) {
+			for (i = len - 1; i >= 0; i--) {
 				var	id = eventsData[i].eventId,
 					title = eventsData[i].title,
 					date = eventsData[i].date.split(' ')[0],
@@ -146,13 +146,13 @@ function deleteEvent(eventId) {
 		type: 'POST',
 		url: 'rest/events/delete?eventId=' + eventId
 	}).done(function() {
-		toastr.success("Seccessfully deleted event!")
+		toastr.success("Seccessfully deleted event!");
 		setTimeout(function() { 
 			window.location.reload(); 
 		}, 1000);
 	}).fail(function() {
-		alert("Failed to delete event!")
-	})
+		alert("Failed to delete event!");
+	});
 }
 
 function loadMore() {
